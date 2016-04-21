@@ -270,7 +270,7 @@ ADMIN_ICONS = [
 ]
 
 # front end theme
-DEFAULT_THEME = 'pure'
+DEFAULT_THEME = 'brother'
 
 # default content extension for url buildind
 CONTENT_EXTENSION = "html"
