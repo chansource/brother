@@ -95,8 +95,7 @@ class ImageAdmin(MediaAdmin):
     form_columns = ['title', 'slug', 'path', 'channel', 'content_format',
                     'comments_enabled', 'summary', 'published']
 
-    @staticmethod
-    def _list_thumbnail(context, model, name):
+    def _list_thumbnail(self, context, model, name):
         if not model.path:
             return ''
 
