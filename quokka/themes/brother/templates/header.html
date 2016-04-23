@@ -1,0 +1,13 @@
+{% import theme('_menu.html') as menu with context -%}
+<div id="header">
+    <div id="logo">
+        <img src="{{ Config.get('site', 'site_logo', theme_static('img/logo.png')) }}" alt="{{Config.get('site', 'site_name')}}">
+        <span>{{channel.title}}</span>
+    </div>
+    <div id="nav">
+        <ul>
+            {{ menu.build_nodes(nodes=channels) }}
+        </ul>
+    </div>
+ </div>
+ <div class="clearfloat"></div>
