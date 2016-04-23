@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from flask import current_app, request
-from .models import Brother
+from .models import BrotherInfo as Brother
 
 def get_brothers(*args, **kwargs):
     brothers = Brother.objects.order_by(current_app.config.get(BROTHERS_ORDER", "name"))
