@@ -14,15 +14,19 @@
 {% endblock %}
 
 {% block content %}
-<!-- A wrapper for the header -->
-    {% include theme('header.html') %}
-
-         <!-- A wrapper for all the blog posts -->
+<div class="pure-g-r" id="layout">
+    {% include theme('sidebar.html') %}
+    <div class="pure-u-1">
+        {{ menu.build_nodes(nodes=channels) }}
+        <div class="content">
+            <!-- A wrapper for all the blog posts -->
 
             <div class="posts">
                 {{render_list(contents.items)}}
                 {{render_pagination(contents, channel.get_absolute_url())}}
                 {% include theme('footer.html') %}
             </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
-
