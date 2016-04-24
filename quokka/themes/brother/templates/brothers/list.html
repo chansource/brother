@@ -1,0 +1,37 @@
+{% from theme('_helpers.html') import render_list, render_pagination with context %}
+{% extends theme("base.html") %}
+
+{%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
+{%if channel.tags %}
+<meta name="keywords" content="{{channel.tags|join(',')}}">
+{%else%}
+<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+{%endif%}
+
+{% endblock %}
+{% block header_css %}
+     <link rel="stylesheet" href="{{theme_static('css/brother_list.css')}}">
+{% endblock %}
+{% block content %}
+<!-- A wrapper for the header -->
+    {% include theme('header.html') %}
+
+         <!-- A wrapper for all the blog posts -->
+            <div id="rest">
+                <div id="previews">
+                    <div class="preview-content" >
+                        <img src={{ brother.cover_small }}>
+                        <h2 >{{brother.name}}</h2>
+                        <p >{{brother.motto}}</p>
+                    </div>
+                    {% else%}
+                        {{channel.get_text()|safe}}
+                    {% endfor %}
+                 </div>
+                {{render_pagination(contents, channel.get_absolute_url())}}
+                {% include theme('footer.html') %}
+            </div>
+{% endblock %}
