@@ -1,0 +1,150 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sub-nav {
+    width: 100%;
+    margin: 0;
+    background-color: #148acc;
+}
+
+.sub-nav-content {
+    width: 960px;
+    margin: 0 auto;
+    height: 135px;
+}
+
+.sub-nav-text {
+    margin: 0;
+    padding: 0;
+    padding-top: 103px;
+    width: 33%;
+    float: left;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 117px 14px;
+    background-size: 84px;
+    text-decoration: none;
+    font-family: "Lantinghei TC";
+
+}
+
+.sub-nav-text:nth-child(1) {
+    background-image: url("../img/index_brother_icon.png");
+}
+
+.sub-nav-text:nth-child(2) {
+    background-image: url("../img/index_join_icon.png");
+}
+
+.sub-nav-text:nth-child(3) {
+    background-image: url("../img/index_spread_icon.png");
+}
+
+.slogan {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.big-slogan {
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.small-slogan {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 13px;
+    color: #7c7c7c;
+    font-family: "Lantinghei SC";
+}
+
+.brother-container {
+    width: 1180px;
+    margin: 10px auto 0 auto;
+}
+
+.brother-sub-container {
+    margin-left: -30px;
+}
+
+.brother-item {
+    width: 370px;
+    padding: 0;
+    margin: 44px 0 0 30px;
+    display: inline-block;
+}
+
+.brother-cover {
+    width: 100%;
+    height: 270px;
+}
+
+.brother-info {
+    margin: 15px 0 0 0;
+    padding: 0;
+}
+
+.brother-other-info {
+    color: #499cd5;
+    font: 20px "Lantinghei SC";
+    padding-left: 2px;
+}
+
+.brother-name {
+    color: #128bcd;
+    font: 22px "Lantinghei TC";
+    padding-left: 2px;
+}
+
+.brother-item-tag {
+    margin: 3px 0 0 -15px;
+    padding: 0;
+}
+
+.brother-item-tag span {
+    display: inline-block;
+    padding: 3px 12px 3px 12px;
+    margin: 6px 0 0 16px;
+    border: 1px solid #7c7c7c;
+    height: 22px;
+    border-radius: 4px;
+    color: #7c7c7c;
+    font: 17px "Lantinghei SC";
+}
+
+.brother-link {
+    text-decoration: none;
+}
+
+.more-brother {
+    margin: 36px 0 40px 0;
+    text-align: center;
+}
+
+.more-brother a{
+    text-decoration: none;
+    text-align: center;
+    border-bottom: 1px solid #148acc;
+    font: 15px "Lantinghei SC";
+    color: #148acc;
+    padding-bottom: 6px;
+
+}
+
+
+
+
+
+
+
+
+
+

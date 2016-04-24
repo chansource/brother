@@ -1,4 +1,3 @@
-{% from theme('_helpers.html') import render_list, render_pagination with context %}
 {% extends theme("base.html") %}
 
 {%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
@@ -14,15 +13,53 @@
 {% endblock %}
 
 {% block content %}
-<!-- A wrapper for the header -->
     {% include theme('header.html') %}
 
-            这里是home list页面！！！！！
+    <div class="sub-nav">
+        <div class="sub-nav-content">
+            <a href="#" class="sub-nav-text">师兄</a>
+            <a href="#" class="sub-nav-text">加入</a>
+            <a href="#" class="sub-nav-text">传播者</a>
+        </div>
+    </div>
 
-            <div class="posts">
-                {{render_list(contents.items)}}
-                {{render_pagination(contents, channel.get_absolute_url())}}
-                {% include theme('footer.html') %}
-            </div>
+    <div class="slogan">
+        <p class="big-slogan">
+            <img src="{{theme_static('img/index_slogan_text.png')}}" alt="我们是年轻人，我们渴望推动自己和社会进步">
+        </p>
+        <p class="small-slogan">
+            我们分享经验、教训和思考，帮助后来人少走弯路
+        </p>
+    </div>
+
+    <div class="brother-container">
+        <div class="brother-sub-container">
+            {% for content in contents.items %}
+            <a href="#" class="brother-link">
+                <div class="brother-item">
+                    <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
+                    <p class="brother-info">
+                        <span class="brother-name">{{content.title}}</span>
+                        <span class="brother-other-info">{{content.brother_college_major}}</span>
+                        <span class="brother-other-info">{{content.brother_college_name}}</span>
+                    </p>
+                    <p class="brother-item-tag">
+                        {% for brother_tag in content.brother_tags %}
+                        <span>{{brother_tag}}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+            </a>
+            {% endfor %}        
+        </div>
+    </div>
+
+    <div class="more-brother">
+        <a href="#">更多师兄</a>
+    </div>
+    
+    {% include theme('footer.html') %}
 {% endblock %}
+
+
 
