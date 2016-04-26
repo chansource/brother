@@ -12,6 +12,9 @@
 
 {% endblock %}
 
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/index.css')}}">
+{% endblock %}
 {% block content %}
     {% include theme('header.html') %}
 

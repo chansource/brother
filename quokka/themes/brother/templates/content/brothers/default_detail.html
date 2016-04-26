@@ -8,85 +8,91 @@
 <meta name="keywords" content="{{content.tags|join(',')}}">
 {% endblock %}
 
-{% block bottom_js %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".content").fitVids();
-        });
-        $(window).load(function(){
-          $("iframe").css("margin-bottom", "-6px")
-          $("#twitter-widget-0").css("margin-bottom", "-5px");
-          $("#twitter-widget-0").css("margin-left", "-1px");
-        });
-    </script>
-    <script type="text/javascript" src="https://apis.google.com/js/platform.js">
-      {lang: 'pt-BR'}
-    </script>
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/brother_detail.css')}}">
 {% endblock %}
-
-
-{% block meta %}
-    {{ super() }}
-    <meta property="fb:app_id" content="{{ Config.get('site', 'facebook_app_id', '') }}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="{{ content.title }}" />
-    <meta property="og:site_name" content="{{ Config.get('site', 'site_name') }}" />
-    <meta property="og:url" content="{{ content.get_http_url() }}" />
-    <meta property="og:description" content="{{ content.get_summary()|truncate(255)|striptags }}" />
-    <meta property="og:image" content="{{ content.get_main_image_http(default=Config.get('site', 'site_logo', theme_static('img/logo.png'))) }}" />
-{% endblock meta %}
-
 {% block content %}
-    <div class="pure-g-r" id="layout">
-        这里是brothers detail页面！！！！
-      {{ menu.build_nodes(nodes=channels) }}
-      {{load_page_content(content)}}
-    </div>
-{% endblock %}
+        {% include theme('header.html') %}
+      <div id="baseinfo">
+          <div id="cover">
+              <img src="{{content.get_main_image_url(default="")}}">
+          </div>
+          <div id="summary">
+              <p id="moto">
+                  {{content.brother_motto}}
+              </p>
+              <p>
+                  <span id="name">{{content.title}}</span>
+                  <span class="other-info">{{content.brother_college_major}}</span>
+                  <span class="other-info">{{content.brother_college_name}}</span>
+              </p>
+              <p id="tags">
+                  {% for tag in content.brother_tags%}
+                  <span>{{tag}}</span>
+                  {% endfor %}
+              </p>
+          </div>
+      </div>
 
+       <div id="rest-wrap">
+          <a id="left-arrow" href='#'>
+              <img src="{{theme_static('img/left_arrow.png')}}">
+          </a>        
+          <a id="right-arrow" href='#'>
+              <img src="{{theme_static('img/right_arrow.png')}}">
+          </a>
+          <div id="experiences">
+            <div class="experience">
+              <p class="experience-type">高校专业学历</p>
+              <div class="experience-items">
+                {% for experience in content.brother_experience_study%}
+                  <div class="experience-item">
+                      <p class="experience-title"> >{{experience.title}}</p>
+                      <p class="experience-time">{{experience.time}}</p>
+                  </div>
+                  {% endfor %}                
+              </div>
+           </div>
+           <div class="experience">
+              <p class="experience-type">实习工作经历</p>
+              <div class="experience-items">
+                {% for experience in content.brother_experience_work%}
+                  <div class="experience-item">
+                      <p class="experience-title"> >{{experience.title}}</p>
+                      <p class="experience-time">{{experience.time}}</p>
+                  </div>   
+                  {% endfor %}             
+              </div>
+           </div>
+            <div class="experience">
+              <p class="experience-type">社团组织与获奖经历</p>
+              <div class="experience-items">
+                {% for experience in content.brither_experience_award%}
+                  <div class="experience-item">
+                      <p class="experience-title"> >{{experience.title}}</p>
+                      <p class="experience-time">{{experience.time}}</p>
+                  </div>    
+                  {% endfor %}           
+              </div>
+           </div>
+         </div> 
 
-{% block js_footer %}
-{% if Config.get('comments', 'system') == 'internal' %}
-<script>
-$(function(){
-
-    function bind_comment_form_submit(){
-        $("form").on("submit", function(e){
-            var postData = $(this).serializeArray();
-            var formURL = $(this).attr("action");
-            $.ajax(
-            {
-                url : formURL,
-                type: "POST",
-                data : postData,
-                success:function(data, textStatus, jqXHR)
-                {
-                    //data: return data from server
-                    $("#comment-area").html(data);
-                    bind_comment_form_submit();
-                },
-                error: function(jqXHR, textStatus, errorThrown)
-                {
-                    //if fails
-                }
-            });
-            e.preventDefault(); //STOP default action
-        })
-    }
-
-    function load_internal_comments(){
-        var comment_area = $("#comment-area" );
-        comment_area.empty();
-        comment_area.load( comment_area.attr('data-path'), function() {
-            console.log( "Load was performed." );
-            bind_comment_form_submit();
-        });
-    }
-
-    load_internal_comments();
-
-})
-</script>
-{% endif %}
+       <div id="cross"></div>
+        <div id="links">
+            <div id="link1">
+                <img class="link-img" src="{{theme_static('img/hotpic.jpg')}}">
+                {% if content.brother_is_video %}
+                  <button class="link-button" onclick="location='{{content.brother_videos.get_absolute_url()}}'">师兄说</button>
+                {% else %}
+                <button class="link-button" onclick="location='{{content.brother_articles.get_absolute_url()}}'">师兄说</button>
+                {% endif %}
+            </div>
+             <div id="link2">
+                 <img class="link-img" src="{{theme_static('img/hotpic.jpg')}}">
+                 <button class="link-button">师兄帮帮忙</button>
+            </div>
+        </div>
+        {% include theme('footer.html') %}
+      </div> 
+     
 {% endblock %}

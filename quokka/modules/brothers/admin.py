@@ -1,19 +1,20 @@
-# coding : utf-8
+# -*- coding: utf-8 -*-
 
 from quokka import admin
 from quokka.core.admin.models import BaseContentAdmin
 from quokka.core.widgets import TextEditor, PrepopulatedText
-from .models import BrotherVideos, BrotherInfo, BrotherArticles
+from .models import BrotherVideos, BrotherInfo, BrotherArticles, Topic, News, About
 from quokka.utils.translation import _l
 
-class BrotherInfoAdmin(BaseContentAdmin): 
+
+class BrotherInfoAdmin(BaseContentAdmin):
 
     form_columns = [
         'channel',
         'related_channels',
         'title',
         'slug',
-        'brother_college_major', 
+        'brother_college_major',
         'brother_college_name',
         'brother_tags',
         'brother_motto',
@@ -23,7 +24,7 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'add_image',
         'brother_is_video',
         'brother_videos',
-        'brother_article',
+        'brother_articles',
         'published',
     ]
 
@@ -31,12 +32,14 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'slug': {'widget': PrepopulatedText(master='title')}
     }
 
+
 class BrotherVideosAdmin(BaseContentAdmin):
-    
+
     form_columns = [
         'channel',
         'title',
         'slug',
+        'shared_by',
         'videos',
     ]
 
@@ -44,19 +47,72 @@ class BrotherVideosAdmin(BaseContentAdmin):
         'slug': {'widget': PrepopulatedText(master='title')}
     }
 
+
 class BrotherArticlesAdmin(BaseContentAdmin):
-    
+
     form_columns = [
         'channel',
         'title',
         'slug',
         'articles',
     ]
-    
+
     form_args = {
         'slug': {'widget': PrepopulatedText(master='title')}
     }
 
-admin.register(BrotherInfo, BrotherInfoAdmin, category=_l("Content"), name=_l("BrotherInfo"))
-admin.register(BrotherVideos, BrotherVideosAdmin, category=_l("Content"), name=_l("BrotherVideos"))
-admin.register(BrotherArticles, BrotherArticlesAdmin, category=_l("Content"), name=_l("BrotherArticles"))
+
+class TopicAdmin(BaseContentAdmin):
+    form_columns = [
+        'title',
+        'slug',
+        'summary',
+        'add_image',
+        'video',
+        'shared_by',
+        'published',
+        'channel',
+    ]
+    form_args = {
+        'slug': {'widget': PrepopulatedText(master='title')}
+    }
+
+
+class NewsAdmin(BaseContentAdmin):
+    form_columns = [
+        'title',  # 标题
+        'slug',  # 路由
+        'summary',  # 摘要
+        'articles',  # 文章
+        'add_image',  # 图片
+        'author',  # 作者
+        'published',  # 是否发布
+        'channel',
+    ]
+    form_args = {
+        'slug': {'widget': PrepopulatedText(master='title')}
+    }
+
+
+class AboutAdmin(BaseContentAdmin):
+    form_columns = [
+        'title',
+        'slug',  # 路由
+        'articles',  # 文章
+        'author',  # 作者
+        'published',  # 是否发布
+        'channel',
+    ]
+    form_args = {
+        'slug': {'widget': PrepopulatedText(master='title')}
+    }
+
+admin.register(BrotherInfo, BrotherInfoAdmin,
+               category=_l("Content"), name=_l("BrotherInfo"))
+admin.register(BrotherVideos, BrotherVideosAdmin,
+               category=_l("Content"), name=_l("BrotherVideos"))
+admin.register(BrotherArticles, BrotherArticlesAdmin,
+               category=_l("Content"), name=_l("BrotherArticles"))
+admin.register(Topic, TopicAdmin, category=_l("Content"), name=_l("Topic"))
+admin.register(News, NewsAdmin, category=_l("Content"), name=_l("News"))
+admin.register(About, AboutAdmin, category=_l("Content"), name=_l("About"))

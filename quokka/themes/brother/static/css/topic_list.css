@@ -1,0 +1,34 @@
+#hotpic{
+    position: relative;
+}
+#hotpic img{
+    width:100%;
+}
+.topic-link{
+    text-decoration: none;
+}
+#previews{
+    width: 980px;
+    margin:54px auto;
+    background: #f4f4f4;
+}
+/* .preview-content:first-child {
+    width:470px;
+} */
+.preview-content{
+    width:219px;
+    margin-left: 20px;
+    display: inline-block;
+}
+.preview-content img{
+    width:100%;
+}
+
+.preview-content h2{
+    color:#148acc;
+    font:20px "Lantinghei TC";
+}
+.preview-content p{
+    color:#7c7c7c;
+   font:14px "Lantinghei SC";
+}
