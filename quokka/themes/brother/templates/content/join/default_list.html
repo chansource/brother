@@ -1,0 +1,46 @@
+{% extends theme("base.html") %}
+
+{%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
+{%if channel.tags %}
+<meta name="keywords" content="{{channel.tags|join(',')}}">
+{%else%}
+<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+{%endif%}
+{% endblock %}
+
+{% block head_css %}
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include theme('header.html') %}
+    
+    <div class="join-container">
+        <div class="join-content">
+            <img src="{{theme_static('img/join_text.png')}}" alt="我们需要伙伴">
+        </div>
+    </div>
+    <div class="join-arcode">
+        <img src="{{theme_static('img/join_qrcode.png')}}" alt="扫描二维码加入">
+    </div>
+
+    {% include theme('footer.html') %}
+{% endblock %}
+
+{% block bottom_js %}
+    <script>
+        $(".join-container").height(($(window).height() - 20)).show();
+    </script>
+{% endblock %}
+
+
+
+
