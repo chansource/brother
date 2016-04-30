@@ -1,4 +1,4 @@
-{% from theme('_helpers.html') import render_list, render_pagination with context %}
+{% from theme('_helpers.html') import  render_pagination with context %}
 {% extends theme("base.html") %}
 
 {%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
@@ -14,34 +14,40 @@
 {% endblock %}
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/brother_list.css')}}">
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/pagination.css')}}">
 {% endblock %}
 {% block content %}
 <!-- A wrapper for the header -->
     {% include theme('header.html') %}
-
-    <div class="brother-container">
-        <div class="brother-sub-container">
-            {% for content in contents.items %}
-            <a href="{{content.get_absolute_url()}}" class="brother-link">
-                <div class="brother-item">
-                    <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
-                    <p class="brother-info">
-                        <span class="brother-name">{{content.title}}</span>
-                        <span class="brother-other-info">{{content.brother_college_major}}</span>
-                        <span class="brother-other-info">{{content.brother_college_name}}</span>
-                    </p>
-                    <p class="brother-item-tag">
-                        {% for brother_tag in content.brother_tags %}
-                        <span>{{brother_tag}}</span>
-                        {% endfor %}
-                    </p>
-                </div>
-            </a>
-            {% endfor %}        
+    <div id="rest">
+        <div class="brother-container">
+            <div class="brother-sub-container">
+                {% for content in contents.items %}
+                <a href="{{content.get_absolute_url()}}" class="brother-link">
+                    <div class="brother-item">
+                        <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
+                        <p class="brother-info">
+                            <span class="brother-name">{{content.title}}</span>
+                            <span class="brother-other-info">{{content.brother_college_major}}</span>
+                            <span class="brother-other-info">{{content.brother_college_name}}</span>
+                        </p>
+                        <p class="brother-item-tag">
+                            {% for brother_tag in content.brother_tags %}
+                            <span>{{brother_tag}}</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </a>
+                {% endfor %}        
+            </div>
+            {{render_pagination(contents, channel.get_absolute_url())}}
         </div>
-        {{render_pagination(contents, channel.get_absolute_url())}}
+        {% include theme('footer.html') %}
     </div>
-
-    {% include theme('footer.html') %}
+      <script type="text/javascript">
+  $(document).ready(function  () {
+      $("#pagination").css("width",({{contents.pages}}+3)*52);
+  });
+  </script>
 {% endblock %}
 

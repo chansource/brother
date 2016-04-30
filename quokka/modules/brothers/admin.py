@@ -68,7 +68,7 @@ class TopicAdmin(BaseContentAdmin):
         'slug',
         'summary',
         'add_image',
-        'video',
+        'videos',
         'shared_by',
         'published',
         'channel',

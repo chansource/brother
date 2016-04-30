@@ -1,4 +1,4 @@
-{% from theme('_helpers.html') import render_list, render_pagination with context %}
+{% from theme('_helpers.html') import render_pagination with context %}
 {% extends theme("base.html") %}
 
 {%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
@@ -14,6 +14,7 @@
 {% endblock %}
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/topic_list.css')}}">
+<link rel="stylesheet" href="{{theme_static('css/pagination.css')}}">
 {% endblock %}
 {% block content %}
 <!-- A wrapper for the header -->
@@ -33,8 +34,13 @@
                 </a>
              {% endfor %}           
         </div>
+        {{render_pagination(contents, channel.get_absolute_url())}}
         {% include theme('footer.html') %}
     </div>
-
+  <script type="text/javascript">
+  $(document).ready(function  () {
+      $("#pagination").css("width",({{contents.pages}}+3)*52);
+  });
+  </script>
 {% endblock %}
 
