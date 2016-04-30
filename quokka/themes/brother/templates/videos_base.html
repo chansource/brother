@@ -1,0 +1,56 @@
+{% extends theme("base.html") %}
+
+{%block title%} {{content.title}} | {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{content.summary}}">
+<meta name="keywords" content="{{content.tags|join(',')}}">
+{% endblock %}
+{% block head %}
+<title>{{ content.title }}</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/videos.css')}}">
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/share.css')}}">
+{% endblock %}
+{% block content %}
+        {% include theme('header.html') %}
+    <div id="content-wrap">
+        <div  id="content">
+              <div id="content-header">
+                  <h1>{{content.title}}</h1>
+                  <span>{{content.created_at.strftime('%Y.%m.%d')}}|分享人 {{content.shared_by}}</span>
+              </div>
+             <div id="video">
+                <img id="good" src="{{theme_static('img/zan.png')}}">
+                <div id="flashcontent">视频无法加载，请允许flash插件或者更新flash插件</div>
+            </div>
+            {% if content.videos|length >1 %}
+            <div id="section-buttons">
+            {% for video in content.videos %}
+                <button class="section-button">{{video.video_title}}</button>
+            {% endfor %}
+            </div>
+            {% endif %}
+     </div> 
+     {% include theme('share.html') %}
+</div>
+     {% include theme('footer.html') %}
+     <script type="text/javascript" src="{{theme_static('js/swfobject.js')}}"></script>
+     <script type="text/javascript">
+        $(document).ready(function(){
+             var videos_url=[{% for video in content.videos %} "{{ video.video_url}}",{% endfor %}]
+            swfobject.embedSWF(videos_url[0],"flashcontent" , 960, 732, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlashexpressInstall.swf", '', '',{quality:'high',allowfullscreen : 'true'});
+            $(".section-button").click(function(){
+            swfobject.embedSWF(videos_url[$(this).index()],$("#flashcontent")[0] , 960, 732, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash", '', '',{quality:'high',allowfullscreen : 'true'});
+                    $(".section-button").css("background","#ffffff");
+                $(".section-button").css("color","#148acc");        
+                $(this).css("background","#148acc");
+                $(this).css("color","#ffffff");
+              });
+        });
+     </script>
+      <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
+     <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
+     <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
+{% endblock %}

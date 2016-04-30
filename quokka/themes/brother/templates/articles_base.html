@@ -1,0 +1,74 @@
+{% extends theme("base.html") %}
+
+{%block title%} {{content.title}} | {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{content.summary}}">
+<meta name="keywords" content="{{content.tags|join(',')}}">
+{% endblock %}
+{% block head %}
+<title>{{ content.title }}</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/articles_detail.css')}}">
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/share.css')}}">
+{% endblock %}
+{% block content %}
+        {% include theme('header.html') %}
+        <div id="rest">
+        <div  id="content">
+              <div id="content-header">
+                    <div id="header-wrap">
+                      <h1>{{content.title}}</h1>
+                      <span>作者 | {{content.author}}   发表时间|{{content.created_at.strftime('%Y.%m.%d')}}</span>
+                    </div>
+              </div>
+                <div id="section-links">
+                    {% for article in content.articles%}
+                      {% if loop.index==1 %}
+                    <a class="selected-section-link section-link">
+                        <span>{{article.title}}</span>
+                    </a>
+                    {% else %}
+                    <a class="noselect-section-link section-link">
+                        <span>{{article.title}}</span>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="right">
+                    <a href="#nav">
+                        <img src="{{theme_static('img/back_top.png')}}">
+                    </a>
+                </div>
+                <div id="articles-container">
+                        <p id="article-detail">{{content.articles[0].body}}</p>
+                     {% include theme('share.html') %}
+                </div>
+     </div>
+     {% include theme('footer.html') %}
+     </div>
+     <script type="text/javascript">
+     $(document).ready(function () {
+        var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
+        //将第二个按钮放到下面
+        var margin=($("#articles-container").height()-$("#section-links").height())/2;
+        $(".section-link:eq(1)").css("margin-top",margin);
+          /*按钮点击事件*/
+        $(".section-link").click(function() {
+            $("#article-detail").text(articles[$(this).index()]);
+            //更换样式
+            $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
+            $(this).removeClass("noselect-section-link").addClass("selected-section-link");
+            //清空margin
+            $(".section-link").css("margin-top",0);
+            margin=($("#articles-container").height()-$("#section-links").height())/2;
+            // $(this).css("margin-top",margin);
+            $(this).next().css("margin-top",margin);
+        });
+     });
+     </script>
+     <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
+     <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
+     <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
+{% endblock %}

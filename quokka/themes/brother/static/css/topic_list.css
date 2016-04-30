@@ -1,3 +1,6 @@
+#rest{
+    background: #f4f4f4;
+}
 #hotpic{
     position: relative;
 }
@@ -9,7 +12,8 @@
 }
 #previews{
     width: 980px;
-    margin:54px auto;
+    padding-top: 54px;
+    margin:auto;
     background: #f4f4f4;
 }
 /* .preview-content:first-child {

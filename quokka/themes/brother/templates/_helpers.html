@@ -398,32 +398,39 @@ tagged {% for tag in content.tags%}<a class="post-category post-category-design"
 {# --------- pagination ----------- #}
 
 {% macro render_pagination(pagination, endpoint) %}
-<div class="pagination-wrapper content-subhead">
-    {% if pagination.pages > 1 %}
-    <div class="pagination">
-        <div class="pagination-left">
-            {% if pagination.has_prev %}
-                {% if not request.args.get('per_page') %}
-                <a href="{{ '{}?page={}'.format(endpoint, pagination.prev_num) }}"><span>&larr; PREVIOUS</span></a>
-                {% else %}
-                  <a href="{{ '{}?page={}&per_page={}'.format(endpoint, pagination.prev_num, request.args.get('per_page')) }}"><span>&larr; PREVIOUS</span></a>
-                {% endif %}
-            {% else %}
-                &nbsp;
-            {% endif %}
-
-        </div>
-        <span>PAGE {{ pagination.page }} / {{ pagination.pages }}</span>
-        <div class="pagination-right">
-            {% if pagination.has_next %}
-                {% if not request.args.get('per_page') %}
-                <a href="{{ '{}?page={}'.format(endpoint, pagination.next_num) }}">NEXT&nbsp;&rarr;</a>
-                {% else %}
-                  <a href="{{ '{}?page={}&per_page={}'.format(endpoint, pagination.next_num, request.args.get('per_page')) }}">NEXT&nbsp;&rarr;</a>
-                {% endif %}
-            {% endif %}
-        </div>
-    </div>
+<div id="pagination">
+    {% if pagination.has_prev %}
+        {% if not request.args.get('per_page') %}
+        <a class="page_link" href="{{ '{}?page={}'.format(endpoint, pagination.prev_num) }}">
+            <img src="{{theme_static('img/left_arrow.png')}}">
+        </a>
+        {% else %}
+        <a class="page_link" href="{{ '{}?page={}&per_page={}'.format(endpoint, pagination.prev_num, request.args.get('per_page')) }}">
+            <img src="{{theme_static('img/left_arrow.png')}}">
+        </a>
+        {% endif %}
     {% endif %}
-
+    {% for page in  range(1,pagination.pages+1) %}
+      {% if not request.args.get('per_page') %}
+        {% if loop.index==pagination.page %}
+        <a class="page_link selected_page" href="#">{{page}}</a>
+        {% else %}
+        <a class="page_link" href="{{ '{}?page={}'.format(endpoint, page) }}">{{page}}</a>
+        {% endif %}
+      {% else %}
+        <a class="page_link" href="{{ '{}?page={}&per_page={}'.format(endpoint, page, request.args.get('per_page')) }}">
+      {% endif %}
+    {% endfor %}  
+  {% if pagination.has_next %}
+      {% if not request.args.get('per_page') %}
+        <a class="page_link" href="{{ '{}?page={}'.format(endpoint, pagination.next_num) }}">
+          <img src="{{theme_static('img/right_arrow.png')}}">
+        </a>
+      {% else %}
+        <a class="page_link" href="{{ '{}?page={}&per_page={}'.format(endpoint, pagination.next_num, request.args.get('per_page')) }}">
+          <img src="right_arrow.png">
+        </a>
+        {% endif %}
+    {% endif %}
+</div>
 {% endmacro %}

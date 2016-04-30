@@ -77,7 +77,8 @@ class Topic(Content):
     话题类
     """
     shared_by = db.StringField(max_length=255, required=True)  # 分享人
-    video = db.EmbeddedDocumentField(Video, required=True)  # 分享视频
+    videos = db.ListField(
+        db.EmbeddedDocumentField(Video, required=True), required=False)  # 分享视频
 
 class News(Content):
     """

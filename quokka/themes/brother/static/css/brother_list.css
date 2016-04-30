@@ -2,7 +2,9 @@ body {
     margin: 0;
     padding: 0;
 }
-
+#rest{
+    background: #f4f4f4;
+}
 .brother-container {
     width: 960px;
     margin: 10px auto 0 auto;
@@ -12,6 +14,9 @@ body {
     margin-left: -30px;
 }
 
+.brother-item:first-of-type{
+    width: 400px;
+}
 .brother-item {
     width: 225px;
     padding: 0;
