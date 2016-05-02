@@ -15,6 +15,7 @@
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
 <link rel="stylesheet" href="{{theme_static('css/index.css')}}">
+<link rel="stylesheet" href="{{theme_static('css/follow.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -78,8 +79,9 @@
     <div class="more-brother">
         <a href="/brothers">更多师兄</a>
     </div>
-    
+    {% include theme('follow.html') %}
     {% include theme('footer.html') %}
+    <script type="text/javascript" src="{{theme_static('js/follow.js')}}"></script>
 {% endblock %}
 
 {% block bottom_js %}

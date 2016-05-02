@@ -30,15 +30,22 @@
 #section-links{
     width:232px;
     background: #f4f4f4;
-    position:relative;
     float: left;
-    position:relative;
 }
-.section-link{
+
+.noselect-section-link{
     display: block;
     border-bottom:1px solid #148acc;
     background:#ffffff;
     color:#148acc;
+    font:24px "Lantinghei TC";
+    text-decoration: none;
+}
+.selected-section-link{
+    display: block;
+    border-bottom:1px solid #148acc;
+    background:#148acc;
+    color:#ffffff;
     font:24px "Lantinghei TC";
     text-decoration: none;
 }
@@ -49,21 +56,24 @@
 }
 #right{
     width: 232px;
-    position:relative; 
     float: right;
     margin-left:-200px;
 }
 #right a{
-    margin-left: 30px;
-    margin-top:100px;
+    position:fixed;
+    right: 170px;
+    top:50%;
     display: block;
 }
 #articles-container{
     background: #ffffff;
     margin-left:232px; 
     margin-right:232px;
-
 }
-#articles{
+#article-detail{
     padding: 68px 100px;
+    margin:0;
+    min-height:300px;
+    color:#515151;
+    font:18px "Lantinghei TC";
 }
