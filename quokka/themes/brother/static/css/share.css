@@ -1,0 +1,72 @@
+.sharing{
+    height:168px;
+    margin: 76px auto 0 auto;
+    overflow: hidden;
+    border-bottom: 1px solid #148acc;
+}
+#cut-line1 {
+    width:50%;
+    height:1px;
+    margin:11px 0 0 -160px;
+    background-color:#148acc;
+    overflow:hidden;
+    float: left;
+    }
+#cut-line2 {
+    width:50%;
+    height:1px;
+    margin:11px  -160px 0 0  ;
+    background-color:#148acc;
+    overflow:hidden;
+    float: right;
+    }
+#shares{
+    width:320px;
+    float: left;
+}
+#shares #shareword{
+    text-align: center;
+
+}
+ #shares span{
+    color: #148acc;
+    font-size: 22px;
+}
+#shares #sites{
+margin-top: 39px;
+padding-left: 16px;
+}
+.site{
+display: inline-block;
+width: 30%;
+}
+.site-name{
+    color: #148acc;
+    text-align: center;
+    font-size: 18px;
+}
+.weibo-logo{
+    border-radius:60px;
+    border: 1px solid #148acc;
+    padding: 5px;
+    display: block;
+    width:33px;
+    margin:auto;
+}
+.weixin-logo{
+    border-radius:60px;
+    border: 1px solid #148acc;
+    padding: 5px;
+    background:  #148acc;
+    display: block;
+    width:33px;
+    margin:auto;
+}
+.tweibo-logo{
+    border-radius:60px;
+    border: 1px solid #148acc;
+    padding: 5px;
+    display: block;
+    width:33px;
+    margin:auto;
+}

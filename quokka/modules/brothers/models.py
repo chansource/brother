@@ -10,6 +10,7 @@ class Video(db.EmbeddedDocument):
     """
     video_title = db.StringField(max_length=255, required=True) # 视频标题
     video_url = db.StringField(max_length=255, required=True) # 视频url
+    like_numbers = db.IntField(default=0)  # 点赞数
 
 class BrotherVideos(Content):
     """
@@ -58,5 +59,12 @@ class BrotherInfo(Content):
     brother_is_video = db.BooleanField(required=False, default=True) # 是否视频类型
     brother_videos = db.ReferenceField(BrotherVideos, required=False) # 视频
     brother_article = db.ReferenceField(BrotherArticles, required=False) # 文章信息
+
+class Banner(Content):
+    """
+    轮播图
+    """
+    # 轮播图片，使用Content.path
+    url = db.StringField(max_length=255, required=True) # 链接地址
 
 

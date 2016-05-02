@@ -22,12 +22,7 @@
               </div>
              <div id="video">
                 <img id="good" src="zan.png">
-                <embed  quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="http://static.hdslb.com/miniloader.swf" flashvars="{{content.videos[0].video_url}}" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
-            </div>
-            <div id="section-buttons">
-            {% for video in content.videos %}
-                <button class="section-button">{{video.video_title}}</button>
-            {% endfor %}
+                <embed  quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="http://static.hdslb.com/miniloader.swf" flashvars="{{content.video.video_url}}" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
             </div>
      </div>
      {% include theme('share.html') %}

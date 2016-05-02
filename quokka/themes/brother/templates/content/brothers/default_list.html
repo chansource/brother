@@ -12,17 +12,35 @@
 {%endif%}
 
 {% endblock %}
-
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/brother_list.css')}}">
+{% endblock %}
 {% block content %}
-<!-- A wrapper for the header -->
     {% include theme('header.html') %}
 
-            这里是brothers list页面！！！！！
+    <div class="brother-container">
+        <div class="brother-sub-container">
+            {% for content in contents.items %}
+            <a href="{{content.get_absolute_url()}}" class="brother-link">
+                <div class="brother-item">
+                    <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
+                    <p class="brother-info">
+                        <span class="brother-name">{{content.title}}</span>
+                        <span class="brother-other-info">{{content.brother_college_major}}</span>
+                        <span class="brother-other-info">{{content.brother_college_name}}</span>
+                    </p>
+                    <p class="brother-item-tag">
+                        {% for brother_tag in content.brother_tags %}
+                        <span>{{brother_tag}}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+            </a>
+            {% endfor %}        
+        </div>
+        {{render_pagination(contents, channel.get_absolute_url())}}
+    </div>
 
-            <div class="posts">
-                {{render_list(contents.items)}}
-                {{render_pagination(contents, channel.get_absolute_url())}}
-                {% include theme('footer.html') %}
-            </div>
+    {% include theme('footer.html') %}
 {% endblock %}
 
