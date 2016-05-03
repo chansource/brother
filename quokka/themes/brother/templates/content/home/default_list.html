@@ -13,17 +13,35 @@
 {% endblock %}
 
 {% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
 <link rel="stylesheet" href="{{theme_static('css/index.css')}}">
 <link rel="stylesheet" href="{{theme_static('css/follow.css')}}">
 {% endblock %}
+
 {% block content %}
     {% include theme('header.html') %}
 
+    <div class="banner-container">
+        <div class="swiper-wrapper">
+            {% for content in contents.items %}
+            {% if content.model == "brothers.banner" %}
+            <div class="swiper-slide">
+                <a href="{{content.url}}">
+                    <img class="banner-img" src="{{content.get_main_image_url()}}" alt="轮播图片">
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}   
+        </div>
+        <div class="banner-prev"></div>
+        <div class="banner-next"></div>
+    </div>
+
     <div class="sub-nav">
         <div class="sub-nav-content">
-            <a href="#" class="sub-nav-text">师兄</a>
-            <a href="#" class="sub-nav-text">加入</a>
-            <a href="#" class="sub-nav-text">传播者</a>
+            <a href="/brothers/" class="sub-nav-text">师兄</a>
+            <a href="/join/" class="sub-nav-text">加入</a>
+            <a href="/spread/" class="sub-nav-text">传播者</a>
         </div>
     </div>
 
@@ -37,33 +55,43 @@
     </div>
 
     <div class="brother-container">
-        <div class="brother-sub-container">
-            {% for content in contents.items %}
-            <a href="#" class="brother-link">
-                <div class="brother-item">
-                    <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
-                    <p class="brother-info">
-                        <span class="brother-name">{{content.title}}</span>
-                        <span class="brother-other-info">{{content.brother_college_major}}</span>
-                        <span class="brother-other-info">{{content.brother_college_name}}</span>
-                    </p>
-                    <p class="brother-item-tag">
-                        {% for brother_tag in content.brother_tags %}
-                        <span>{{brother_tag}}</span>
-                        {% endfor %}
-                    </p>
-                </div>
+        {% for content in contents.items %}
+        {% if content.model == "brothers.brotherinfo" %}
+        <div class="brother-item">
+            <a href="{{content.get_absolute_url()}}" class="brother-link">
+                <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
+                <p class="brother-info">
+                    <span class="brother-name">{{content.title}}</span>
+                    <span class="brother-other-info">{{content.brother_college_major}}</span>
+                    <span class="brother-other-info">{{content.brother_college_name}}</span>
+                </p>
+                <p class="brother-item-tag">
+                    {% for brother_tag in content.brother_tags %}
+                    <span>{{brother_tag}}</span>
+                    {% endfor %}
+                </p>
             </a>
-            {% endfor %}        
         </div>
+        {% endif %}
+        {% endfor %}        
     </div>
 
     <div class="more-brother">
-        <a href="#">更多师兄</a>
+        <a href="/brothers">更多师兄</a>
     </div>
     {% include theme('follow.html') %}
     {% include theme('footer.html') %}
     <script type="text/javascript" src="{{theme_static('js/follow.js')}}"></script>
+{% endblock %}
+
+{% block bottom_js %}
+<script src="{{theme_static('js/swiper.min.js')}}"></script>
+<script>
+    var mySwiper = new Swiper ('.banner-container', {
+        nextButton: '.banner-next',
+        prevButton: '.banner-prev',
+    });
+</script>
 {% endblock %}
 
 

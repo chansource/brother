@@ -67,12 +67,10 @@ body {
 }
 
 .brother-container {
-    width: 1180px;
+    width: 1210px;
     margin: 10px auto 0 auto;
-}
-
-.brother-sub-container {
-    margin-left: -30px;
+    position: relative;
+    left: -30px;
 }
 
 .brother-item {
@@ -136,7 +134,37 @@ body {
     font: 15px "Lantinghei SC";
     color: #148acc;
     padding-bottom: 6px;
+}
 
+.banner-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.banner-img {
+    width: 100%;
+}
+
+.banner-prev {
+    width: 50px;
+    height: 58px;
+    background-image: url("../img/index_banner_left.png");
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 270px;
+    left: 0;
+    z-index:1;
+}
+
+.banner-next {
+    width: 50px;
+    height: 58px;
+    background-image: url("../img/index_banner_right.png");
+    position: absolute;
+    top: 270px;
+    right: 0;
+    z-index:1;
 }
 
 

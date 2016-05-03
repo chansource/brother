@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
     {% block seo_meta %}
     <meta name="description" content="{{Config.get('site', 'site_description')}}">
     <meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="{{theme_static('css/footer.css')}}">
     <link rel="stylesheet" href="{{theme_static('css/header.css')}}">
     {% block head_css %}{% endblock %}
+
     <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
     {% block head_js %}{% endblock %}
 </head>
@@ -21,6 +23,8 @@
 <body>
     {% block content %}
     {% endblock %}
+    
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     {% block bottom_js %}{% endblock %}
     {% block js_footer %}{% endblock %}
 </body>

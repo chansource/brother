@@ -1,19 +1,23 @@
 .join-container {
     width: 100%;
-    min-height: 100%;
-    background: url("../img/join_bg.png") no-repeat;
-    background-size: 100% auto;
-    display: none;
+    background: url("../img/join_bg.png");
+    background-repeat: no-repeat;
 }
 
 .join-content {
     width: 1174px;
     margin: 0 auto;
     padding-top: 70px;
+    min-height: 900px;
 }
 
-.join-arcode {
+.join-qrcode {
     position: fixed;
     right: 166px;
     bottom: 120px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
 }

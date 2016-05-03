@@ -58,3 +58,6 @@ etc/mongodata/*.lock
 etc/mongodata/*.bson
 *.log
 *.pid
+./tmp
+.DS_Store
+._.DS_Store

@@ -3,9 +3,8 @@
 from quokka import admin
 from quokka.core.admin.models import BaseContentAdmin
 from quokka.core.widgets import TextEditor, PrepopulatedText
-from .models import BrotherVideos, BrotherInfo, BrotherArticles, Topic, News, About
+from .models import BrotherVideos, BrotherInfo, BrotherArticles, Banner, Topic, News, About
 from quokka.utils.translation import _l
-
 
 class BrotherInfoAdmin(BaseContentAdmin):
 
@@ -32,15 +31,20 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'slug': {'widget': PrepopulatedText(master='title')}
     }
 
+    form_args = dict(
+        title=dict(label=u'姓名')
+    )
 
 class BrotherVideosAdmin(BaseContentAdmin):
 
     form_columns = [
         'channel',
+        'related_channels',
         'title',
         'slug',
         'shared_by',
         'videos',
+        'published',
     ]
 
     form_args = {
@@ -52,9 +56,11 @@ class BrotherArticlesAdmin(BaseContentAdmin):
 
     form_columns = [
         'channel',
+        'related_channels',
         'title',
         'slug',
         'articles',
+        'published',
     ]
 
     form_args = {
@@ -107,6 +113,22 @@ class AboutAdmin(BaseContentAdmin):
         'slug': {'widget': PrepopulatedText(master='title')}
     }
 
+class BannerAdmin(BaseContentAdmin):
+
+    form_columns = [
+        'channel',
+        'related_channels',
+        'title',
+        'slug',
+        'add_image',
+        'url',
+        'published',
+    ]
+
+    form_args = {
+        'slug': {'widget': PrepopulatedText(master='title')}
+    }
+
 admin.register(BrotherInfo, BrotherInfoAdmin,
                category=_l("Content"), name=_l("BrotherInfo"))
 admin.register(BrotherVideos, BrotherVideosAdmin,
@@ -116,3 +138,4 @@ admin.register(BrotherArticles, BrotherArticlesAdmin,
 admin.register(Topic, TopicAdmin, category=_l("Content"), name=_l("Topic"))
 admin.register(News, NewsAdmin, category=_l("Content"), name=_l("News"))
 admin.register(About, AboutAdmin, category=_l("Content"), name=_l("About"))
+admin.register(Banner, BannerAdmin, category=_l("Content"), name=_l("Banner"))

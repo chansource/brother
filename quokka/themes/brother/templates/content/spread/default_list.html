@@ -12,6 +12,10 @@
 
 {% endblock %}
 
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/spread.css')}}">
+{% endblock %}
+
 {% block content %}
     {% include theme('header.html') %}
 
