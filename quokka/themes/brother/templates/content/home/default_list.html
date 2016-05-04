@@ -53,32 +53,32 @@
             我们分享经验、教训和思考，帮助后来人少走弯路
         </p>
     </div>
-
-    <div class="brother-container">
-        {% for content in contents.items %}
-        {% if content.model == "brothers.brotherinfo" %}
-        <div class="brother-item">
-            <a href="{{content.get_absolute_url()}}" class="brother-link">
-                <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
-                <p class="brother-info">
-                    <span class="brother-name">{{content.title}}</span>
-                    <span class="brother-other-info">{{content.brother_college_major}}</span>
-                    <span class="brother-other-info">{{content.brother_college_name}}</span>
-                </p>
-                <p class="brother-item-tag">
-                    {% for brother_tag in content.brother_tags %}
-                    <span>{{brother_tag}}</span>
-                    {% endfor %}
-                </p>
-            </a>
+    
+    <div class="brother-bg-container">
+        <div class="brother-container">
+            <!-- 为解决inline-block间距问题，div一行显示，只能牺牲代码格式 -->
+            {% for content in contents.items %}{% if content.model == "brothers.brotherinfo" %}<div class="brother-item">
+                <a href="{{content.get_absolute_url()}}" class="brother-link">
+                    <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
+                    <p class="brother-info">
+                        <span class="brother-name">{{content.title}}</span>
+                        <span class="brother-other-info">{{content.brother_college_major}}</span>
+                        <span class="brother-other-info">{{content.brother_college_name}}</span>
+                    </p>
+                    <p class="brother-item-tag">
+                        {% for brother_tag in content.brother_tags %}
+                        <span>{{brother_tag}}</span>
+                        {% endfor %}
+                    </p>
+                </a>
+            </div>{% endif %}{% endfor %}        
         </div>
-        {% endif %}
-        {% endfor %}        
+
+        <div class="more-brother">
+            <a href="/brothers">更多师兄</a>
+        </div>     
     </div>
 
-    <div class="more-brother">
-        <a href="/brothers">更多师兄</a>
-    </div>
     {% include theme('follow.html') %}
     {% include theme('footer.html') %}
     <script type="text/javascript" src="{{theme_static('js/follow.js')}}"></script>

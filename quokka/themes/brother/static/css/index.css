@@ -67,10 +67,10 @@ body {
 }
 
 .brother-container {
-    width: 1210px;
+    width: 1200px;
     margin: 10px auto 0 auto;
     position: relative;
-    left: -30px;
+    left: -15px;
 }
 
 .brother-item {
@@ -166,6 +166,10 @@ body {
     top: 270px;
     right: 0;
     z-index:1;
+}
+
+.brother-bg-container {
+    background-color: #f4f4f4;
 }
 
 
