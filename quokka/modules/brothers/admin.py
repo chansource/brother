@@ -20,6 +20,7 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'brother_experience_study',
         'brother_experience_work',
         'brither_experience_award',
+        'contents',
         'add_image',
         'brother_is_video',
         'brother_videos',
@@ -73,6 +74,7 @@ class TopicAdmin(BaseContentAdmin):
         'title',
         'slug',
         'summary',
+        'contents',
         'add_image',
         'videos',
         'shared_by',
@@ -90,6 +92,7 @@ class NewsAdmin(BaseContentAdmin):
         'slug',  # 路由
         'summary',  # 摘要
         'articles',  # 文章
+        'contents',
         'add_image',  # 图片
         'author',  # 作者
         'published',  # 是否发布
@@ -120,6 +123,7 @@ class BannerAdmin(BaseContentAdmin):
         'related_channels',
         'title',
         'slug',
+        'contents',
         'add_image',
         'url',
         'published',

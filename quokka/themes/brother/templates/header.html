@@ -3,8 +3,8 @@
         {% if channel.is_homepage %}
         <img src="{{ theme_static('img/logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
         {% else %}
-        <img src="{{  theme_static('img/page_logo.jpg') }}" alt="{{Config.get('site', 'site_name')}}">
-        <span>{{channel.title}}</span>
+        <img src="{{  theme_static('img/page_logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
+        <span>{{channel.description}}</span>
         {% endif %}
     </div>
     <div id="nav">

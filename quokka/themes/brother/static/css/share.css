@@ -41,36 +41,19 @@ padding-left: 16px;
 display: inline-block;
 width: 30%;
 }
+.social-share:hover{
+   cursor: pointer;
+}
 .site-name{
     color: #148acc;
     text-align: center;
     font-size: 18px;
 }
-.weibo-logo{
-    border-radius:60px;
-    border: 1px solid #148acc;
-    padding: 5px;
+.site-logo{
     display: block;
-    width:33px;
     margin:auto;
 }
-.weixin-logo{
-    border-radius:60px;
-    border: 1px solid #148acc;
-    padding: 5px;
-    background:  #148acc;
-    display: block;
-    width:33px;
-    margin:auto;
-}
-.tweibo-logo{
-    border-radius:60px;
-    border: 1px solid #148acc;
-    padding: 5px;
-    display: block;
-    width:33px;
-    margin:auto;
-}
+
 .wechat-site{
     position: relative;
 }
@@ -79,4 +62,8 @@ width: 30%;
     position: absolute;
     top:-250px;
     left:-42px;
+    background: #ffffff;
+}
+#wechat-help p{
+    text-align: center;
 }

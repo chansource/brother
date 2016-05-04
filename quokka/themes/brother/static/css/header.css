@@ -22,7 +22,7 @@ body{
     font-size: 30px;
     font-weight: bold;
     vertical-align:middle;
-    margin-left: 8px;
+    margin-left: -2px;
 }
 #nav {
     float:right;
