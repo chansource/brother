@@ -1,0 +1,64 @@
+{% from theme('_helpers.html') import render_pagination with context %}
+{% extends theme("base.html") %}
+
+{%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
+{%if channel.tags %}
+<meta name="keywords" content="{{channel.tags|join(',')}}">
+{%else%}
+<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+{%endif%}
+
+{% endblock %}
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
+<link rel="stylesheet" href="{{theme_static('css/topic_list.css')}}">
+<link rel="stylesheet" href="{{theme_static('css/pagination.css')}}">
+{% endblock %}
+{% block content %}
+<!-- A wrapper for the header -->
+    {% include theme('header.html') %}
+    <div class="banner-container">
+        <div class="swiper-wrapper">
+            {%- for content in contents.items  if content.model == "brothers.banner" -%}
+            <div class="swiper-slide">
+                <a href="{{content.url}}">
+                    <img class="banner-img" src="{{content.get_main_image_url()}}" alt="轮播图片">
+                </a>
+            </div>
+            {%- endfor -%}   
+        </div>
+    </div> 
+     <div id="rest">
+        <div id="previews">
+
+            {% for content in contents.items if content.model == "brothers.topic" or content.model == "brothers.news"%}
+                {% if loop.index==1 %}
+                <a href="{{content.get_absolute_url()}}" class="preview-content first-preview-content">
+                {% else %}
+                <a href="{{content.get_absolute_url()}}" class="preview-content" index={{ loop.index }}>
+                {% endif %}
+                        <img src="{{content.get_main_image_url(default="")}}" alt="话题封面">
+                        <h2 >{{content.title}}</h2>
+                         <p >{{content.summary|truncate(length=20)}}</p> 
+            {% endfor %} 
+             </a>          
+        </div>
+        <div class="clearfloat"></div>
+        {{render_pagination(contents, channel.get_absolute_url())}}
+        {% include theme('footer.html') %}
+    </div>
+{% endblock %}
+{% block bottom_js %}
+<script src="{{theme_static('js/swiper.min.js')}}"></script>
+<script>
+    var mySwiper = new Swiper ('.banner-container', {
+        autoplay : 3000,
+    });
+    $(document).ready(function  () {
+    $("#pagination").css("width",({{contents.pages}}+3)*52);
+  });
+</script>
+{% endblock %}

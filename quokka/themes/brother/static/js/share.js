@@ -1,4 +1,4 @@
-$(document).ready(function(){
+// $(document).ready(function(){
     var width=($("#sharing").width()-$("#shares").width())/2-2;
    $("#cut-line1").css("width",width);
    $("#cut-line2").css("width",width);
@@ -29,9 +29,9 @@ $(document).ready(function(){
     $('.social-share-wechat').hover(
             function(){
             $('#wechat-help').css("display","block");
-        },     
+        },    
         function(){
             $('#wechat-help').css("display","none");
         }
     );
-});
+// });
