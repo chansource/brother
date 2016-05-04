@@ -20,7 +20,7 @@
               <div id="content-header">
                     <div id="header-wrap">
                       <h1>{{content.title}}</h1>
-                      <span>作者 | {{content.author}}   发表时间|{{content.created_at.strftime('%Y.%m.%d')}}</span>
+                      <span>作者 | {{content.author}}   发表时间 | {{content.created_at.strftime('%Y.%m.%d')}}</span>
                     </div>
               </div>
                 <div id="section-links">
@@ -53,7 +53,7 @@
         var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
         //将第二个按钮放到下面
         var margin=($("#articles-container").height()-$("#section-links").height())/2;
-        $(".section-link:eq(1)").css("margin-top",margin);
+        $(".section-link:eq(0)").css("margin-top",margin);
           /*按钮点击事件*/
         $(".section-link").click(function() {
             $("#article-detail").text(articles[$(this).index()]);
@@ -63,8 +63,7 @@
             //清空margin
             $(".section-link").css("margin-top",0);
             margin=($("#articles-container").height()-$("#section-links").height())/2;
-            // $(this).css("margin-top",margin);
-            $(this).next().css("margin-top",margin);
+            $(this).css("margin-top",margin);
         });
      });
      </script>

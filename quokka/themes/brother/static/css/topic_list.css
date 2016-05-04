@@ -1,31 +1,37 @@
 #rest{
     background: #f4f4f4;
 }
-#hotpic{
-    position: relative;
+.banner-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
 }
-#hotpic img{
-    width:100%;
+.banner-img {
+    width: 100%;
 }
-.topic-link{
-    text-decoration: none;
-}
+
 #previews{
     width: 980px;
     padding-top: 54px;
     margin:auto;
     background: #f4f4f4;
 }
-/* .preview-content:first-child {
-    width:470px;
-} */
+
 .preview-content{
-    width:219px;
+    width:225px;
+    height:270px;
     margin-left: 20px;
     display: inline-block;
+    text-decoration: none;
+    float: left;
+}
+.first-preview-content{
+    width:470px;
+   height:540px;
 }
 .preview-content img{
     width:100%;
+
 }
 
 .preview-content h2{

@@ -12,12 +12,30 @@
 }
 #summary{
     display: inline-block;
+    position: relative;
+    vertical-align: top;
     margin-left: 40px;
     width:450px;
+    
+}
+#left-quote{
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+#right-quote{;
+
+    position: absolute;
+    bottom:114px;
+    right:0px;
 }
 #moto{
     color:#000000;
     font: 38px "Lantinghei TC";
+    padding-top:20px;
+}
+#text-info{
+    padding-top: 136px
 }
 #name{
     color:#128bcd;
@@ -79,6 +97,7 @@
     color: #7c7c7c;
     font: 18px "Lantinghei SC";
     padding-top: 30px;
+    margin:0;
 }
 .experience-type:before{
     content: '';
@@ -86,7 +105,8 @@
     width:48px;
     height: 18px;
     background: #148acc;
-    margin-left: -8px;
+    margin:0 8px 0 -8px;
+    vertical-align: text-bottom;
 
 }
 .experience-items{
@@ -104,6 +124,7 @@
     color: #7c7c7c;
     font: 12px "Lantinghei SC"; 
     margin: 8px 0 12px 0;
+    padding-left: 16px;
 }
 #cross{
     width:100%;
@@ -141,6 +162,9 @@
     margin-top: -27px;
     margin-left: 35px;
     padding: 0;
+    vertical-align: middle;
+    border-radius: 10px;
+    outline: none;
 }
 .link-button:hover{
     background: #148acc;

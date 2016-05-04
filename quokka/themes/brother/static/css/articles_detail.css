@@ -49,6 +49,9 @@
     font:24px "Lantinghei TC";
     text-decoration: none;
 }
+.section-link:hover{
+cursor: pointer;
+}
 .section-link span{
     margin-left:32px;
     line-height:68px;

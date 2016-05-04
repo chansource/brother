@@ -402,11 +402,11 @@ tagged {% for tag in content.tags%}<a class="post-category post-category-design"
     {% if pagination.has_prev %}
         {% if not request.args.get('per_page') %}
         <a class="page_link" href="{{ '{}?page={}'.format(endpoint, pagination.prev_num) }}">
-            <img src="{{theme_static('img/left_arrow.png')}}">
+            <
         </a>
         {% else %}
         <a class="page_link" href="{{ '{}?page={}&per_page={}'.format(endpoint, pagination.prev_num, request.args.get('per_page')) }}">
-            <img src="{{theme_static('img/left_arrow.png')}}">
+            <
         </a>
         {% endif %}
     {% endif %}
@@ -424,11 +424,11 @@ tagged {% for tag in content.tags%}<a class="post-category post-category-design"
   {% if pagination.has_next %}
       {% if not request.args.get('per_page') %}
         <a class="page_link" href="{{ '{}?page={}'.format(endpoint, pagination.next_num) }}">
-          <img src="{{theme_static('img/right_arrow.png')}}">
+          >
         </a>
       {% else %}
         <a class="page_link" href="{{ '{}?page={}&per_page={}'.format(endpoint, pagination.next_num, request.args.get('per_page')) }}">
-          <img src="right_arrow.png">
+          >
         </a>
         {% endif %}
     {% endif %}

@@ -18,10 +18,12 @@
               <img src="{{content.get_main_image_url(default="")}}">
           </div>
           <div id="summary">
+             <img id="left-quote" src="{{theme_static('img/left_quote.png')}}">
               <p id="moto">
-                  {{content.brother_motto}}
+                  {{content.brother_motto|truncate(length=64,killwords=true)}}
               </p>
-              <p>
+             <img id="right-quote" src="{{theme_static('img/right_quote.png')}}">
+              <p id="text-info">
                   <span id="name">{{content.title}}</span>
                   <span class="other-info">{{content.brother_college_major}}</span>
                   <span class="other-info">{{content.brother_college_name}}</span>
@@ -36,10 +38,10 @@
 
        <div id="rest-wrap">
           <a id="left-arrow" href='#'>
-              <img src="{{theme_static('img/left_arrow.png')}}">
+              <img src="{{theme_static('img/index_banner_left.png')}}">
           </a>        
           <a id="right-arrow" href='#'>
-              <img src="{{theme_static('img/right_arrow.png')}}">
+              <img src="{{theme_static('img/index_banner_right.png')}}">
           </a>
           <div id="experiences">
             <div class="experience">
@@ -47,7 +49,7 @@
               <div class="experience-items">
                 {% for experience in content.brother_experience_study%}
                   <div class="experience-item">
-                      <p class="experience-title"> >{{experience.title}}</p>
+                      <p class="experience-title"> >  {{experience.title}}</p>
                       <p class="experience-time">{{experience.time}}</p>
                   </div>
                   {% endfor %}                
@@ -58,7 +60,7 @@
               <div class="experience-items">
                 {% for experience in content.brother_experience_work%}
                   <div class="experience-item">
-                      <p class="experience-title"> >{{experience.title}}</p>
+                      <p class="experience-title"> >  {{experience.title}}</p>
                       <p class="experience-time">{{experience.time}}</p>
                   </div>   
                   {% endfor %}             
@@ -69,7 +71,7 @@
               <div class="experience-items">
                 {% for experience in content.brither_experience_award%}
                   <div class="experience-item">
-                      <p class="experience-title"> >{{experience.title}}</p>
+                      <p class="experience-title"> >  {{experience.title}}</p>
                       <p class="experience-time">{{experience.time}}</p>
                   </div>    
                   {% endfor %}           
@@ -80,7 +82,7 @@
        <div id="cross"></div>
         <div id="links">
             <div id="link1">
-                <img class="link-img" src="{{theme_static('img/hotpic.jpg')}}">
+                <img class="link-img" src="{{theme_static('img/brother_say.png')}}">
                 {% if content.brother_is_video %}
                   <button class="link-button" onclick="location='{{content.brother_videos.get_absolute_url()}}'">师兄说</button>
                 {% else %}
@@ -88,7 +90,7 @@
                 {% endif %}
             </div>
              <div id="link2">
-                 <img class="link-img" src="{{theme_static('img/hotpic.jpg')}}">
+                 <img class="link-img" src="{{theme_static('img/brother_help.png')}}">
                  <button class="link-button">师兄帮帮忙</button>
             </div>
         </div>
