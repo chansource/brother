@@ -17,15 +17,15 @@
 
 {% block content %}
     {% include theme('header.html') %}
+    <img src="{{theme_static('img/join_bg.png')}}" alt="背景图" class="join-bg">
     
-    <div class="join-container">
-        <div class="join-content">
-            <img src="{{theme_static('img/join_text.png')}}" alt="我们需要伙伴">
-        </div>
+    <div class="join-content">
+        <img src="{{theme_static('img/join_text.png')}}" alt="我们需要伙伴">
     </div>
 
     <div class="join-qrcode">
         <img src="{{theme_static('img/join_qrcode.png')}}" alt="扫描二维码加入">
+        <div class="clearfloat"></div>
     </div>
 
     {% include theme('footer.html') %}
