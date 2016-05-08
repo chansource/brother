@@ -1,5 +1,5 @@
 #baseinfo{
-    width:960px;
+    width:1170px;
     margin: 70px auto;
     background: #ffffff;
 }
@@ -7,53 +7,53 @@
         display: inline-block;
 }
 #cover img{
-    width: 460px;
+    width: 570px;
     height:420px;
 }
 #summary{
     display: inline-block;
-    position: relative;
     vertical-align: top;
-    margin-left: 40px;
-    width:450px;
-    
-}
-#left-quote{
-    position: absolute;
-    top:0px;
-    left:0px;
-}
-#right-quote{;
-
-    position: absolute;
-    bottom:114px;
-    right:0px;
+    margin-left: 100px;
+    width:500px;
+    height:420px;
 }
 #moto{
+    height:288px;
     color:#000000;
-    font: 38px "Lantinghei TC";
-    padding-top:20px;
+    font-size: 38px;
+    font-family:  "Lantinghei TC";
+    margin:0;
 }
-#text-info{
-    padding-top: 136px
+#moto p{
+    margin:0;
+}
+#right-quote{
+    text-align: right;
+}
+
+#person-info{
+    margin-top: 34px;
+    margin-bottom: 21px;
 }
 #name{
-    color:#128bcd;
-    font:36px "Lantinghei TC";
+    color:#148acc;
+    font-size:36px ;
+    font-family: "Lantinghei TC";
 }
-.other-info{
-    color:#128bcd;
-    font:32px "Lantinghei TC";
+.school-info{
+    color:#148acc;
+    font-size:32px;
+    font-family:  "Lantinghei TC";
 }
 #tags{
-    margin:3px 0 0 -15px;
+    margin:0 0 0 -15px;
     padding: 0;
 }
 #tags span{
     display: inline-block;
     padding: 3px 12px 3px 12px;
     margin: 6px 0 0 16px;
-    border: 1px solid #7c7c7c;
+    border: 1px solid #148acc;
     height: 22px;
     border-radius: 4px;
     color: #148acc;
@@ -62,25 +62,11 @@
 #rest-wrap{
         background: #f4f4f4;
 }
-#left-arrow{
-    margin-top: 330px;
-    float: left;
-}
-#left-arrow img{
-    background: #148acc;
-}
-#right-arrow{
-    margin-top: 330px;
-    float: right;
-}
-#right-arrow img{
-    background: #148acc;
-}
+
 #experiences{
     width: 980px;
     padding:70px 0 68px 0; 
     margin: auto;
-
 }
 
 .experience{
@@ -90,7 +76,7 @@
     margin-left: 20px;
     vertical-align: middle;
     background: #ffffff;
-    border-bottom: 6px solid #7c7c7c;
+    
 }
 
 .experience-type{

@@ -34,6 +34,7 @@ class BrotherArticles(Content):
     """
     师兄文章集
     """
+    author = db.StringField(max_length=255, required=True)  # 分享人
     articles = db.ListField(
         db.EmbeddedDocumentField(Article, required=True), required=False)  # 师兄文章列表
 

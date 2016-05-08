@@ -20,6 +20,10 @@
             "http://share.v.t.qq.com/index.php?c=share&a=index&url=" + encodeURIComponent(shareLink)+"&title=" +encodeURIComponent(shareTitle)
         );
     });
+    $(".social-share-qzone").click(function () {
+        window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+ encodeURIComponent(shareLink)+ '&title='+encodeURIComponent(shareTitle)
+        );
+    });
     $('#wechat-qrcode').qrcode({
         render: "canvas",
         width: 200,

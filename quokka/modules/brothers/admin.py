@@ -60,6 +60,7 @@ class BrotherArticlesAdmin(BaseContentAdmin):
         'related_channels',
         'title',
         'slug',
+        'author',
         'articles',
         'published',
     ]

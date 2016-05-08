@@ -4,17 +4,25 @@
         <img src="{{ theme_static('img/logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
         {% else %}
         <img src="{{  theme_static('img/page_logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
-        <span>{{channel.description}}</span>
+        <span>{% if channel.slug=='brothers' and contents %}师兄{% else %}{{channel.description}}{% endif %}</span>
         {% endif %}
     </div>
+    {% set navigation_bar = [
+            ('/', ['home'], '首页'),
+            ('/brothers', ['brothers','brothervideos','brotherarticles'], '师兄'),
+            ('/topics', ['topics'], '话题'),
+            ('/news', ['news'], '动态'),
+            ('/about/detail.html', ['about'], '关于'),
+            ('/join', ['join'], '加入')
+     ] -%}
     <div id="nav">
         <ul>
-                 <li><a href="/home">首页</a></li>
-                <li><a href="/brothers">师兄</a></li>
-                <li><a href="/topics">话题</a></li>
-                <li><a href="/news">动态</a></li>
-                <li><a href="/about/detail.html">关于</a></li>
-                <li><a href="/join">加入</a></li>
+            {% for  href, channels, caption in navigation_bar%}
+            <li>
+            <a href="{{ href|e }}" {% if channel.slug in channels %} class="active-nav-link"
+            {% else %} class="nav-link"{% endif%}>{{ caption|e }}</a>
+            {% endfor %}
+        </li>
         </ul>
     </div>
  </div>

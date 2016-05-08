@@ -1,7 +1,4 @@
 {% extends theme("base.html") %}
-
-{%block title%} {{content.title}} | {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
-
 {% block seo_meta %}
 <meta name="description" content="{{content.summary}}">
 <meta name="keywords" content="{{content.tags|join(',')}}">
@@ -20,7 +17,7 @@
               <div id="content-header">
                     <div id="header-wrap">
                       <h1>{{content.title}}</h1>
-                      <span>作者 | {{content.author}}   发表时间 | {{content.created_at.strftime('%Y.%m.%d')}}</span>
+                      <span>作者 | {{content.author}}</span>
                     </div>
               </div>
                 <div id="section-links">

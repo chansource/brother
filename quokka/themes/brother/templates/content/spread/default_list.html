@@ -1,6 +1,6 @@
 {% extends theme("base.html") %}
 
-{%block title%} {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
+{%block title%}<title>师兄指路 传播者</title>{% endblock %}
 
 {% block seo_meta %}
 <meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">

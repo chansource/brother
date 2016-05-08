@@ -3,24 +3,29 @@
     background:#f4f4f4;
 }
 #content{
-    width:960px;
+    width:1170px;
     padding-top:24px;
+    margin: auto;
+}
+#content-header{
     margin: auto;
 }
 #content-header h1{
     color:#148acc;
     font-size:20px;
+     font-family: "Lantinghei SC";
 }
 #content-header span{
     margin-top:14px;
-   color:#c7c7c7;
+   color:#7c7c7c;
    font-size:14px;
+   font-family: "Lantinghei SC";
 }
 #like-button{
     position: absolute;
     z-index: 1;
-    top:180px;
-    right: 0px;
+    bottom:88px;
+    right: -23px;
 }
 #like-button p{
     margin: -41px 0 0 43px ;
@@ -28,13 +33,13 @@
     font:22px  "Lantinghei SC";;
 }
 #video{
-    width:960px;
-    margin-top:22px;
+    width:1170px;
+    margin:22px auto 0 auto;
     position: relative;
 }
 #video embed{
-    height:732px;
-     width:960px;
+    height:760px;
+     width:1170px;
 }
 #section-buttons{
     margin:26px auto 0 auto;

@@ -1,13 +1,10 @@
 {% extends theme("base.html") %}
 
-{%block title%} {{content.title}} | {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'Quokka site')}} {% endblock %}
-
 {% block seo_meta %}
 <meta name="description" content="{{content.summary}}">
 <meta name="keywords" content="{{content.tags|join(',')}}">
 {% endblock %}
 {% block head %}
-<title>{{ content.title }}</title>
 {% endblock head %}
 {% block head_css %}
 <link rel="stylesheet" type="text/css" href="{{theme_static('css/videos.css')}}">
@@ -48,18 +45,19 @@
      <script type="text/javascript" src="{{theme_static('js/swfobject.js')}}"></script>
      <script type="text/javascript">
         $(document).ready(function(){
+            var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
              var videos_urls=[{% for video in content.videos %}"{{ video.video_url}}",{% endfor %}];
              var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
              var index=0;
              var status=true;
              //加载视频
-            swfobject.embedSWF(videos_urls[0],"flashcontent" , 960, 732, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlashexpressInstall.swf", '', '',{quality:'high',allowfullscreen : 'true'});
+            swfobject.embedSWF(videos_urls[0],"flashcontent" , 1170, 760, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlashexpressInstall.swf", '', '',{quality:'high',allowfullscreen : 'true'});
             $("#like_numbers").text(likes[0]); 
             //视频按钮布局
            {% if content.videos|length >1 %}
              var button_number={{ content.videos|length }};
              var margin_left=21;
-             var width=(960-margin_left*(button_number-1))/button_number;
+             var width=($("#video").width()-margin_left*(button_number-1))/button_number;
               $(".non-first-section-button").css("margin-left",margin_left);
              $(".section-button").css("width",width);
              $(".section-button").css("display","inline-block");
@@ -67,12 +65,13 @@
             //视频按钮事件
             $(".section-button").click(function(){
                 index=$(this).index();
-            swfobject.embedSWF(videos_urls[index],$("#flashcontent")[0] , 960, 732, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash", '', '',{quality:'high',allowfullscreen : 'true'});
+            swfobject.embedSWF(videos_urls[index],$("#flashcontent")[0] , 1170, 760, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash", '', '',{quality:'high',allowfullscreen : 'true'});
                 $(".section-button").css("background","#ffffff");
                 $("#like_numbers").text(likes[index]);
                 $(".section-button").css("color","#148acc");        
                 $(this).css("background","#148acc");
                 $(this).css("color","#ffffff");
+                $("title").text("{{content.shared_by}} "+videos_titles[index])
               });
 
             //增加csrf_token

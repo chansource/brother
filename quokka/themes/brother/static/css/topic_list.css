@@ -11,23 +11,23 @@
 }
 
 #previews{
-    width: 980px;
+    width: 1201px;
     padding-top: 54px;
     margin:auto;
     background: #f4f4f4;
 }
 
 .preview-content{
-    width:225px;
-    height:270px;
-    margin-left: 20px;
+    width:272px;
+    height:315px;
+    margin-left: 28px;
     display: inline-block;
     text-decoration: none;
     float: left;
 }
 .first-preview-content{
-    width:470px;
-   height:540px;
+    width:573px;
+   height:630px;
 }
 .preview-content img{
     width:100%;

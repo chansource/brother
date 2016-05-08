@@ -2,7 +2,7 @@ body{
     margin:0;
 }
 #header {
-    width:960px;
+    width:1170px;
     height:106px;
     background: white;
     margin:auto;
@@ -20,7 +20,7 @@ body{
 #logo span{
     color: #148acc;
     font-size: 30px;
-    font-weight: bold;
+    font-family: "Lantinghei TC";
     vertical-align:middle;
     margin-left: -2px;
 }
@@ -36,21 +36,35 @@ body{
     float: left;
     list-style-type: none;
 }
-#nav ul li a{
+.active-nav-link{
+    height: 28px;
+    line-height: 28px;
+    background: white;
+    color:#148acc;
+    font-size: 18px;
+    font-family: "Lantinghei TC";
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin-left:40px;
+    border-bottom:1px solid #148acc;
+}
+.nav-link{
     height: 28px;
     line-height: 28px;
     background: white;
     color: #919191;
     font-size: 18px;
-    font-weight: bold;
+    font-family: "Lantinghei TC";
     display: block;
     text-align: center;
     text-decoration: none;
-    margin-left:35px;
-    border-bottom:1px solid white;
+    margin-left:40px;
+    border-bottom:1px solid #ffffff;
 }
-#nav ul li a:hover{
-   color:blue;
+
+.nav-link:hover{
+   color:#148acc;
 }
 .clearfloat{
     clear:both;
