@@ -4,6 +4,7 @@ WORKDIR /tmp
 COPY requirements/requirements.txt /tmp/
 COPY requirements/test.txt /tmp/
 COPY requirements/dev.txt /tmp/
+ENV LIB /lib
 RUN apk update
 RUN apk add gcc python py-pip jpeg libjpeg jpeg-dev zlib zlib-dev tiff freetype git py-pillow python-dev musl-dev bash
 RUN pip install -r /tmp/requirements.txt
