@@ -17,8 +17,8 @@ Import it if you want to pass some password to your configs.
 """
 DB for localhost
 """
-MONGODB_DB = "quokka_db"
-MONGODB_HOST = 'localhost'
+MONGODB_DB = "brother_db"
+MONGODB_HOST = '10.251.237.71'
 MONGODB_PORT = 27017
 MONGODB_USERNAME = None
 MONGODB_PASSWORD = None

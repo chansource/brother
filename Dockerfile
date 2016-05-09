@@ -8,7 +8,6 @@ RUN curl https://bootstrap.pypa.io/get-pip.py|python
 COPY ./ /root/app/
 
 WORKDIR /root/app/
-RUN tree 
 RUN pip install -r requirements/requirements.txt
 RUN pip install uwsgi
 
