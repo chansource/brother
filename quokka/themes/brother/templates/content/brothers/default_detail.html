@@ -1,7 +1,7 @@
 {% from theme('_helpers.html') import load_comment_area, load_tags_area, load_share_area, load_recommendation_area, load_page_header, load_page_time, load_page_content  with context %}
 {% extends theme("base.html") %}
 
-{% block title %}<title>师兄卡片 {{content.title}}</title>{% endblock %}
+{% block title %}<title>师兄名片 {{content.title}}</title>{% endblock %}
 
 {% block seo_meta %}
 <meta name="description" content="{{content.summary}}">
@@ -77,14 +77,14 @@
             <div id="link1">
                 <img class="link-img" src="{{theme_static('img/brother_say_1.png')}}">
                 {% if content.brother_is_video %}
-                  <button class="link-button" onclick="location='{{content.brother_videos.get_absolute_url()}}'">师兄说</button>
+                  <button class="link-button" onclick="location='{{content.brother_videos.get_absolute_url()}}'">分享</button>
                 {% else %}
                 <button class="link-button" onclick="location='{{content.brother_articles.get_absolute_url()}}'">师兄说</button>
                 {% endif %}
             </div>
              <div id="link2">
                  <img class="link-img" src="{{theme_static('img/brother_help_1.png')}}">
-                 <button class="link-button">师兄帮帮忙</button>
+                 <button class="link-button">我要问路</button>
             </div>
         </div>
         {% include theme('footer.html') %}

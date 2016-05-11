@@ -21,7 +21,7 @@
     height:288px;
     color:#000000;
     font-size: 38px;
-    font-family:  "Lantinghei TC";
+    font-family:  "Lantinghei TC","Microsoft YaHei",sans-serif;
     margin:0;
 }
 #moto p{
@@ -38,12 +38,12 @@
 #name{
     color:#148acc;
     font-size:36px ;
-    font-family: "Lantinghei TC";
+    font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 .school-info{
     color:#148acc;
     font-size:32px;
-    font-family:  "Lantinghei TC";
+    font-family:  "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 #tags{
     margin:0 0 0 -15px;
@@ -57,7 +57,7 @@
     height: 22px;
     border-radius: 4px;
     color: #148acc;
-    font:17px "Lantinghei SC";
+    font:17px "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 #rest-wrap{
         background: #f4f4f4;
@@ -72,7 +72,7 @@
 .experience{
     display: inline-block;
     width:300px;
-    height: 448px;
+    min-height: 448px;
     margin-left: 20px;
     vertical-align: middle;
     background: #ffffff;
@@ -81,7 +81,7 @@
 
 .experience-type{
     color: #7c7c7c;
-    font: 18px "Lantinghei SC";
+    font: 18px "Lantinghei TC","Microsoft YaHei",sans-serif;
     padding-top: 30px;
     margin:0;
 }
@@ -104,23 +104,23 @@
 }
 .experience-title{
     color: #148acc;
-    font: 14px "Lantinghei SC"; 
+    font: 14px "Lantinghei TC","Microsoft YaHei",sans-serif; 
 }
 .experience-time{
     color: #7c7c7c;
-    font: 12px "Lantinghei SC"; 
+    font: 12px "Lantinghei TC","Microsoft YaHei",sans-serif; 
     margin: 8px 0 12px 0;
     padding-left: 16px;
 }
 #cross{
-    width:100%;
-    height:334px;
+    width: 100%;
+    height: 270px;
     background: #148acc;
 }
 
 #links{
     width: 572px;
-    margin-top:-270px;
+    margin-top: -200px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -136,7 +136,7 @@
 }
 .link-img{
     width:100%;
-    height: 312px;
+    height: auto;
 }
 .link-button{
     width:200px;
@@ -144,7 +144,7 @@
     border:1px solid  #148acc;
     background: #ffffff;
     color: #148acc;
-    font: 18px "Lantinghei TC";
+    font: 18px "Lantinghei TC","Microsoft YaHei",sans-serif;
     margin-top: -27px;
     margin-left: 35px;
     padding: 0;

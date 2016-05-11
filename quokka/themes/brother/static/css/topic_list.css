@@ -36,9 +36,9 @@
 
 .preview-content h2{
     color:#148acc;
-    font:20px "Lantinghei TC";
+    font:20px "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 .preview-content p{
     color:#7c7c7c;
-   font:14px "Lantinghei SC";
+   font:14px "Lantinghei TC","Microsoft YaHei",sans-serif;
 }

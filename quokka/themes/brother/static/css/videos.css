@@ -13,13 +13,13 @@
 #content-header h1{
     color:#148acc;
     font-size:20px;
-     font-family: "Lantinghei SC";
+     font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 #content-header span{
     margin-top:14px;
    color:#7c7c7c;
    font-size:14px;
-   font-family: "Lantinghei SC";
+   font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 #like-button{
     position: absolute;
@@ -30,7 +30,7 @@
 #like-button p{
     margin: -41px 0 0 43px ;
     color: #ffffff;
-    font:22px  "Lantinghei SC";;
+    font:22px  "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 #video{
     width:1170px;
@@ -52,7 +52,7 @@
     border:1px solid #148acc;
     border-radius:8px;
     color:#148acc;
-    font:19px "Lantinghei SC";;
+    font:19px "Lantinghei TC","Microsoft YaHei",sans-serif;
     outline:none;
     padding:0;
     display: none;

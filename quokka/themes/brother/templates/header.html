@@ -7,11 +7,17 @@
         <span>{% if channel.slug=='brothers' and contents %}师兄{% else %}{{channel.description}}{% endif %}</span>
         {% endif %}
     </div>
-    {% set navigation_bar = [
+<!--     {% set navigation_bar = [
             ('/', ['home'], '首页'),
             ('/brothers', ['brothers','brothervideos','brotherarticles'], '师兄'),
             ('/topics', ['topics'], '话题'),
             ('/news', ['news'], '动态'),
+            ('/about/detail.html', ['about'], '关于'),
+            ('/join', ['join'], '加入')
+     ] -%} -->
+    {% set navigation_bar = [
+            ('/', ['home'], '首页'),
+            ('/brothers', ['brothers','brothervideos','brotherarticles'], '师兄'),
             ('/about/detail.html', ['about'], '关于'),
             ('/join', ['join'], '加入')
      ] -%}
