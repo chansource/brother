@@ -17,13 +17,13 @@
 #content-header h1{
     padding-top: 32px;
     color:#ffffff;
-    font:30px "Lantinghei TC";
+    font:30px "Lantinghei TC","Microsoft YaHei",sans-serif;
     
 }
 #content-header span{
-  margin-top:16px;
-   color:#ffffff;
-   font:18px "Lantinghei SC";
+    margin-top:16px;
+    color:#ffffff;
+    font:18px "Lantinghei TC","Microsoft YaHei",sans-serif;
    
 }
 
@@ -38,7 +38,7 @@
     border-bottom:1px solid #148acc;
     background:#ffffff;
     color:#148acc;
-    font:24px "Lantinghei TC";
+    font:24px "Lantinghei TC","Microsoft YaHei",sans-serif;
     text-decoration: none;
 }
 .selected-section-link{
@@ -46,7 +46,7 @@
     border-bottom:1px solid #148acc;
     background:#148acc;
     color:#ffffff;
-    font:24px "Lantinghei TC";
+    font:24px "Lantinghei TC","Microsoft YaHei",sans-serif;
     text-decoration: none;
 }
 .section-link:hover{
@@ -78,5 +78,5 @@ cursor: pointer;
     margin:0;
     min-height:300px;
     color:#515151;
-    font:18px "Lantinghei TC";
+    font:18px "Lantinghei TC","Microsoft YaHei",sans-serif;
 }

@@ -28,7 +28,7 @@ body {
     background-position: 117px 14px;
     background-size: 84px;
     text-decoration: none;
-    font-family: "Lantinghei TC";
+    font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
 
 }
 
@@ -69,6 +69,7 @@ body {
     padding: 0;
     margin: 44px 0 0 30px;
     display: inline-block;
+    vertical-align: top;
 }
 
 .brother-cover {
@@ -83,13 +84,13 @@ body {
 
 .brother-other-info {
     color: #499cd5;
-    font: 20px "Lantinghei SC";
+    font: 20px "Lantinghei TC","Microsoft YaHei",sans-serif;
     padding-left: 2px;
 }
 
 .brother-name {
     color: #128bcd;
-    font: 22px "Lantinghei TC";
+    font: 22px "Lantinghei TC","Microsoft YaHei",sans-serif;
     padding-left: 2px;
 }
 
@@ -106,7 +107,7 @@ body {
     height: 22px;
     border-radius: 4px;
     color: #7c7c7c;
-    font: 17px "Lantinghei SC";
+    font: 17px "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 
 .brother-link {
@@ -122,7 +123,7 @@ body {
     text-decoration: none;
     text-align: center;
     border-bottom: 1px solid #148acc;
-    font: 15px "Lantinghei SC";
+    font: 15px "Lantinghei TC","Microsoft YaHei",sans-serif;
     color: #148acc;
     padding-bottom: 6px;
 }

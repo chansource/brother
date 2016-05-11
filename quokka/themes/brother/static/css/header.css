@@ -20,7 +20,7 @@ body{
 #logo span{
     color: #148acc;
     font-size: 30px;
-    font-family: "Lantinghei TC";
+    font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
     vertical-align:middle;
     margin-left: -2px;
 }
@@ -42,7 +42,7 @@ body{
     background: white;
     color:#148acc;
     font-size: 18px;
-    font-family: "Lantinghei TC";
+    font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
     display: block;
     text-align: center;
     text-decoration: none;
@@ -55,7 +55,7 @@ body{
     background: white;
     color: #919191;
     font-size: 18px;
-    font-family: "Lantinghei TC";
+    font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
     display: block;
     text-align: center;
     text-decoration: none;
