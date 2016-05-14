@@ -130,7 +130,7 @@ body {
 
 .banner-container {
     width: 100%;
-    height: auto;
+    display: none;
     position: relative;
     overflow: hidden;
 }

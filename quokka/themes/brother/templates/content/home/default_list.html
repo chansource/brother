@@ -2,16 +2,6 @@
 
 {%block title%} <title>师兄指路 首页</title>{% endblock %}
 
-{% block seo_meta %}
-<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
-{%if channel.tags %}
-<meta name="keywords" content="{{channel.tags|join(',')}}">
-{%else%}
-<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
-{%endif%}
-
-{% endblock %}
-
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
 <link rel="stylesheet" href="{{theme_static('css/index.css')}}">
@@ -84,10 +74,17 @@
 <script type="text/javascript" src="{{theme_static('js/follow.js')}}"></script>
 <script src="{{theme_static('js/swiper.min.js')}}"></script>
 <script>
+    function setBannerHeight(){
+        $(".banner-container").height($(window).width()*760/1500).show();
+    }
+    
     var mySwiper = new Swiper ('.banner-container', {
         nextButton: '.banner-next',
         prevButton: '.banner-prev',
     });
+
+    setBannerHeight();
+    $(window).resize(setBannerHeight);
 </script>
 {% endblock %}
 

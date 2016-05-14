@@ -3,13 +3,14 @@
 from quokka.core.db import db
 from quokka.core.models.content import Content
 from quokka.core.models.subcontent import SubContent
+from quokka.core.models.signature import Ordered
 
 
 class Video(db.EmbeddedDocument):
     """
     单一视频
     """
-    video_title = db.StringField(max_length=255,required=True,default="default title of the video")  # 视频标题
+    video_title = db.StringField(max_length=255, required=True)  # 视频标题
     video_url = db.StringField(max_length=255, required=True)  # 视频url
     like_numbers = db.IntField(default=0)  # 点赞数
 
@@ -47,19 +48,25 @@ class Experience(db.EmbeddedDocument):
     time = db.StringField(max_length=255, required=True)  # 时间区间
 
 
-class BrotherInfo(Content):
+class BrotherInfo(Content, Ordered):
     """
     师兄信息
     """
-    # 师兄封面图片，使用Content.path
+
+    meta = {
+        'allow_inheritance': True,
+        'ordering': ['order'],
+    }
+
+    # 师兄封面图片，使用Content.contents
     # 师兄姓名，使用Content.title
     brother_college_major = db.StringField(
-        max_length=255, required=True)  # 师兄专业
+        max_length=255, required=False)  # 师兄专业
     brother_college_name = db.StringField(
-        max_length=255, required=True)  # 师兄毕业院校
+        max_length=255, required=False)  # 师兄毕业院校
     brother_tags = db.ListField(db.StringField(
         max_length=255), required=False)  # 师兄标签
-    brother_motto = db.StringField(max_length=255, required=True)  # 师兄语录
+    brother_motto = db.StringField(max_length=255, required=False)  # 师兄语录
     brother_experience_study = db.ListField(
         db.EmbeddedDocumentField(Experience), required=False)  # 师兄学习经历
     brother_experience_work = db.ListField(
@@ -70,6 +77,29 @@ class BrotherInfo(Content):
     brother_videos = db.ReferenceField(BrotherVideos, required=False)  # 视频
     brother_articles = db.ReferenceField(
         BrotherArticles, required=False)  # 文章信息
+    sex = db.StringField(
+        max_length=255, required=False)  # 性别
+    email = db.StringField(
+        max_length=255, required=False)  # 邮箱
+    tel = db.StringField(
+        max_length=255, required=False)  # 电话
+    qq = db.StringField(
+        max_length=255, required=False)  # QQ
+    born_city = db.StringField(
+        max_length=255, required=False)  # 籍贯
+    college_city = db.StringField(
+        max_length=255, required=False)  # 学校城市
+    work_city = db.StringField(
+        max_length=255, required=False)  # 工作城市
+    work_company = db.StringField(
+        max_length=255, required=False)  # 工作公司
+    internship_company = db.StringField(
+        max_length=255, required=False)  # 实习公司
+    work_abroad = db.BooleanField(required=False) # 是否海外工作
+    work_industry = db.StringField(
+        max_length=255, required=False)  # 工作行业
+    science_liberal = db.StringField(
+        max_length=255, required=False)  # 文理科
 
 class Banner(Content):
     """
