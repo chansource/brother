@@ -2,16 +2,6 @@
 
 {%block title%} <title>师兄指路 首页</title>{% endblock %}
 
-{% block seo_meta %}
-<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
-{%if channel.tags %}
-<meta name="keywords" content="{{channel.tags|join(',')}}">
-{%else%}
-<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
-{%endif%}
-
-{% endblock %}
-
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
 <link rel="stylesheet" href="{{theme_static('css/index.css')}}">
@@ -54,7 +44,7 @@
     <div class="brother-bg-container">
         <div class="brother-container">
             <!-- 为解决inline-block间距问题，div一行显示，只能牺牲代码格式 -->
-            {% for content in contents.items %}{% if content.model == "brothers.brotherinfo" %}<div class="brother-item">
+            {% for content in contents.items|selectattr("model", "equalto", "brothers.brotherinfo")|sort(attribute='home_order') %}{% if content.model == "brothers.brotherinfo" %}<div class="brother-item">
                 <a href="{{content.get_absolute_url()}}" class="brother-link">
                     <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
                     <p class="brother-info">
@@ -78,16 +68,23 @@
 
     {% include theme('follow.html') %}
     {% include theme('footer.html') %}
-    <script type="text/javascript" src="{{theme_static('js/follow.js')}}"></script>
 {% endblock %}
 
 {% block bottom_js %}
+<script type="text/javascript" src="{{theme_static('js/follow.js')}}"></script>
 <script src="{{theme_static('js/swiper.min.js')}}"></script>
 <script>
+    function setBannerHeight(){
+        $(".banner-container").height($(window).width()*740/1500).show();
+    }
+    
     var mySwiper = new Swiper ('.banner-container', {
         nextButton: '.banner-next',
         prevButton: '.banner-prev',
     });
+
+    setBannerHeight();
+    $(window).resize(setBannerHeight);
 </script>
 {% endblock %}
 

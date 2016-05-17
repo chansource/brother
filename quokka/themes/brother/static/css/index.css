@@ -115,7 +115,7 @@ body {
 }
 
 .more-brother {
-    margin: 36px 0 40px 0;
+    padding: 36px 0 40px 0;
     text-align: center;
 }
 
@@ -130,7 +130,7 @@ body {
 
 .banner-container {
     width: 100%;
-    height: auto;
+    display: none;
     position: relative;
     overflow: hidden;
 }

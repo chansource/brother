@@ -40,7 +40,7 @@
                 {% endif %}
                         <img src="{{content.get_main_image_url(default="")}}" alt="话题封面">
                         <h2 >{{content.title}}</h2>
-                         <p >{{content.summary|truncate(length=20)}}</p> 
+                         <p >{{content.summary}}</p> 
             {% endfor %} 
              </a>          
         </div>

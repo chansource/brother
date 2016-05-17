@@ -2,12 +2,12 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="csrf_token" content="{{ csrf_token() }}" />
     {%block title%}{% endblock %}
     {% block seo_meta %}
-    <meta name="description" content="{{Config.get('site', 'site_description')}}">
-    <meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+    <meta name="description" content="{{Config.get('site', 'site_description')}}" />
+    <meta name="keywords" content="{{Config.get('site', 'site_keywords')}}" />
     {% endblock %}
     {% block meta %}{% endblock %}
     {% block head %}

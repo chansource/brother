@@ -1,17 +1,18 @@
-# Translations template for quokka.
+# Chinese (Simplified, China) translations for quokka.
 # Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the quokka project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: quokka VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2016-05-14 22:06+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-05-14 15:54+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_Hans_CN\n"
+"Language-Team: zh_Hans_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,25 +20,25 @@ msgstr ""
 
 #: ../core/admin/__init__.py:93
 msgid "name"
-msgstr ""
+msgstr "名称"
 
 #: ../core/admin/__init__.py:94
 msgid "category"
-msgstr ""
+msgstr "类别"
 
 #: ../core/admin/__init__.py:120 ../core/admin/__init__.py:133
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: ../core/admin/__init__.py:148 ../core/admin/__init__.py:170
 #: ../core/admin/__init__.py:174 ../core/admin/__init__.py:177
 #: ../core/admin/__init__.py:180
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: ../core/admin/__init__.py:149
 msgid "Inspector"
-msgstr ""
+msgstr "监视器"
 
 #: ../core/admin/__init__.py:165 ../core/admin/__init__.py:183
 #: ../modules/brothers/admin.py:185 ../modules/brothers/admin.py:187
@@ -46,310 +47,310 @@ msgstr ""
 #: ../modules/brothers/admin.py:193 ../modules/comments/admin.py:23
 #: ../modules/media/admin.py:157 ../modules/posts/admin.py:26
 msgid "Content"
-msgstr ""
+msgstr "内容"
 
 #: ../core/admin/__init__.py:166
 msgid "Link"
-msgstr ""
+msgstr "链接"
 
 #: ../core/admin/__init__.py:171
 msgid "Config"
-msgstr ""
+msgstr "配置"
 
 #: ../core/admin/__init__.py:175
 msgid "Sub content purposes"
-msgstr ""
+msgstr "子内容目的"
 
 #: ../core/admin/__init__.py:177
 msgid "Channel type"
-msgstr ""
+msgstr "频道类型"
 
 #: ../core/admin/__init__.py:181
 msgid "Template type"
-msgstr ""
+msgstr "模板类型"
 
 #: ../core/admin/__init__.py:183
 msgid "Channel"
-msgstr ""
+msgstr "频道"
 
 #: ../core/admin/models.py:75
 msgid "View on site"
-msgstr ""
+msgstr "预览"
 
 #: ../core/admin/models.py:75
 msgid "Preview on site"
-msgstr ""
+msgstr "预览"
 
 #: ../core/admin/models.py:152
 #, python-format
 msgid "Item not found %(i)s"
-msgstr ""
+msgstr "未找到 %(i)s"
 
 #: ../core/admin/models.py:154
 msgid "Export as json"
-msgstr ""
+msgstr "导出成json"
 
 #: ../core/admin/models.py:167
 msgid "Export as csv"
-msgstr ""
+msgstr "导出成csv"
 
 #: ../core/admin/models.py:189
 msgid "Publish/Unpublish"
-msgstr ""
+msgstr "发布/取消发布"
 
 #: ../core/admin/models.py:190
 msgid "Publish/Unpublish?"
-msgstr ""
+msgstr "发布/取消发布？"
 
 #: ../core/admin/models.py:207
 msgid "Create a copy"
-msgstr ""
+msgstr "复制一份"
 
 #: ../core/admin/models.py:208
 msgid "Are you sure you want a copy?"
-msgstr ""
+msgstr "你确认要复制一份？"
 
 #: ../core/admin/models.py:213 ../core/admin/views.py:127
 msgid "You can select only one item for this action"
-msgstr ""
+msgstr "你只能选择一条记录"
 
 #: ../core/admin/views.py:121
 msgid "Set as homepage"
-msgstr ""
+msgstr "设为首页"
 
 #: ../core/admin/views.py:122
 msgid "Set as homepage?"
-msgstr ""
+msgstr "确认要设为首页？"
 
 #: ../core/admin/views.py:135
 msgid "Already homepage"
-msgstr ""
+msgstr "已经是首页"
 
 #: ../core/admin/views.py:147
 #, python-format
 msgid "Error setting channel as homepage %s"
-msgstr ""
+msgstr "设为首页发生错误 %s"
 
 #: ../core/admin/views.py:149
 msgid "Channel set as homepage"
-msgstr ""
+msgstr "设置频道为首页"
 
 #: ../core/models/channel.py:170
 msgid "Home page already exists"
-msgstr ""
+msgstr "首页已经存在"
 
 #: ../core/models/custom_values.py:39
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 #: ../core/models/custom_values.py:96
 #, python-format
 msgid "%(name)s already exists"
-msgstr ""
+msgstr "%(name)s 已经存在"
 
 #: ../core/models/signature.py:119
 #, python-format
 msgid "%(slug)s slug already exists"
-msgstr ""
+msgstr "%(slug)s 已经存在"
 
 #: ../modules/accounts/admin.py:44 ../modules/accounts/admin.py:45
 #: ../modules/accounts/admin.py:47
 msgid "Accounts"
-msgstr ""
+msgstr "账户"
 
 #: ../modules/accounts/admin.py:44
 msgid "User"
-msgstr ""
+msgstr "用户"
 
 #: ../modules/accounts/admin.py:45
 msgid "Roles"
-msgstr ""
+msgstr "角色"
 
 #: ../modules/accounts/admin.py:47
 msgid "Connection"
-msgstr ""
+msgstr "连接"
 
 #: ../modules/brothers/admin.py:185
 msgid "BrotherInfo"
-msgstr ""
+msgstr "师兄信息"
 
 #: ../modules/brothers/admin.py:187
 msgid "BrotherVideos"
-msgstr ""
+msgstr "师兄视频"
 
 #: ../modules/brothers/admin.py:189
 msgid "BrotherArticles"
-msgstr ""
+msgstr "师兄文章"
 
 #: ../modules/brothers/admin.py:190
 msgid "Topic"
-msgstr ""
+msgstr "话题"
 
 #: ../modules/brothers/admin.py:191
 msgid "News"
-msgstr ""
+msgstr "动态"
 
 #: ../modules/brothers/admin.py:192
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: ../modules/brothers/admin.py:193
 msgid "Banner"
-msgstr ""
+msgstr "轮播"
 
 #: ../modules/comments/admin.py:24
 msgid "Comments"
-msgstr ""
+msgstr "评论"
 
 #: ../modules/media/admin.py:36
 msgid "media/"
-msgstr ""
+msgstr "媒体文件"
 
 #: ../modules/media/admin.py:152 ../modules/media/admin.py:153
 #: ../modules/media/admin.py:154 ../modules/media/admin.py:155
 msgid "Media"
-msgstr ""
+msgstr "媒体文件"
 
 #: ../modules/media/admin.py:152
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: ../modules/media/admin.py:153
 msgid "Video"
-msgstr ""
+msgstr "视频"
 
 #: ../modules/media/admin.py:154
 msgid "Audio"
-msgstr ""
+msgstr "音频"
 
 #: ../modules/media/admin.py:155
 msgid "Image"
-msgstr ""
+msgstr "图片"
 
 #: ../modules/media/admin.py:157
 msgid "Media Gallery"
-msgstr ""
+msgstr "图片库"
 
 #: ../modules/posts/admin.py:26
 msgid "Post"
-msgstr ""
+msgstr "发表"
 
 #: ../themes/admin/templates/admin/actions.html:2
 msgid "With selected"
-msgstr ""
+msgstr "选中的"
 
 #: ../themes/admin/templates/admin/index.html:10
 msgid "Latest Posts"
-msgstr ""
+msgstr "最新发表"
 
 #: ../themes/admin/templates/admin/index.html:17
 #: ../themes/admin/templates/admin/model/details.html:17
 #: ../themes/admin/templates/admin/model/edit.html:26
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: ../themes/admin/templates/admin/index.html:19
 msgid "View"
-msgstr ""
+msgstr "查看"
 
 #: ../themes/admin/templates/admin/index.html:19
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 #: ../themes/admin/templates/admin/index.html:22
 msgid "There is no content yet!"
-msgstr ""
+msgstr "目前还没有内容"
 
 #: ../themes/admin/templates/admin/index.html:22
 msgid "Create a new post"
-msgstr ""
+msgstr "创建新文章"
 
 #: ../themes/admin/templates/admin/index.html:65
 msgid "Theme"
-msgstr ""
+msgstr "主题"
 
 #: ../themes/admin/templates/admin/lib.html:155
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: ../themes/admin/templates/admin/lib.html:160
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: ../themes/admin/templates/admin/file/edit.html:8
 msgid "This file cannot be edited for now."
-msgstr ""
+msgstr "目前该文件不能编辑"
 
 #: ../themes/admin/templates/admin/file/edit.html:21
 #, python-format
 msgid "Editing %(path)s"
-msgstr ""
+msgstr "编辑 %(path)s 文件中"
 
 #: ../themes/admin/templates/admin/file/list.html:9
 msgid "Root"
-msgstr ""
+msgstr "根目录"
 
 #: ../themes/admin/templates/admin/file/list.html:36
 #: ../themes/admin/templates/admin/file/list.html:93
 #: ../themes/admin/templates/admin/file/list.html:99
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: ../themes/admin/templates/admin/file/list.html:37
 #: ../themes/admin/templates/admin/file/list.html:111
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: ../themes/admin/templates/admin/file/list.html:56
 #: ../themes/admin/templates/admin/file/list.html:59
 msgid "Rename File"
-msgstr ""
+msgstr "重命名文件"
 
 #: ../themes/admin/templates/admin/file/list.html:75
 #, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\' recursively?"
-msgstr ""
+msgstr "确认要删除文件夹 \\'%(name)s\\' 及其子文件夹？"
 
 #: ../themes/admin/templates/admin/file/list.html:84
 #, python-format
 msgid "Are you sure you want to delete \\'%(name)s\\'?"
-msgstr ""
+msgstr "确认要删除  \\'%(name)s\\'文件？"
 
 #: ../themes/admin/templates/admin/file/list.html:128
 #: ../themes/admin/templates/admin/file/list.html:130
 msgid "Upload File"
-msgstr ""
+msgstr "上传文件"
 
 #: ../themes/admin/templates/admin/file/list.html:139
 #: ../themes/admin/templates/admin/file/list.html:141
 msgid "Create Directory"
-msgstr ""
+msgstr "创建目录"
 
 #: ../themes/admin/templates/admin/file/list.html:165
 msgid "Please select at least one file."
-msgstr ""
+msgstr "请至少选择一个文件"
 
 #: ../themes/admin/templates/admin/file/rename.html:12
 #, python-format
 msgid "Rename %(name)s"
-msgstr ""
+msgstr "重命名文件 %(name)s"
 
 #: ../themes/admin/templates/admin/model/create.html:5
 #: ../themes/admin/templates/admin/model/edit.html:5
 msgid "Save and Add Another"
-msgstr ""
+msgstr "保存并再创建一个"
 
 #: ../themes/admin/templates/admin/model/create.html:6
 #: ../themes/admin/templates/admin/model/edit.html:6
 msgid "Save and Continue Editing"
-msgstr ""
+msgstr "保存然后继续编辑"
 
 #: ../themes/admin/templates/admin/model/create.html:18
 #: ../themes/admin/templates/admin/model/details.html:8
 #: ../themes/admin/templates/admin/model/edit.html:18
 #: ../themes/admin/templates/admin/model/list.html:15
 msgid "List"
-msgstr ""
+msgstr "列表"
 
 #: ../themes/admin/templates/admin/model/create.html:21
 #: ../themes/admin/templates/admin/model/details.html:12
@@ -357,90 +358,90 @@ msgstr ""
 #: ../themes/admin/templates/admin/model/list.html:21
 #: ../themes/admin/templates/admin/model/list.html:23
 msgid "Create"
-msgstr ""
+msgstr "创建"
 
 #: ../themes/admin/templates/admin/model/details.html:21
 #: ../themes/admin/templates/admin/model/list.html:111
 #: ../themes/admin/templates/admin/model/list.html:113
 #: ../themes/admin/templates/admin/model/modals/details.html:36
 msgid "View Record"
-msgstr ""
+msgstr "查看记录"
 
 #: ../themes/admin/templates/admin/model/details.html:29
 #: ../themes/admin/templates/admin/model/modals/details.html:7
 msgid "Filter"
-msgstr ""
+msgstr "过滤器"
 
 #: ../themes/admin/templates/admin/model/edit.html:30
 msgid "Details"
-msgstr ""
+msgstr "细"
 
 #: ../themes/admin/templates/admin/model/inline_list_base.html:13
 msgid "Delete?"
-msgstr ""
+msgstr "确认要删除？"
 
 #: ../themes/admin/templates/admin/model/inline_list_base.html:40
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: ../themes/admin/templates/admin/model/layout.html:3
 msgid "Add Filter"
-msgstr ""
+msgstr "添加过滤器"
 
 #: ../themes/admin/templates/admin/model/layout.html:17
 msgid "Apply"
-msgstr ""
+msgstr "应用"
 
 #: ../themes/admin/templates/admin/model/layout.html:19
 msgid "Reset Filters"
-msgstr ""
+msgstr "清空过滤器"
 
 #: ../themes/admin/templates/admin/model/layout.html:38
 #: ../themes/admin/templates/admin/model/layout.html:45
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: ../themes/admin/templates/admin/model/list.html:21
 #: ../themes/admin/templates/admin/model/list.html:23
 msgid "Create new record"
-msgstr ""
+msgstr "创建一条新纪录"
 
 #: ../themes/admin/templates/admin/model/list.html:61
 msgid "Select all records"
-msgstr ""
+msgstr "选中所有记录"
 
 #: ../themes/admin/templates/admin/model/list.html:72
 #: ../themes/admin/templates/admin/model/list.html:81
 #, python-format
 msgid "Sort by %(name)s"
-msgstr ""
+msgstr "按 %(name)s排序"
 
 #: ../themes/admin/templates/admin/model/list.html:103
 msgid "Select record"
-msgstr ""
+msgstr "选中一条记录"
 
 #: ../themes/admin/templates/admin/model/list.html:120
 #: ../themes/admin/templates/admin/model/list.html:122
 msgid "Edit record"
-msgstr ""
+msgstr "编辑记录"
 
 #: ../themes/admin/templates/admin/model/list.html:136
 msgid "Are you sure you want to delete this record?"
-msgstr ""
+msgstr "你确认要删除这条记录吗？"
 
 #: ../themes/admin/templates/admin/model/list.html:136
 msgid "Delete record"
-msgstr ""
+msgstr "删除记录"
 
 #: ../themes/admin/templates/admin/model/list.html:194
 msgid "Please select at least one record."
-msgstr ""
+msgstr "请至少选中一条记录"
 
 #: ../themes/admin/templates/admin/model/modals/create.html:16
 msgid "Create New Record"
-msgstr ""
+msgstr "创建新纪录"
 
 #: ../themes/admin/templates/admin/model/modals/edit.html:16
 msgid "Edit Record"
-msgstr ""
+msgstr "编辑记录"
 
