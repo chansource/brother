@@ -33,7 +33,7 @@ nosetests.xml
 .db_password.txt
 local_settings.py
 # Translations
-*.mo
+
 
 *.nja
 
