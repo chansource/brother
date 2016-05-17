@@ -58,8 +58,10 @@ class BrotherInfo(Content, Ordered):
         'ordering': ['order'],
     }
 
+    # 师兄列表排序，使用Ordered.order
     # 师兄封面图片，使用Content.contents
     # 师兄姓名，使用Content.title
+    home_order = db.IntField(required=True, default=1) # 主页排序
     brother_college_major = db.StringField(
         max_length=255, required=False)  # 师兄专业
     brother_college_name = db.StringField(
