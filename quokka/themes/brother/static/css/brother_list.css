@@ -21,6 +21,7 @@ body {
     display: inline-block;
     text-decoration: none;
     vertical-align: top;
+    position: relative;
 }
 
 .brother-cover {
@@ -61,8 +62,31 @@ body {
     font: 13px "Lantinghei TC","Microsoft YaHei",sans-serif;
     line-height: 22px;
 }
-
-
+.brother-server-tags{
+    position:absolute;
+    top:20px;
+    left:-10px;
+}
+.brother-share-tag{
+    width:81px;
+    height: 29px;
+    color:#ffffff;
+    background: #148acc;
+    text-align: center;
+    line-height: 29px;
+    font-size: 18px;
+    margin: 0 0 8px 0;
+}
+.brother-ask-tag{
+    width:81px;
+    height: 29px;
+    color:#ffffff;
+    background: #e75342;
+    text-align: center;
+    line-height: 29px;
+    font-size: 18px;
+    margin:0px;
+}
 
 
 

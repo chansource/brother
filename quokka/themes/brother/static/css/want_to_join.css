@@ -1,0 +1,105 @@
+.content-wrap{
+    background: #f4f4f4;
+}
+.content{
+    width:970px;
+    background:#f4f4f4;
+    margin:auto;
+    padding-top: 76px;
+}
+.message-form{
+  margin:0px;
+}
+.segment{
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: #7c7c7c;
+}
+.segment-name{
+    display: inline-block;
+     width:92px;
+}
+.segment-content{
+    padding-left: 23px;
+    font-weight: bold;
+}
+.ask-segment{
+    vertical-align: top;
+}
+.segment-default{
+    border:0;
+    line-height: 42px;
+    width:470px;
+    font-size: 22px;
+    padding-left: 23px;
+    border-radius: 6px;
+    display: inline-block;
+    margin: 0px;
+}
+.segment-input{
+    background: #eaeaea;
+    border:0;
+    line-height: 42px;
+    width:470px;
+    font-size: 22px;
+    padding-left: 23px;
+    border-radius: 6px;
+}
+#detail{
+    background: #eaeaea;
+    border:0;
+    line-height: 42px;
+    width:821px;
+    height:240px;
+    font-size: 22px;
+    padding: 0 23px 0 23px;
+    border-radius: 6px;
+    resize:none;
+}
+.buttons-wrap{
+    width: 100%;
+    height: 56px;
+   position: relative;
+   margin-top: 7px;
+}
+.buttons{
+  position: absolute;
+  right: 0;
+  /*width: 200px;*/
+}
+.btn{
+  width: 200px;
+  height:100%;
+  font-size: 22px;
+  border-radius: 6px;
+  outline: none;
+  display: inline-block;
+  line-height: 56px;
+  text-align: center;
+  margin-left:20px;
+  padding:0px;
+}
+/*#add-file-button{
+  width: 200px;
+  height:100%;
+  font-size: 22px;
+  border-radius: 6px;
+  outline: none;
+}
+#send-button{
+  width: 200px;
+  height:100%;
+  font-size: 22px;
+  border-radius: 6px;
+  outline: none;
+}*/
+.novalid-button{
+  border: 1px solid #7c7c7c;
+  background: #ffffff;
+  color:#7c7c7c;
+}
+.valid-button{
+  border: 1px solid #148acc;
+  background: #148acc;
+  color:#ffffff;
+}
