@@ -28,7 +28,11 @@
                 </div>
                 <div class="segment">
                     <span class="segment-name ask-segment">简介</span>
-                    <textarea id="detail" name="message" placeholder="请输入你的自我介绍" required onblur="checkForm()"></textarea>
+                    <div class="message-wrap">
+                        <textarea id="detail"  class="text-area" name="message" placeholder="请输入你的简介" required onblur="checkForm()"></textarea>
+                        <!--用来存放文件信息-->
+                        <div id="filelist" class="uploader-list"></div>
+                    </div>
                 </div> 
                 <div class="buttons-wrap">
                         <div class="buttons">
@@ -46,49 +50,5 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script> 
-<script>
-//增加csrf_token
-$(function () {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
-        }
-    });
-});
-$.validator.setDefaults({
-    //只验证不提交
-   debug: true
-})
-$("#messageForm").validate({
-    submitHandler: function() {
-      alert($("#title").text());
-      $.post(
-                    '/joinmessages/sendmessage', 
-                    {
-                        "title":$("#title").text(),
-                        "message":$("textarea[name='message']").val(),
-                        "sender_email":$("input[name='sender_email']").val(),
-                        "status":"未读",
-                        "channel":$("input[name='channel']").val(),
-                    },
-                    function(data){
-                        if(!data["rtn"]){
-                            alert("提交成功！");
-                        }
-                        else{
-                            alert(data["msg"]);
-                        }
-                    }
-                );  
-    }
-});
-function checkForm () {
-    if($("#messageForm").valid()){
-        $("#send-button").removeClass("novalid-button").addClass("valid-button");
-    }
-    else{
-        $("#send-button").removeClass("valid-button").addClass("novalid-button");
-    }
-}
-</script>
+<script type="text/javascript" src="{{theme_static('js/joinmessage.js')}}"></script>
 {% endblock %}

@@ -5,6 +5,7 @@ from quokka.core.models.content import Content
 from quokka.core.models.subcontent import SubContent
 from quokka.core.models.signature import Ordered
 import uuid
+from quokka.modules.media.models import File
 
 class Video(db.EmbeddedDocument):
     """
@@ -166,3 +167,4 @@ class JoinMessage(Content):
         max_length=255, required=True)  # 发件人邮箱
     message = db.StringField(required=True)  # 信件内容
     status = db.StringField(required=True,choices=[(u'未读', u'未读'), (u'已阅', u'已阅')])  # 信件状态
+    document=db.ReferenceField(File,reverse_delete_rule=db.NULLIFY)#如果消息被删除，那么文件也会被删除

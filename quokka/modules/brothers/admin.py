@@ -362,6 +362,7 @@ class JoinMessageAdmin(BaseContentAdmin):
         'created_at',
         'sender_email',
         'message',
+        'document',
         'status',
     ]
     form_args = {
@@ -369,6 +370,7 @@ class JoinMessageAdmin(BaseContentAdmin):
         'created_at': {'label': u'提交时间'},
         'sender_email': {'label': u'发件人'},
         'message': {'label': u'简介'},
+        'document':{'label':u'附件'},
         'status': {'label': u'状态'},
     }
 
