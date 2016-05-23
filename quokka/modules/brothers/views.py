@@ -3,28 +3,27 @@
 from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
 from flask import request
-from flask.json import jsonify
+from quokka.utils.baseresp import _base_err_resp,_base_normal_resp
 from .models import BrotherVideos,BrotherAsk,JoinMessage
-from flask_wtf import csrf
 from pprint import pprint
 import uuid
 import logging
 
 logger = logging.getLogger('quokka')
 
-def _base_err_resp(err_msg="Default error message.", err_rtn=1):
-    resp = {
-        "rtn": err_rtn,
-        "msg": err_msg,
-    }
-    return jsonify(resp)
+# def _base_err_resp(err_msg="Default error message.", err_rtn=1):
+#     resp = {
+#         "rtn": err_rtn,
+#         "msg": err_msg,
+#     }
+#     return jsonify(resp)
 
-def _base_normal_resp(data={}):
-    resp = {
-        "rtn": 0,
-        "data": data,
-    }
-    return jsonify(resp)
+# def _base_normal_resp(data={}):
+#     resp = {
+#         "rtn": 0,
+#         "data": data,
+#     }
+#     return jsonify(resp)
 
 class AddLikeView(MethodView):
     """
