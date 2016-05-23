@@ -1,0 +1,94 @@
+{% extends theme("base.html") %}
+{% block seo_meta %}
+{% endblock %}
+{% block head %}
+<title>我要加入</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/want_to_join.css')}}">
+{% endblock %}
+{% block content %}
+        {% include theme('header.html') %}
+        <div class="content-wrap">
+        <div class="content">
+            <form id="messageForm" class="message-form" action="/join/sendmessage" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input  type="hidden" name="channel" value="{{ channel.id }}" />
+                <div class="segment">
+                    <span class="segment-name">收件人</span>
+                    <p id="receiver" class="segment-default">师兄指路</p>
+                </div>    
+                <div class="segment">
+                    <span class="segment-name">发件人</span>
+                    <input id="sender_email" class="segment-input" name="sender_email" type="email" placeholder="请输入你的邮箱" autocomplete="on" required onblur="checkForm()">
+                </div>
+                <div class="segment">
+                    <span class="segment-name">主题</span>
+                    <p id="title" class="segment-default" >我要加入</p>
+                </div>
+                <div class="segment">
+                    <span class="segment-name ask-segment">简介</span>
+                    <textarea id="detail" name="message" placeholder="请输入你的自我介绍" required onblur="checkForm()"></textarea>
+                </div> 
+                <div class="buttons-wrap">
+                        <div class="buttons">
+                            <div id="chooseBtn" class="btn valid-button">上传简历</div>
+                            <button id="send-button" class="btn novalid-button ">发送</button>
+                        </div>
+                </div>     
+            </form>  
+        </div> 
+    </div> 
+
+     {% include theme('footer.html') %}
+{% endblock %}
+{% block bottom_js %}
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script> 
+<script>
+//增加csrf_token
+$(function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
+        }
+    });
+});
+$.validator.setDefaults({
+    //只验证不提交
+   debug: true
+})
+$("#messageForm").validate({
+    submitHandler: function() {
+      alert($("#title").text());
+      $.post(
+                    '/joinmessages/sendmessage', 
+                    {
+                        "title":$("#title").text(),
+                        "message":$("textarea[name='message']").val(),
+                        "sender_email":$("input[name='sender_email']").val(),
+                        "status":"未读",
+                        "channel":$("input[name='channel']").val(),
+                    },
+                    function(data){
+                        if(!data["rtn"]){
+                            alert("提交成功！");
+                        }
+                        else{
+                            alert(data["msg"]);
+                        }
+                    }
+                );  
+    }
+});
+function checkForm () {
+    if($("#messageForm").valid()){
+        $("#send-button").removeClass("novalid-button").addClass("valid-button");
+    }
+    else{
+        $("#send-button").removeClass("valid-button").addClass("novalid-button");
+    }
+}
+</script>
+{% endblock %}
