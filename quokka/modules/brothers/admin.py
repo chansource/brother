@@ -3,7 +3,7 @@
 from quokka import admin
 from quokka.core.admin.models import BaseContentAdmin
 from quokka.core.widgets import TextEditor, PrepopulatedText
-from .models import BrotherVideos, BrotherInfo, BrotherArticles, Banner, Topic, News, About
+from .models import BrotherVideos, BrotherInfo, BrotherArticles,  BrotherAsk, Banner, Topic, News, About,JoinMessage
 from quokka.utils.translation import _l
 from flask_admin.contrib.mongoengine import EmbeddedForm
 
@@ -13,6 +13,7 @@ class ExperienceField(EmbeddedForm):
         'title': {'label': u'内容'},
         'time': {'label': u'时间'}
     }
+
 
 class PhotoField(EmbeddedForm):
 
@@ -27,6 +28,7 @@ class PhotoField(EmbeddedForm):
         "order",
         "purpose",
     ]
+
 
 class BrotherInfoAdmin(BaseContentAdmin):
 
@@ -43,6 +45,8 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'brother_experience_work',
         'brither_experience_award',
         'contents',
+        'brother_is_ask',
+        'brother_is_share',
         'brother_is_video',
         'brother_videos',
         'brother_articles',
@@ -76,6 +80,8 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'brother_experience_work': {'label': u'工作经历'},
         'brither_experience_award': {'label': u'获奖经历'},
         'contents': {'label': u'照片'},
+        'brother_is_ask': {'label': u'是否提供答问服务'},
+        'brother_is_share': {'label': u'是否提供分享'},
         'brother_is_video': {'label': u'是否视频'},
         'brother_videos': {'label': u'视频'},
         'brother_articles': {'label': u'文章'},
@@ -111,6 +117,7 @@ class BrotherInfoAdmin(BaseContentAdmin):
         }
     }
 
+
 class VideoField(EmbeddedForm):
 
     form_args = {
@@ -124,6 +131,7 @@ class VideoField(EmbeddedForm):
         "video_url",
         "like_numbers",
     ]
+
 
 class BrotherVideosAdmin(BaseContentAdmin):
 
@@ -153,6 +161,7 @@ class BrotherVideosAdmin(BaseContentAdmin):
         },
     }
 
+
 class ArticleField(EmbeddedForm):
 
     form_args = {
@@ -164,6 +173,7 @@ class ArticleField(EmbeddedForm):
         "title",
         "body",
     ]
+
 
 class BrotherArticlesAdmin(BaseContentAdmin):
 
@@ -192,6 +202,7 @@ class BrotherArticlesAdmin(BaseContentAdmin):
             'form_subdocuments': { None: ArticleField() }
         },
     }
+
 
 class TopicAdmin(BaseContentAdmin):
     form_columns = [
@@ -224,6 +235,7 @@ class TopicAdmin(BaseContentAdmin):
             'form_subdocuments': { None: VideoField() }
         },
     }
+
 
 class NewsAdmin(BaseContentAdmin):
 
@@ -285,6 +297,7 @@ class AboutAdmin(BaseContentAdmin):
         },
     }
 
+
 class BannerAdmin(BaseContentAdmin):
 
     form_columns = [
@@ -313,6 +326,54 @@ class BannerAdmin(BaseContentAdmin):
         },
     }
 
+
+
+class BrotherAskAdmin(BaseContentAdmin):
+    column_list = ['title','receiver','sender_email','created_at','status']
+    column_searchable_list = ('title', 'message', 'receiver')
+    column_filters = ['receiver','sender_email','created_at','status']
+    form_columns = [
+        'title',
+        'created_at',
+        'receiver',
+        'brother',
+        'sender_email',
+        'message',
+        'tags',
+        'status',
+    ]
+    form_args = {
+        'title': {'label': u'主题'},
+        'created_at': {'label': u'提交时间'},
+        'receiver': {'label': u'收件人'},
+        'brother': {'label': u'对应的师兄'},
+        'sender_email': {'label': u'发件人'},
+        'message': {'label': u'提问内容'},
+        'tags': {'label': u'标签'},
+        'status': {'label': u'状态'},
+    }
+class JoinMessageAdmin(BaseContentAdmin):
+    column_list = ['sender_email','created_at','status']
+    column_filters = ['sender_email','created_at','status']
+    form_columns = [
+        'title',
+        'channel',
+        'slug',
+        'created_at',
+        'sender_email',
+        'message',
+        'document',
+        'status',
+    ]
+    form_args = {
+        'title': {'label': u'主题'},
+        'created_at': {'label': u'提交时间'},
+        'sender_email': {'label': u'发件人'},
+        'message': {'label': u'简介'},
+        'document':{'label':u'附件'},
+        'status': {'label': u'状态'},
+    }
+
 admin.register(BrotherInfo, BrotherInfoAdmin,
                category=_l("Content"), name=_l("BrotherInfo"))
 admin.register(BrotherVideos, BrotherVideosAdmin,
@@ -323,3 +384,7 @@ admin.register(Topic, TopicAdmin, category=_l("Content"), name=_l("Topic"))
 admin.register(News, NewsAdmin, category=_l("Content"), name=_l("News"))
 admin.register(About, AboutAdmin, category=_l("Content"), name=_l("About"))
 admin.register(Banner, BannerAdmin, category=_l("Content"), name=_l("Banner"))
+admin.register(BrotherAsk, BrotherAskAdmin,
+               category=_l("Content"), name=_l("BrotherAsk"))
+admin.register(JoinMessage, JoinMessageAdmin,
+               category=_l("Content"), name=_l("JoinMessage"))
