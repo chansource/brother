@@ -35,7 +35,12 @@
     padding-left: 23px;
     border-radius: 6px;
 }
-#detail{
+.message-wrap{
+  width:867px;
+  display: inline-block;
+  background: #eaeaea;
+}
+.text-area{
     background: #eaeaea;
     border:0;
     line-height: 42px;
@@ -43,7 +48,7 @@
     height:240px;
     font-size: 22px;
     padding: 0 23px 0 23px;
-    border-radius: 6px;
+    outline: none;
     resize:none;
 }
 .sender-button-wrap{
@@ -75,4 +80,7 @@
   border: 1px solid #148acc;
   background: #148acc;
   color:#ffffff;
+}
+.error{
+  color: #148acc;
 }

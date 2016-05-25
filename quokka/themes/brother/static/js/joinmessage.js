@@ -25,6 +25,7 @@ uploader.on('uploadSuccess', function( file,response ) {
 function delAttach (id) {
     file_id=null;
     $( '#'+id ).remove();
+    uploader.removeFile(id);
 }
 //只允许上传一个附件
 uploader.on( 'beforeFileQueued',function  () {
@@ -36,7 +37,7 @@ uploader.on( 'beforeFileQueued',function  () {
 //添加附加图标和文件名
 uploader.on( 'fileQueued', function( file ) {
         $("#filelist").append( '<div id="' + file.id + '" class="item">' +
-            '<input type="button" class="ico_att">'+
+            '<a class="ico_att"></a>'+
             '<span class="filename">' + file.name + '</span>' +
         '</div>' );
        
@@ -78,6 +79,9 @@ $.validator.setDefaults({
    debug: true
 });
 $("#messageForm").validate({
+    ignore: "input:file",
+    focusCleanup: true,
+    onfocusout: function(element) { },
     submitHandler: function() {
       var data={
                         "title":$("#title").text(),
@@ -104,8 +108,7 @@ $("#messageForm").validate({
                         }
                     }
                 );
-    },
-    errorPlacement: function(error, element) {}
+    },    
 });
 function checkForm () {
     if($("#messageForm").valid()){

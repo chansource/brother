@@ -47,17 +47,20 @@
     border-radius: 6px;
 }
 .message-wrap{
+  width:867px;
   display: inline-block;
+  background: #eaeaea;
 }
+
 .text-area{
     background: #eaeaea;
-    border:0;
     line-height: 42px;
     width:821px;
     height:240px;
     font-size: 22px;
     padding: 0 23px 0 23px;
-    border-radius: 6px;
+    outline: none;
+    border: none;
     resize:none;
 }
 .buttons-wrap{
@@ -79,6 +82,7 @@
   display: inline-block;
   line-height: 56px;
   text-align: center;
+  padding: 0;
 }
 .novalid-button{
   border: 1px solid #7c7c7c;
@@ -90,6 +94,7 @@
   background: #148acc;
   color:#ffffff;
 }
+
 .ico_att {
     background: url('https://rescdn.qqmail.com/zh_CN/htmledition/images/webp/newicon/compose207c92.png') no-repeat 0 0;
     width: 16px;
@@ -97,6 +102,10 @@
     padding: 0;
     border: none;
     margin-right: 5px;
+    display: inline-block;
+}
+.uploader-list{
+  padding-left: 23px;
 }
 .filename{
   color: #148acc;
@@ -121,4 +130,7 @@
 .progress-bar{
   height: 100%;
   background: #148acc;
+}
+.error{
+  color: #148acc;
 }

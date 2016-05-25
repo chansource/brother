@@ -29,7 +29,9 @@
                 </div>
                 <div class="segment">
                     <span class="segment-name ask-segment">提问内容</span>
-                    <textarea id="detail" name="message" placeholder="请输入你的提问内容" required onblur="checkForm()"></textarea>
+                    <div class="message-wrap">
+                        <textarea id="detail" class="text-area" name="message" placeholder="请输入你的提问内容" required onblur="checkForm()"></textarea>
+                    </div>
                 </div> 
                 <div class="sender-button-wrap">
                     <input id="send-button"  class="btn novalid-button" type="submit" value="发送"/>
@@ -55,11 +57,24 @@ $(function () {
         }
     });
 });
+function checkForm () {
+    if( $("#messageForm").valid() ){
+        $("#send-button").removeClass("novalid-button").addClass("valid-button");
+    }
+    else{
+        $("#send-button").removeClass("valid-button").addClass("novalid-button");
+    }
+}
 $.validator.setDefaults({
     //只验证不提交
    debug: true
-})
-$("#messageForm").validate({
+});
+var validator=$("#messageForm").validate({
+    ignore: "input:file",
+    focusCleanup: true,
+    /* 失去焦点时不验证 */ 
+    onfocusout: false,  
+    // onfocusout: function(element) { $(element).valid();return false; },
     submitHandler: function() {
       $.post(
                     '/brotherask/sendmessage', 
@@ -81,15 +96,10 @@ $("#messageForm").validate({
                         }
                     }
                 );
-    }
+      return false;
+    },
+    
 });
-function checkForm () {
-    if( $("#messageForm").valid() ){
-        $("#send-button").removeClass("novalid-button").addClass("valid-button");
-    }
-    else{
-        $("#send-button").removeClass("valid-button").addClass("novalid-button");
-    }
-}
+
 </script>
 {% endblock %}
