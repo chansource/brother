@@ -15,23 +15,23 @@
    color:#c7c7c7;
    font-size:14px;
 }
-#good{
+.good_ico{
     position: absolute;
     background:red;
     z-index: 1;
     top:180px;
     right: 0px;
 }
-#video{
+.video-wrap{
     width:960px;
     margin-top:22px;
     position: relative;
 }
-#video embed{
+.iframe-wrap {
     height:732px;
-     width:960px;
+    width:960px;
 }
-#section-buttons{
+.buttons-wrap{
     margin:26px auto;
 }
 .section-button{

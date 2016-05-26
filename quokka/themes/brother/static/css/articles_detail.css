@@ -1,33 +1,33 @@
-#rest{
+.rest{
     background:#f4f4f4;
 }
-#content{
+.content{
     width:100%;
 
 }
-#content-header{
+.content-header{
     height:146px;
     background: #148acb;
 }
-#header-wrap{
+.header-wrap{
     width:1170px;
     margin: auto;
 
 }
-#content-header h1{
+.content-header h1{
     padding-top: 32px;
     color:#ffffff;
     font:30px "Lantinghei TC","Microsoft YaHei",sans-serif;
     
 }
-#content-header span{
+.content-header span{
     margin-top:16px;
     color:#ffffff;
     font:18px "Lantinghei TC","Microsoft YaHei",sans-serif;
    
 }
 
-#section-links{
+.section-links{
     width:232px;
     background: #f4f4f4;
     float: left;
@@ -57,23 +57,23 @@ cursor: pointer;
     line-height:68px;
     
 }
-#right{
+.right-wrap{
     width: 232px;
     float: right;
     margin-left:-200px;
 }
-#right a{
+.right-wrap a{
     position:fixed;
     right: 170px;
     top:50%;
     display: block;
 }
-#articles-container{
+.articles-container{
     background: #ffffff;
     margin-left:232px; 
     margin-right:232px;
 }
-#article-detail{
+.article-detail{
     padding: 68px 100px;
     margin:0;
     min-height:300px;
