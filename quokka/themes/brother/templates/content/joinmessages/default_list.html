@@ -1,0 +1,55 @@
+{% extends theme("base.html") %}
+{% block seo_meta %}
+{% endblock %}
+{% block head %}
+<title>我要加入</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/want_to_join.css')}}">
+{% endblock %}
+{% block content %}
+        {% include theme('header.html') %}
+        <div class="content-wrap">
+        <div class="content">
+            <form id="messageForm" class="message-form" action="/join/sendmessage" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input  type="hidden" name="channel" value="{{ channel.id }}" />
+                <div class="segment">
+                    <span class="segment-name">收件人</span>
+                    <p id="receiver" class="segment-default">师兄指路</p>
+                </div>    
+                <div class="segment">
+                    <span class="segment-name">发件人</span>
+                    <input id="sender_email" class="segment-input" name="sender_email" type="email" placeholder="请输入你的邮箱" autocomplete="on" required onblur="checkForm()">
+                </div>
+                <div class="segment">
+                    <span class="segment-name">主题</span>
+                    <p id="title" class="segment-default" >我要加入</p>
+                </div>
+                <div class="segment">
+                    <span class="segment-name ask-segment">简介</span>
+                    <div class="message-wrap">
+                        <textarea id="detail"  class="text-area" name="message" placeholder="请输入你的简介" required onblur="checkForm()"></textarea>
+                        <!--用来存放文件信息-->
+                        <div id="filelist" class="uploader-list"></div>
+                    </div>
+                </div> 
+                <div class="buttons-wrap">
+                        <div class="buttons">
+                            <div id="chooseBtn" class="btn valid-button">上传简历</div>
+                            <button id="send-button" class="btn novalid-button ">发送</button>
+                        </div>
+                </div>     
+            </form>  
+        </div> 
+    </div> 
+
+     {% include theme('footer.html') %}
+{% endblock %}
+{% block bottom_js %}
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script  type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script> 
+<script type="text/javascript" src="{{theme_static('js/joinmessage.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends theme("base.html") %}
+{% block seo_meta %}
+{% endblock %}
+{% block head %}
+<title>我要问路</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/brotherask_detail.css')}}">
+{% endblock %}
+{% block content %}
+        {% include theme('header.html') %}
+        <div class="content-wrap">
+        <div class="content">
+            <form id="messageForm" class="message-form" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="brother" value="{{ request.args.get('id') }}" />
+                <input  type="hidden" name="channel" value="{{channel.id }}" />
+                <div class="segment">
+                    <span class="segment-name">收件人</span>
+                    <input class="segment-input" name="receiver" value="{{request.args.get('name','师兄师姐')}}" placeholder="{{request.args.get('name','师兄师姐')}}">
+                </div>    
+                <div class="segment">
+                    <span class="segment-name">发件人</span>
+                    <input  class="segment-input" name="sender_email" type="email" placeholder="请输入你的邮箱" autocomplete="on" required onblur="checkForm()">
+                </div>
+                <div class="segment">
+                    <span class="segment-name">主题</span>
+                    <input class="segment-input" name="title" value="向{{request.args.get('name','师兄师姐')}}问路" placeholder="向{{request.args.get('name','师兄师姐')}}问路">
+                </div>
+                <div class="segment">
+                    <span class="segment-name ask-segment">提问内容</span>
+                    <div class="message-wrap">
+                        <textarea id="detail" class="text-area" name="message" placeholder="请输入你的提问内容" required onblur="checkForm()"></textarea>
+                    </div>
+                </div> 
+                <div class="sender-button-wrap">
+                    <input id="send-button"  class="btn novalid-button" type="submit" value="发送"/>
+                </div>    
+            </form>  
+        </div> 
+    </div> 
+
+     {% include theme('footer.html') %}
+
+
+{% endblock %}
+{% block bottom_js %}
+<script  type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<script  type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.min.js"></script>
+<script  type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_zh.js"></script>
+<script type="text/javascript">
+//增加csrf_token
+$(function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
+        }
+    });
+});
+function checkForm () {
+    if( $("#messageForm").valid() ){
+        $("#send-button").removeClass("novalid-button").addClass("valid-button");
+    }
+    else{
+        $("#send-button").removeClass("valid-button").addClass("novalid-button");
+    }
+}
+$.validator.setDefaults({
+    //只验证不提交
+   debug: true
+});
+var validator=$("#messageForm").validate({
+    ignore: "input:file",
+    focusCleanup: true,
+    /* 失去焦点时不验证 */ 
+    onfocusout: false,  
+    // onfocusout: function(element) { $(element).valid();return false; },
+    submitHandler: function() {
+      $.post(
+                    '/brotherask/sendmessage', 
+                    {
+                        "title":$("input[name='title']").val(),
+                        "message":$("textarea[name='message']").val(),
+                        "sender_email":$("input[name='sender_email']").val(),
+                        "receiver":$("input[name='receiver']").val(),
+                        "status":"未读",
+                        "channel":$("input[name='channel']").val(),
+                        "brother":$("input[name='brother']").val(),
+                    }, 
+                    function (data) {
+                        if(!data["rtn"]){
+                            alert("提交成功！");
+                        }
+                        else{
+                            alert(data["msg"]);
+                        }
+                    }
+                );
+      return false;
+    },
+    
+});
+
+</script>
+{% endblock %}
