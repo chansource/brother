@@ -12,8 +12,8 @@
 }
 .segment{
     margin-bottom: 30px;
-    font-size: 22px;
     color: #7c7c7c;
+    font:22px "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 .segment-name{
     display: inline-block;
@@ -31,9 +31,12 @@
     border:0;
     line-height: 42px;
     width:470px;
+    height: 44px;
     font-size: 22px;
     padding-left: 23px;
     border-radius: 6px;
+    outline: none;
+    
 }
 .message-wrap{
   width:867px;

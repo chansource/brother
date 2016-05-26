@@ -1,10 +1,10 @@
 // $(document).ready(function(){
-    var width=($("#sharing").width()-$("#shares").width())/2-2;
+    var width=($(".sharing").width()-$("#shares").width())/2-2;
    $("#cut-line1").css("width",width);
    $("#cut-line2").css("width",width);
 
    $(window).resize(function(){
-    width=($("#sharing").width()-$("#shares").width())/2-2;
+    width=($(".sharing").width()-$("#shares").width())/2-2;
    $("#cut-line1").css("width",width);
    $("#cut-line2").css("width",width);
    });
@@ -32,10 +32,10 @@
     });
     $('.social-share-wechat').hover(
             function(){
-            $('#wechat-help').css("display","block");
-        },    
+            $('.wechat-help').css("display","block");
+        }, 
         function(){
-            $('#wechat-help').css("display","none");
+            $('.wechat-help').css("display","none");
         }
     );
 // });

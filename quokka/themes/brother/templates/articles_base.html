@@ -12,15 +12,15 @@
 {% endblock %}
 {% block content %}
         {% include theme('header.html') %}
-        <div id="rest">
-        <div  id="content">
-              <div id="content-header">
-                    <div id="header-wrap">
+        <div class="rest">
+        <div  class="content">
+              <div class="content-header">
+                    <div class="header-wrap">
                       <h1>{{content.title}}</h1>
                       <span>作者&nbsp;|&nbsp;{{content.author}}&nbsp;&nbsp;发表日期&nbsp;|&nbsp;{{content.created_at.strftime('%Y.%m.%d')}}</span>
                     </div>
               </div>
-                <div id="section-links">
+                <div id="section-links" class="section-links">
                     {% for article in content.articles%}
                       {% if loop.index==1 %}
                     <a class="selected-section-link section-link">
@@ -33,38 +33,40 @@
                     {% endif %}
                     {% endfor %}
                 </div>
-                <div id="right">
+                <div class="right-wrap">
                     <a href="#nav">
                         <img src="{{theme_static('img/back_top.png')}}">
                     </a>
                 </div>
-                <div id="articles-container">
-                        <p id="article-detail">{{content.articles[0].body}}</p>
+                <div class="articles-container">
+                        <p id="article" class="article-detail">{{content.articles[0].body}}</p>
                      {% include theme('share.html') %}
                 </div>
      </div>
      {% include theme('footer.html') %}
      </div>
-     <script type="text/javascript">
-     $(document).ready(function () {
-        var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
-        //将第二个按钮放到下面
-        var margin=($("#articles-container").height()-$("#section-links").height())/2;
-        $(".section-link:eq(0)").css("margin-top",margin);
-          /*按钮点击事件*/
-        $(".section-link").click(function() {
-            $("#article-detail").text(articles[$(this).index()]);
-            //更换样式
-            $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
-            $(this).removeClass("noselect-section-link").addClass("selected-section-link");
-            //清空margin
-            $(".section-link").css("margin-top",0);
-            margin=($("#articles-container").height()-$("#section-links").height())/2;
-            $(this).css("margin-top",margin);
-        });
-     });
-     </script>
-     <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
-     <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
-     <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
 {% endblock %}
+{% block bottom_js %}
+ <script type="text/javascript">
+ $(document).ready(function () {
+    var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
+    //将第二个按钮放到下面
+    var margin=($(".articles-container").height()-$("#section-links").height())/2;
+    $(".section-link:eq(0)").css("margin-top",margin);
+      /*按钮点击事件*/
+    $(".section-link").click(function() {
+        $("#article").text(articles[$(this).index()]);
+        //更换样式
+        $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
+        $(this).removeClass("noselect-section-link").addClass("selected-section-link");
+        //清空margin
+        $(".section-link").css("margin-top",0);
+        margin=($(".articles-container").height()-$("#section-links").height())/2;
+        $(this).css("margin-top",margin);
+    });
+ });
+ </script>
+ <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
+ <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
+ <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
+ {% endblock %}

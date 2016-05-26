@@ -12,7 +12,7 @@ class Video(db.EmbeddedDocument):
     单一视频
     """
     video_title = db.StringField(max_length=255, required=True)  # 视频标题
-    video_url = db.StringField(max_length=255, required=True)  # 视频url
+    video_url = db.StringField(max_length=500, required=True)  # 视频url
     like_numbers = db.IntField(default=0)  # 点赞数
 
 

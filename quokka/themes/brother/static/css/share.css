@@ -1,4 +1,4 @@
-#sharing{
+.sharing{
     height:168px;
     padding-top: 76px;
     border-bottom: 1px solid #148acc;
@@ -25,7 +25,7 @@
     width:320px;
     margin:auto;
 }
-#shareword{
+.shareword{
     text-align: center;
 
 }
@@ -33,7 +33,7 @@
     color: #148acc;
     font-size: 22px;
 }
-#sites{
+.sites{
 margin-top: 39px;
 padding-left: 16px;
 }
@@ -57,13 +57,18 @@ width: 30%;
 .wechat-site{
     position: relative;
 }
-#wechat-help{
+.wechat-help{
+    width: 216px;
     display:none;
     position: absolute;
-    top:-250px;
-    left:-42px;
+    top:-265px;
+    left:-62px;
     background: #ffffff;
 }
-#wechat-help p{
+.wechat-help p{
     text-align: center;
+}
+.wechat-help div{
+    width:200px;
+    margin: 4px auto 0 auto;
 }
