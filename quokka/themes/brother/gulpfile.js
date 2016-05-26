@@ -17,7 +17,7 @@ gulp.task('rev', function() {
 });
 
 gulp.task('rev_template', function() {
-    return gulp.src(['dist/*.json', 'templates/**/*.html'])
+    return gulp.src(['rev/*.json', 'templates/**/*.html'])
         // 替换模板中文件名
         .pipe(revCollector())
         // 输出文件
