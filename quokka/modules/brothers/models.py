@@ -23,7 +23,7 @@ class BrotherVideos(Content):
     shared_by = db.StringField(max_length=255, required=True)  # 分享人
     videos = db.ListField(
         db.EmbeddedDocumentField(Video, required=True), required=False)  # 师兄视频列表
-
+    
 
 class Article(db.EmbeddedDocument):
     """
@@ -31,7 +31,7 @@ class Article(db.EmbeddedDocument):
     """
     title = db.StringField(max_length=255, required=True)  # 文章标题
     body = db.StringField(required=True)  # 文章正文
-
+    like_numbers = db.IntField(default=0)  # 点赞数
 
 class BrotherArticles(Content):
     """

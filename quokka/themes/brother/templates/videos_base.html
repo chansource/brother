@@ -21,7 +21,7 @@
              <div class="video-wrap" >
                 <div id="like-button" class="like-wrap">
                     <img class="good_ico" src="{{theme_static('img/zan.png')}}">
-                    <p id="like_numbers"></p>
+                    <p id="like_numbers">{{content.videos[0].like_numbers}}</p>
                 </div>
                 <div id="video-detail" class="iframe-wrap">
                 </div>
@@ -51,10 +51,10 @@ $(document).ready(function(){
      var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
      var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
      var index=0;
-     var status=true;
+     var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
      //加载视频
     $("#video-detail").append(videos_urls[0]);
-    $("#like_numbers").text(likes[0]); 
+    $(".like-wrap").css("display","block");
     //视频按钮布局
    {% if content.videos|length >1 %}
      var button_number={{ content.videos|length }};
@@ -86,13 +86,16 @@ $(document).ready(function(){
 
     //点赞事件
     $("#like-button").click(function  () {
-        if(status){
+        if(likeStatus[index]){
             $.post(
-                '/brothervideos/addlike', 
+                '/brothervideos/addvideolike', 
                 {"id":"{{content.id}}","index":index}, 
-                function(){$("#like_numbers").text(Number($("#like_numbers").text())+1);}
+                function(){
+                    likes[index]+=1;
+                    $("#like_numbers").text(likes[index]);
+                }
             );
-            status=false;
+            likeStatus[index]=false;
         }
     });
 });

@@ -26,6 +26,7 @@
     z-index: 1;
     bottom:53px;
     right: -23px;
+    display: none;
 }
 .like-wrap p{
     margin: -41px 0 0 43px ;
