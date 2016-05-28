@@ -16,7 +16,7 @@
         <div  class="content">
               <div class="content-header">
                     <div class="header-wrap">
-                      <h1>{{content.title}}</h1>
+                      <p>{{content.title}}</p>
                       <span>作者&nbsp;|&nbsp;{{content.author}}&nbsp;&nbsp;发表日期&nbsp;|&nbsp;{{content.created_at.strftime('%Y.%m.%d')}}</span>
                     </div>
               </div>
@@ -39,7 +39,15 @@
                     </a>
                 </div>
                 <div class="articles-container">
-                        <p id="article" class="article-detail">{{content.articles[0].body}}</p>
+                        {% if channel.slug =="brotherarticles"%}
+                        <div class="article-wrap">
+                          <div id="like-button" class="like-wrap">
+                                <img class="good_ico" src="{{theme_static('img/zan.png')}}">
+                                <p id="like_numbers">{{content.articles[0].like_numbers}}</p>
+                          </div>
+                          {% endif %}
+                          <div id="article" class="article-detail">{{content.articles[0].body}}</div>
+                        </div>
                      {% include theme('share.html') %}
                 </div>
      </div>
@@ -48,14 +56,18 @@
 {% endblock %}
 {% block bottom_js %}
  <script type="text/javascript">
- $(document).ready(function () {
     var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
+    var likes=[{% for article in content.articles %}{{ article.like_numbers }},{% endfor %}];
+     var index=0;
+     var likeStatus=[{% for i in range(content.articles|length) %}true,{% endfor %}];
     //将第二个按钮放到下面
     var margin=($(".articles-container").height()-$("#section-links").height())/2;
     $(".section-link:eq(0)").css("margin-top",margin);
       /*按钮点击事件*/
     $(".section-link").click(function() {
-        $("#article").text(articles[$(this).index()]);
+        index=$(this).index();
+        $("#article").text(articles[index]);
+        $("#like_numbers").text(likes[index]);
         //更换样式
         $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
         $(this).removeClass("noselect-section-link").addClass("selected-section-link");
@@ -64,7 +76,32 @@
         margin=($(".articles-container").height()-$("#section-links").height())/2;
         $(this).css("margin-top",margin);
     });
- });
+
+    //增加csrf_token
+    $(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
+            }
+        });
+        });
+
+    //点赞事件
+    $("#like-button").click(function  () {
+        if(likeStatus[index]){
+            $.post(
+                '/brotherarticles/addarticlelike', 
+                {"id":"{{content.id}}","index":index}, 
+                function(){
+                  likes[index]+=1;
+                  $("#like_numbers").text(likes[index]);
+
+                }
+            );
+            likeStatus[index]=false;
+
+        }
+    });
  </script>
  <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
  <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>

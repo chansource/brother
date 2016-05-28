@@ -14,7 +14,7 @@
     margin: auto;
 
 }
-.content-header h1{
+.content-header p{
     padding-top: 32px;
     color:#ffffff;
     font:30px "Lantinghei TC","Microsoft YaHei",sans-serif;
@@ -72,6 +72,20 @@ cursor: pointer;
     background: #ffffff;
     margin-left:232px; 
     margin-right:232px;
+}
+.article-wrap{
+    position: relative;
+}
+.like-wrap{
+    position: absolute;
+    z-index: 1;
+    top:46px;
+    right: -23px;
+}
+.like-wrap p{
+    margin: -41px 0 0 43px ;
+    color: #ffffff;
+    font:22px  "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
 .article-detail{
     padding: 68px 100px;
