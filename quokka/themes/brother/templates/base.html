@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="renderer" content="webkit">
     <meta charset="utf-8" />
     <meta name="csrf_token" content="{{ csrf_token() }}" />
     {%block title%}{% endblock %}
@@ -26,7 +27,7 @@
     {% endblock %}
     
     {% block commom_js %}
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
     {% endblock %}
     {% block bottom_js %}
     {% endblock %}

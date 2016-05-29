@@ -1,3 +1,8 @@
+if (!window.location.origin) {
+  window.location.origin = window.location.protocol + "//" 
+    + window.location.hostname 
+    + (window.location.port ? ':' + window.location.port : '');
+}
 var file_id=null;
 var uploader = WebUploader.create({
     headers: { "X-CSRFToken": $("meta[name=csrf_token]").attr("content")},
@@ -88,7 +93,7 @@ $("#messageForm").validate({
                         "message":$("textarea[name='message']").val(),
                         "sender_email":$("input[name='sender_email']").val(),
                         "status":"未读",
-                        "channel":$("input[name='channel']").val(),
+                        "channel":$("input[name='channel']").val()
                     };
       if(file_id!==null){
         data['document']=file_id;
@@ -108,7 +113,7 @@ $("#messageForm").validate({
                         }
                     }
                 );
-    },    
+    }
 });
 function checkForm () {
     if($("#messageForm").valid()){

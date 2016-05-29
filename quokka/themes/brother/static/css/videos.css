@@ -1,66 +1,69 @@
-#content-wrap{
+.content-wrap{
     width: 100%;
     background:#f4f4f4;
 }
-#content{
+.content{
     width:1170px;
     padding-top:24px;
     margin: auto;
 }
-#content-header{
+.content-header{
     margin: auto;
 }
-#content-header h1{
+.content-header h1{
     color:#148acc;
     font-size:20px;
      font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
-#content-header span{
+.content-header span{
     margin-top:14px;
    color:#7c7c7c;
    font-size:14px;
    font-family: "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
-#like-button{
+.like-wrap{
     position: absolute;
     z-index: 1;
-    bottom:88px;
+    bottom:53px;
     right: -23px;
+    display: none;
 }
-#like-button p{
+.like-wrap p{
     margin: -41px 0 0 43px ;
     color: #ffffff;
     font:22px  "Lantinghei TC","Microsoft YaHei",sans-serif;
 }
-#video{
+.video-wrap{
     width:1170px;
     margin:22px auto 0 auto;
     position: relative;
 }
-#video embed{
-    height:760px;
-     width:1170px;
+.iframe-wrap {
+    height:732px;
+    width:1170px;
 }
-#section-buttons{
+.buttons-wrap{
     margin:26px auto 0 auto;
 }
 
 .section-button{
     width:164px;
     height:54px;
-    background:white;
     border:1px solid #148acc;
     border-radius:8px;
-    color:#148acc;
     font:19px "Lantinghei TC","Microsoft YaHei",sans-serif;
     outline:none;
     padding:0;
     display: none;
 }
-.section-button:hover{
+.non-selected-section-button{
+    background:#ffffff;
+    color:#148acc;
+}
+.non-selected-section-button:hover{
     cursor: pointer;
 }
-.first-section-button{
+.selected-section-button{
     background:#148acc;
     color:#ffffff;
 }
