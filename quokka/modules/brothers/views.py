@@ -4,28 +4,14 @@ from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
 from flask import request
 from quokka.utils.baseresp import _base_err_resp,_base_normal_resp
-from .models import BrotherVideos,BrotherAsk,JoinMessage
+from .models import BrotherVideos,BrotherArticles,BrotherAsk,JoinMessage
 from pprint import pprint
 import uuid
 import logging
 
 logger = logging.getLogger('quokka')
 
-# def _base_err_resp(err_msg="Default error message.", err_rtn=1):
-#     resp = {
-#         "rtn": err_rtn,
-#         "msg": err_msg,
-#     }
-#     return jsonify(resp)
-
-# def _base_normal_resp(data={}):
-#     resp = {
-#         "rtn": 0,
-#         "data": data,
-#     }
-#     return jsonify(resp)
-
-class AddLikeView(MethodView):
+class AddVideoLikeView(MethodView):
     """
     Add like number.
 
@@ -40,7 +26,7 @@ class AddLikeView(MethodView):
     """
 
     def post(self):
-        logger.debug("add like view")
+        logger.debug("add video like view")
         try:
             content_id = request.form["id"]
             index = int(request.form["index"])
@@ -54,6 +40,34 @@ class AddLikeView(MethodView):
             logger.error(str(e))
             return _base_err_resp("error")
 
+class AddArticleLikeView(MethodView):
+    """
+    Add like number.
+
+    `HTTP` is form-style request,json-style respond using post submit.
+
+    POST param:
+        id: BrotherVideos id
+        index: video index,eg 0,1,2,3,4
+
+    HTTP return:
+        Try it your self.
+    """
+
+    def post(self):
+        logger.debug("add article like view")
+        try:
+            content_id = request.form["id"]
+            index = int(request.form["index"])
+            logger.debug("content_id:{}  index:{}".format(content_id,index))
+            result = BrotherArticles.objects(id=content_id).first()
+            result.articles[index].like_numbers += 1
+            result.save()
+            return _base_normal_resp()
+
+        except Exception, e:
+            logger.error(str(e))
+            return _base_err_resp("error")
 
 class SendMessageView(MethodView):
     """
