@@ -2,28 +2,14 @@
 
 from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
-from flask import request
+from flask import request, url_for
 from quokka.utils.baseresp import _base_err_resp,_base_normal_resp
-from .models import BrotherVideos,BrotherAsk,JoinMessage
+from .models import BrotherVideos, BrotherAsk, JoinMessage, BrotherInfo
 from pprint import pprint
 import uuid
 import logging
 
 logger = logging.getLogger('quokka')
-
-# def _base_err_resp(err_msg="Default error message.", err_rtn=1):
-#     resp = {
-#         "rtn": err_rtn,
-#         "msg": err_msg,
-#     }
-#     return jsonify(resp)
-
-# def _base_normal_resp(data={}):
-#     resp = {
-#         "rtn": 0,
-#         "data": data,
-#     }
-#     return jsonify(resp)
 
 class AddLikeView(MethodView):
     """
@@ -126,3 +112,41 @@ class JoinMessageView(MethodView):
         except Exception, e:
             logger.error(str(e))
             return _base_err_resp("something went wrong")
+
+class BrotherInfoView(MethodView):
+    """
+    Get brother list.
+
+    `HTTP` is form-style request,json-style respond using post submit.
+
+    POST param:
+        offset: start position
+        count: result count
+
+    HTTP return:
+        Try it your self.
+    """
+
+    def get(self):
+        offset = int(request.args.get("offset", 0))
+        count = int(request.args.get("count", 10))
+        results = BrotherInfo.objects.skip(offset).limit(count)
+        
+        brother_list = []
+        for i in results:
+            tmp = {
+                "brother_tags": i["brother_tags"],
+                "photo": url_for('quokka.core.media', filename=i["contents"][0]["content"].path),
+                "brother_college_major": i["brother_college_major"],
+                "brother_college_name": i["brother_college_name"],
+                "name": i["title"],
+                "brother_is_ask": i["brother_is_ask"],
+                "brother_is_share": i["brother_is_share"],
+                # TODO: 如何使用url_for优雅地拼接详情页的url
+                # "details_link": url_for('quokka.core.detail', long_slug=i.slug)
+                "details_link": "/brothers/" + i.slug + ".html"
+            }
+            brother_list.append(tmp)
+
+        return _base_normal_resp(data=brother_list)
+
