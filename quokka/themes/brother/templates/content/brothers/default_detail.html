@@ -1,7 +1,7 @@
 {% from theme('_helpers.html') import load_comment_area, load_tags_area, load_share_area, load_recommendation_area, load_page_header, load_page_time, load_page_content  with context %}
 {% extends theme("base.html") %}
 
-{% block title %}<title>师兄名片 {{content.title}}</title>{% endblock %}
+{% block title %}<title>师兄师姐名片 {{content.title}}</title>{% endblock %}
 
 {% block seo_meta %}
 <meta name="description" content="{{content.summary}}">
@@ -75,16 +75,22 @@
        <div id="cross"></div>
         <div id="links">
             <div id="link1">
+              {% if content.brother_is_share %}
                 <img class="link-img" src="{{theme_static('img/brother_say_1.png')}}">
-                {% if content.brother_is_video %}
-                  <button class="link-button" onclick="location='{{content.brother_videos.get_absolute_url()}}'">分享</button>
+                  <a class="link-button active-link-button" {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}'" {% endif %}>分享</a>
                 {% else %}
-                <button class="link-button" onclick="location='{{content.brother_articles.get_absolute_url()}}'">师兄说</button>
+                <img class="link-img" src="{{theme_static('img/brother_say.png')}}">
+                  <a class="link-button deactive-link-button">分享</a>
                 {% endif %}
             </div>
              <div id="link2">
+              {% if content.brother_is_ask %}
                  <img class="link-img" src="{{theme_static('img/brother_help_1.png')}}">
-                 <button class="link-button">我要问路</button>
+                 <a class=" link-button active-link-button" href="/brotherask/?name={{content.title}}&id={{content.id}}">我要问路</a>
+                 {% else %}
+                <img class="link-img" src="{{theme_static('img/brother_help.png')}}">
+                  <a class="link-button deactive-link-button" >我要问路</a>
+                {% endif %}
             </div>
         </div>
         {% include theme('footer.html') %}

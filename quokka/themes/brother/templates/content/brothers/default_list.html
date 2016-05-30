@@ -22,6 +22,16 @@
             <div class="brother-sub-container">
                 {% for content in contents.items %}
                 <a href="{{content.get_absolute_url()}}" class="brother-item">
+                        {% if content.brother_is_share or content.brother_is_ask %}
+                        <div class="brother-server-tags">
+                            {% if content.brother_is_share %}
+                            <p class="brother-share-tag">分享</p>
+                            {% endif %}
+                            {% if content.brother_is_ask %}
+                            <p class="brother-ask-tag">答问</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
                         <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
                         <p class="brother-info">
                             <span class="brother-name">{{content.title}}</span>
@@ -41,10 +51,12 @@
         </div>
         {% include theme('footer.html') %}
     </div>
-      <script type="text/javascript">
+
+{% endblock %}
+{% block bottom_js %}
+<script type="text/javascript">
   $(document).ready(function  () {
       $("#pagination").css("width",{{(contents.pages+3)*52}});
   });
   </script>
 {% endblock %}
-

@@ -1,6 +1,6 @@
 {% extends theme("base.html") %}
 
-{%block title%} <title>师兄指路 首页</title>{% endblock %}
+{%block title%} <title>师兄指路——年轻人帮助年轻人</title>{% endblock %}
 
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
@@ -46,6 +46,16 @@
             <!-- 为解决inline-block间距问题，div一行显示，只能牺牲代码格式 -->
             {% for content in contents.items|selectattr("model", "equalto", "brothers.brotherinfo")|sort(attribute='home_order') %}{% if content.model == "brothers.brotherinfo" %}<div class="brother-item">
                 <a href="{{content.get_absolute_url()}}" class="brother-link">
+                    {% if content.brother_is_share or content.brother_is_ask %}
+                        <div class="brother-server-tags">
+                            {% if content.brother_is_share %}
+                            <p class="brother-share-tag">分享</p>
+                            {% endif %}
+                            {% if content.brother_is_ask %}
+                            <p class="brother-ask-tag">答问</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                     <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="brother-cover">
                     <p class="brother-info">
                         <span class="brother-name">{{content.title}}</span>
@@ -81,6 +91,8 @@
     var mySwiper = new Swiper ('.banner-container', {
         nextButton: '.banner-next',
         prevButton: '.banner-prev',
+        autoplay : 1000,
+        speed:1000,
     });
 
     setBannerHeight();

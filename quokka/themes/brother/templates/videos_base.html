@@ -12,27 +12,27 @@
 {% endblock %}
 {% block content %}
         {% include theme('header.html') %}
-    <div id="content-wrap">
-        <div  id="content">
-              <div id="content-header">
+    <div class="content-wrap">
+        <div  class="content">
+              <div class="content-header">
                   <h1>{{content.title}}</h1>
                   <span>分享人 {{content.shared_by}}</span>
               </div>
-             <div id="video">
-                <div id="like-button">
-                    <img id="good" src="{{theme_static('img/zan.png')}}">
-                    <!-- <input type="text"  id="like_numbers" disabled="disabled"/> -->
-                    <p id="like_numbers"></p>
+             <div class="video-wrap" >
+                <div id="like-button" class="like-wrap">
+                    <img class="good_ico" src="{{theme_static('img/zan.png')}}">
+                    <p id="like_numbers">{{content.videos[0].like_numbers}}</p>
                 </div>
-                <div id="flashcontent">视频无法加载，请允许flash插件或者更新flash插件</div>
+                <div id="video-detail" class="iframe-wrap">
+                </div>
             </div>
             {% if content.videos|length >1 %}
-            <div id="section-buttons">
+            <div class="buttons-wrap">
             {% for video in content.videos %}
               {% if loop.index==1 %}
-              <button class="section-button first-section-button">{{video.video_title}}
+              <button class="section-button selected-section-button">{{video.video_title}}
               {% else %}
-              <button class="section-button non-first-section-button">{{video.video_title}}
+              <button class="section-button non-selected-section-button">{{video.video_title}}
               {% endif %}
             {% endfor %}
             </button>
@@ -40,63 +40,67 @@
             {% endif %}
      </div> 
      {% include theme('share.html') %}
-</div>
+
      {% include theme('footer.html') %}
-     <script type="text/javascript" src="{{theme_static('js/swfobject.js')}}"></script>
-     <script type="text/javascript">
-        $(document).ready(function(){
-            var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
-             var videos_urls=[{% for video in content.videos %}"{{ video.video_url}}",{% endfor %}];
-             var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
-             var index=0;
-             var status=true;
-             //加载视频
-            swfobject.embedSWF(videos_urls[0],"flashcontent" , 1170, 760, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlashexpressInstall.swf", '', '',{quality:'high',allowfullscreen : 'true'});
-            $("#like_numbers").text(likes[0]); 
-            //视频按钮布局
-           {% if content.videos|length >1 %}
-             var button_number={{ content.videos|length }};
-             var margin_left=21;
-             var width=($("#video").width()-margin_left*(button_number-1))/button_number;
-              $(".non-first-section-button").css("margin-left",margin_left);
-             $(".section-button").css("width",width);
-             $(".section-button").css("display","inline-block");
-           {% endif %}
-            //视频按钮事件
-            $(".section-button").click(function(){
-                index=$(this).index();
-            swfobject.embedSWF(videos_urls[index],$("#flashcontent")[0] , 1170, 760, 10,"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash", '', '',{quality:'high',allowfullscreen : 'true'});
-                $(".section-button").css("background","#ffffff");
-                $("#like_numbers").text(likes[index]);
-                $(".section-button").css("color","#148acc");        
-                $(this).css("background","#148acc");
-                $(this).css("color","#ffffff");
-                $("title").text("{{content.shared_by}} "+videos_titles[index])
-              });
+</div>
+{% endblock %}
+{% block bottom_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+    var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
+     var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
+     var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
+     var index=0;
+     var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
+     //加载视频
+    $("#video-detail").append(videos_urls[0]);
+    $(".like-wrap").css("display","block");
+    //视频按钮布局
+   {% if content.videos|length >1 %}
+     var button_number={{ content.videos|length }};
+     var margin_left=21;
+     var width=($(".video-wrap").width()-margin_left*(button_number-1))/button_number;
+      $(".non-selected-section-button").css("margin-left",margin_left);
+     $(".section-button").css("width",width);
+     $(".section-button").css("display","inline-block");
+   {% endif %}
+    //视频按钮事件
+    $(".section-button").click(function(){
+        index=$(this).index();
+        $("#video-detail iframe").remove();
+        $("#video-detail").append(videos_urls[index]);
+        $("#like_numbers").text(likes[index]);
+        $("title").text("{{content.shared_by}} "+videos_titles[index])
+        $(".section-button").removeClass("selected-section-button").addClass("non-selected-section-button");
+        $(this).removeClass("non-selected-section-button").addClass("selected-section-button");
+      });
 
-            //增加csrf_token
-            $(function () {
-                    $.ajaxSetup({
-                        headers: {
-                            "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
-                    }
-                });
-                });
-
-            //点赞事件
-            $("#like-button").click(function  () {
-                if(status){
-                    $.post(
-                        '/brothervideos/addlike', 
-                        {"id":"{{content.id}}","index":index}, 
-                        function(){$("#like_numbers").text(Number($("#like_numbers").text())+1);}
-                    );
-                    status=false;
-                }
-            });
+    //增加csrf_token
+    $(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
+            }
         });
-     </script>
-      <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
-     <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
-     <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
+        });
+
+    //点赞事件
+    $("#like-button").click(function  () {
+        if(likeStatus[index]){
+            $.post(
+                '/brothervideos/addvideolike', 
+                {"id":"{{content.id}}","index":index}, 
+                function(){
+                    likes[index]+=1;
+                    $("#like_numbers").text(likes[index]);
+                }
+            );
+            likeStatus[index]=false;
+        }
+    });
+});
+</script>
+ <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
+ <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
+ <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
 {% endblock %}

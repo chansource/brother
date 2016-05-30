@@ -12,15 +12,15 @@
 {% endblock %}
 {% block content %}
         {% include theme('header.html') %}
-        <div id="rest">
-        <div  id="content">
-              <div id="content-header">
-                    <div id="header-wrap">
-                      <h1>{{content.title}}</h1>
+        <div class="rest">
+        <div  class="content">
+              <div class="content-header">
+                    <div class="header-wrap">
+                      <p>{{content.title}}</p>
                       <span>作者&nbsp;|&nbsp;{{content.author}}&nbsp;&nbsp;发表日期&nbsp;|&nbsp;{{content.created_at.strftime('%Y.%m.%d')}}</span>
                     </div>
               </div>
-                <div id="section-links">
+                <div id="section-links" class="section-links">
                     {% for article in content.articles%}
                       {% if loop.index==1 %}
                     <a class="selected-section-link section-link">
@@ -33,38 +33,77 @@
                     {% endif %}
                     {% endfor %}
                 </div>
-                <div id="right">
+                <div class="right-wrap">
                     <a href="#nav">
                         <img src="{{theme_static('img/back_top.png')}}">
                     </a>
                 </div>
-                <div id="articles-container">
-                        <p id="article-detail">{{content.articles[0].body}}</p>
+                <div class="articles-container">
+                        {% if channel.slug =="brotherarticles"%}
+                        <div class="article-wrap">
+                          <div id="like-button" class="like-wrap">
+                                <img class="good_ico" src="{{theme_static('img/zan.png')}}">
+                                <p id="like_numbers">{{content.articles[0].like_numbers}}</p>
+                          </div>
+                          {% endif %}
+                          <div id="article" class="article-detail">{{content.articles[0].body}}</div>
+                        </div>
                      {% include theme('share.html') %}
                 </div>
      </div>
      {% include theme('footer.html') %}
      </div>
-     <script type="text/javascript">
-     $(document).ready(function () {
-        var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
-        //将第二个按钮放到下面
-        var margin=($("#articles-container").height()-$("#section-links").height())/2;
-        $(".section-link:eq(0)").css("margin-top",margin);
-          /*按钮点击事件*/
-        $(".section-link").click(function() {
-            $("#article-detail").text(articles[$(this).index()]);
-            //更换样式
-            $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
-            $(this).removeClass("noselect-section-link").addClass("selected-section-link");
-            //清空margin
-            $(".section-link").css("margin-top",0);
-            margin=($("#articles-container").height()-$("#section-links").height())/2;
-            $(this).css("margin-top",margin);
-        });
-     });
-     </script>
-     <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
-     <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
-     <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
 {% endblock %}
+{% block bottom_js %}
+ <script type="text/javascript">
+    var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
+    var likes=[{% for article in content.articles %}{{ article.like_numbers }},{% endfor %}];
+     var index=0;
+     var likeStatus=[{% for i in range(content.articles|length) %}true,{% endfor %}];
+    //将第二个按钮放到下面
+    var margin=($(".articles-container").height()-$("#section-links").height())/2;
+    $(".section-link:eq(0)").css("margin-top",margin);
+      /*按钮点击事件*/
+    $(".section-link").click(function() {
+        index=$(this).index();
+        $("#article").text(articles[index]);
+        $("#like_numbers").text(likes[index]);
+        //更换样式
+        $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
+        $(this).removeClass("noselect-section-link").addClass("selected-section-link");
+        //清空margin
+        $(".section-link").css("margin-top",0);
+        margin=($(".articles-container").height()-$("#section-links").height())/2;
+        $(this).css("margin-top",margin);
+    });
+
+    //增加csrf_token
+    $(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
+            }
+        });
+        });
+
+    //点赞事件
+    $("#like-button").click(function  () {
+        if(likeStatus[index]){
+            $.post(
+                '/brotherarticles/addarticlelike', 
+                {"id":"{{content.id}}","index":index}, 
+                function(){
+                  likes[index]+=1;
+                  $("#like_numbers").text(likes[index]);
+
+                }
+            );
+            likeStatus[index]=false;
+
+        }
+    });
+ </script>
+ <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
+ <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
+ <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
+ {% endblock %}

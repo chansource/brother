@@ -67,3 +67,8 @@ class Audio(Media):
 
 class MediaGallery(Content):
     body = db.StringField(required=False)
+
+#增加上传文件处理类
+class FileUploadField(form.FileUploadField):
+    widget =None
+    
