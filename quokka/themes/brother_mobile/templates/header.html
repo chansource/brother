@@ -1,0 +1,22 @@
+<div class="header">
+    <a id="nav-btn" class="nav-btn">
+        <img  src="{{ theme_static('img/header_menu.png') }}">
+        <img class="cross_img" src="{{ theme_static('img/cross.png') }}">
+    </a>
+    <div class="logo-wrap">
+        <img src="{{ theme_static('img/logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
+        {% if not channel.is_homepage %}
+        <span>|  {% if channel.slug=='brothers' and contents %}师兄{% else %}{{channel.description}}{% endif %}</span>
+        {% endif %}
+    </div>
+    <a id="share-btn" class="share-btn">
+        <img src="{{ theme_static('img/share.png') }}">
+    </a>
+</div>
+<nav class="page-nav">
+    <a  class="pre-nav-item" href="/">首页</a>
+    <a  class="pre-nav-item" href="/brothers">师兄</a>
+    <a class="pre-nav-item" href="/about/detail.html">关于</a>
+    <a class="pre-nav-item" href="/join">加入</a>
+    <a href="/spread">加入</a>
+</nav>

@@ -1,0 +1,55 @@
+{% extends theme("base.html") %}
+
+{%block title%}<title>师兄指路 加入</title>{% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
+{%if channel.tags %}
+<meta name="keywords" content="{{channel.tags|join(',')}}">
+{%else%}
+<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+{%endif%}
+{% endblock %}
+
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/join.css')}}">
+{% endblock %}
+
+{% block content %}
+    {% include theme('header.html') %}
+    <div class="join-container">
+        <img class="join-content" src="{{theme_static('img/join_text.png')}}" alt="我们需要伙伴">
+
+        <div class="join-qrcode">
+            <img src="{{theme_static('img/join_qrcode.png')}}" alt="扫描二维码加入">
+            <div class="clearfloat"></div>
+        </div>
+        
+        {% include theme('footer.html') %}
+    </div>
+    
+{% endblock %}
+
+{% block bottom_js %}
+<script>
+    // TODO: 如何优雅地实现定高+剩余占据全部的布局？并且窗口大小变化后自动变化。
+    function setSize(){
+        // 占据除header外剩余高度，但不能小于最小高度
+        minHeight = 810;
+        height = $(window).height() - 106;
+        if(height < minHeight){
+            height = minHeight; 
+        }
+        $(".join-container").height(height);
+    }
+
+    // initial
+    setSize();
+
+    $(window).resize(setSize);
+</script>
+{% endblock %}
+
+
+
+

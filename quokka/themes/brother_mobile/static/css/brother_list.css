@@ -1,0 +1,105 @@
+.container{
+    width:100%;
+    background: #f4f4f4;
+}
+.sort-wrap{
+    width:100%;
+    display: flex;
+}
+.sort-btn{
+    width: 50%;
+    height: 43px;
+    background: #f4f4f4;
+    border: 0;
+    outline: none;
+    padding: 0;
+    color: #148acc;
+    font-size: 13px;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+.content-link{
+    display: block;
+    text-decoration: none;
+}
+.content-item{
+    width:100%;
+    margin-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    text-decoration: none;
+}
+.item-cover{
+    width:40%;
+}
+.item-cover img{
+    width: 100%;
+    margin: 3px 0 3px 0;
+}
+.item-infos{
+    position: relative;
+    width:60%;
+}
+.server-tags{
+    position: absolute;
+    right:0;
+}
+.server-tags span{
+    display: inline-block;
+    width: 55px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+.ask-tag{
+    background: #e65442;
+}
+.share-tag{
+    background: #148acc;
+}
+.basic-info{
+    margin:20px 0 0 8px;
+}
+.basic-info p{
+    margin: 0 0 2px 0;
+    color: #148acc;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+.basic-info span{
+    color: #148acc;
+    font-size: 10px;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+.tags{
+    margin:6px 0 0 0;
+    line-height: 20px;
+}
+.personal-tag{
+    display: inline-block;
+    padding: 3px 6px 3px 6px;
+    margin: 0  0  4px 6px;
+    border: 1px solid #7c7c7c;
+    border-radius: 6px;
+    text-align: center;
+    color: #7c7c7c;
+    font: 12px "Lantinghei TC","Microsoft YaHei",sans-serif;
+}
+.more-btn{
+    width:90px;
+    height:22px;
+    margin:6px auto 9px auto;
+    display: block;
+    border: 0;
+    outline:none;
+    background: #f4f4f4;
+    color:#7c7c7c;
+    font-size: 15px;
+    font-weight: bold;
+    font: 14px "Lantinghei TC","Microsoft YaHei",sans-serif;
+    
+}

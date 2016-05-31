@@ -1,0 +1,40 @@
+{% extends theme("base.html") %}
+{% block seo_meta %}
+<meta name="description" content="{{content.summary}}">
+<meta name="keywords" content="{{content.tags|join(',')}}">
+{% endblock %}
+{% block head %}
+<title>{{ content.title }}</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/articles_detail.css')}}">
+{% endblock %}
+{% block content %}
+<div class="container">
+      {% include theme('header.html') %}
+        <div  class="content">
+          {% if channel.slug =="brotherarticles"%}
+          <div id="like-btn" class="like-btn">
+            <img class="good_ico" src="{{theme_static('img/like.png')}}">
+            <p id="like_numbers">{{content.articles[0].like_numbers}}</p>
+        </div>
+         {% endif %}
+        <a class="up-top help-btn" href="#nav-btn">
+                <img src="{{theme_static('img/up_top.png')}}">
+        </a>
+        <a id="sections-nav" class="sections-nav help-btn">
+                <img src="{{theme_static('img/section_menu.png')}}">
+        </a>
+        <div class="content-header">
+            <p class="content-title">{{content.title}}</p>
+            <p class="content-author">分享者： {{content.author}}</p>
+        </div>
+        <div class="section">
+            <div class="section-title">{{content.articles[0].title}}</div>
+            <div class="section-body">{{content.articles[0].body}}</div>
+            <div class="more">更多章节请点击右边目录</div>
+        </div>
+      </div>   
+    {% include theme('footer.html') %}
+  </div>
+{% endblock %}
