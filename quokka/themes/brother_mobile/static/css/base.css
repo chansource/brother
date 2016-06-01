@@ -1,3 +1,6 @@
+body{
+  margin: 0;
+}
 .header{
     width:100%;
     height:50px;
@@ -59,4 +62,18 @@
 }
 .pre-nav-item{
     border-bottom: 1px solid #ffffff;
+}
+.footer{
+    width: 100%;
+    padding-top: 44px;
+    padding-bottom: 58px;
+    background: #f4f4f4;
+}
+
+.footer p{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 13px;
+    color: #7c7c7c;
+    width: 300px;
 }

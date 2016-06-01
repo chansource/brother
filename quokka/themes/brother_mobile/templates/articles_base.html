@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="{{theme_static('css/articles_detail.css')}}">
 {% endblock %}
 {% block content %}
-<div class="container">
+<div class="container" id="container">
       {% include theme('header.html') %}
         <div  class="content">
           {% if channel.slug =="brotherarticles"%}
@@ -19,22 +19,112 @@
             <p id="like_numbers">{{content.articles[0].like_numbers}}</p>
         </div>
          {% endif %}
-        <a class="up-top help-btn" href="#nav-btn">
-                <img src="{{theme_static('img/up_top.png')}}">
-        </a>
-        <a id="sections-nav" class="sections-nav help-btn">
-                <img src="{{theme_static('img/section_menu.png')}}">
-        </a>
         <div class="content-header">
             <p class="content-title">{{content.title}}</p>
             <p class="content-author">分享者： {{content.author}}</p>
         </div>
         <div class="section">
             <div class="section-title">{{content.articles[0].title}}</div>
-            <div class="section-body">{{content.articles[0].body}}</div>
+            <div class="section-body">{{content.articles[0].body|e}}</div>
             <div class="more">更多章节请点击右边目录</div>
         </div>
+
       </div>   
     {% include theme('footer.html') %}
   </div>
+  <div class="fix-btn">
+      <img src="{{theme_static('img/up_top.png')}}" alt="">
+      <img src="{{theme_static('img/section_menu.png')}}" alt="">
+  </div>
+  <!-- 下面部分为sideout相关DOM，注意给整体container加上id -->
+    <div class="menu-mask" id="menu-mask">
+      <nav id="menu" class="section-menu">
+        <header>
+            <h2>目录</h2>
+        </header>
+        <ul>
+          {% for article in content.articles%}
+              {% if loop.index==1 %}
+            <li class="menu-item menu-active" seq="{{loop.index0}}">{{article.title}}</li>
+            {% else %}
+            <li class="menu-item menu-negative" seq="{{loop.index0}}">{{article.title}}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+  </div>
+
+{% endblock %}
+{% block bottom_js %}
+<script src="{{theme_static('js/zepto/1.1.6/fx.js')}}"></script>
+<script>
+    var articleTitles=[{% for article in content.articles %} "{{article.title}}",{% endfor %}];
+    var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
+    var likes=[{% for article in content.articles %}{{ article.like_numbers }},{% endfor %}];
+    var n=0;
+    var likeStatus=[{% for i in range(content.articles|length) %}true,{% endfor %}];
+    //菜单出现和消失的动画
+    function show_menu () {
+      $(".fix-btn").toggle();
+      $(".menu-mask").animate({
+            "margin-left":"0"
+        }, 300, 'linear');
+    }
+    function hide_menu () {
+      $(".menu-mask").animate({
+            "margin-left":"100%"
+        }, 300, 'linear',function  () {
+          $(".fix-btn").toggle();
+        });
+    }
+    //点击的时候显示菜单
+    $(".fix-btn img").eq(1).on("tap", function() {
+        show_menu();
+    });
+    //右滑的时候，菜单消失
+    $("#menu-mask").on('swipeRight',function  () {
+        hide_menu();
+    });
+    $(".fix-btn img").eq(0).on("tap", function() {
+        scroll(0,0);
+    });
+    $("#menu ul").on("tap", function(event) {
+        n = parseInt($(event.target).attr("seq"));
+        // 遍历改变目录文字样式
+        $("#menu ul li").each(function(index, element) {
+            if( index == n ) {
+                $(element).addClass("menu-active");
+                $(element).removeClass("menu-negative");
+            }
+            else {
+                $(element).addClass("menu-negative");
+                $(element).removeClass("menu-active");
+            }
+        });
+        $(".section-body").text(articles[n]);
+        $(".section-title").text(articleTitles[n]);
+        $("#like_numbers").text(likes[n]);
+        hide_menu();
+    });
+     $.extend($.ajaxSettings, {
+    headers: {
+      'X-CSRFToken': $("meta[name=csrf_token]").attr("content")
+    }
+  });
+    //点赞事件
+    $("#like-btn").on("tap", function  () {
+        if(likeStatus[n]){
+            $.post(
+                '/brotherarticles/addarticlelike', 
+                {"id":"{{content.id}}","index":n}, 
+                function(){
+                  likes[n]+=1;
+                  $("#like_numbers").text(likes[n]);
+                }
+            );
+            likeStatus[n]=false;
+        }
+    });
+
+</script>
 {% endblock %}

@@ -12,88 +12,84 @@
 <link rel="stylesheet" type="text/css" href="{{theme_static('css/brother_detail.css')}}">
 {% endblock %}
 {% block content %}
-        {% include theme('header.html') %}
-      <div id="baseinfo">
-          <div id="cover">
-              <img src="{{content.get_main_image_url(default="")}}">
-          </div><div id="summary">
-            <div id="moto">
-               <p>“</p>
-                <p >{{content.brother_motto}}</p>
-               <p id="right-quote"> ”</p>
-           </div>
-            <p id="person-info">
-                <span id="name">{{content.title}}</span>&nbsp;
-                <span class="school-info">{{content.brother_college_major}}</span>&nbsp;
-                <span class="school-info">{{content.brother_college_name}}</span>
-            </p>
-            <p id="tags">
-                {% for tag in content.brother_tags%}
-                <span>{{tag}}</span>
-                {% endfor %}
-            </p>
-          </div>
-      </div>
-
-       <div id="rest-wrap">
-          <div id="experiences">
-            <div class="experience">
-              <p class="experience-type">高校专业学历</p>
-              <div class="experience-items">
-                {% for experience in content.brother_experience_study%}
-                  <div class="experience-item">
-                      <p class="experience-title"> >  {{experience.title}}</p>
-                      <p class="experience-time">{{experience.time}}</p>
-                  </div>
-                  {% endfor %}                
-              </div>
-           </div>
-           <div class="experience">
-              <p class="experience-type">实习工作经历</p>
-              <div class="experience-items">
-                {% for experience in content.brother_experience_work%}
-                  <div class="experience-item">
-                      <p class="experience-title"> >  {{experience.title}}</p>
-                      <p class="experience-time">{{experience.time}}</p>
-                  </div>   
-                  {% endfor %}             
-              </div>
-           </div>
-            <div class="experience">
-              <p class="experience-type">社团组织与获奖经历</p>
-              <div class="experience-items">
-                {% for experience in content.brither_experience_award%}
-                  <div class="experience-item">
-                      <p class="experience-title"> >  {{experience.title}}</p>
-                      <p class="experience-time">{{experience.time}}</p>
-                  </div>    
-                  {% endfor %}           
-              </div>
-           </div>
-         </div> 
-
-       <div id="cross"></div>
-        <div id="links">
-            <div id="link1">
+  <div class="container">
+    {% include theme('header.html') %}
+        <div class="cover">
+            <img src="{{content.get_main_image_url(default="")}}" alt="">
+        </div>
+        <div class="info">
+            <p class="info-name">{{content.title}}</p>
+            <p class="info-education"><span>{{content.brother_college_major}}</span>&nbsp;&nbsp;<span>{{content.brother_college_name}}</span></p>
+            <p class="info-tag">
+              {% for tag in content.brother_tags%}<span>{{tag}}</span>{% endfor %}
+              </p>
+        </div>
+        <div class="motto">
+            <p>“</p>
+            <p>{{content.brother_motto}}</p>
+            <p>”</p>
+        </div>
+        <div class="service">
               {% if content.brother_is_share %}
-                <img class="link-img" src="{{theme_static('img/brother_say_1.png')}}">
-                  <a class="link-button active-link-button" {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}'" {% endif %}>分享</a>
-                {% else %}
-                <img class="link-img" src="{{theme_static('img/brother_say.png')}}">
-                  <a class="link-button deactive-link-button">分享</a>
-                {% endif %}
+              <div class="service-item service-active">
+                <p>
+                看看<br>
+                师兄师姐分享
+                </p>
+                <button  {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}'" {% endif %}>分享</button>
+              </div>
+            {% else %}
+            <div class="service-item service-negative">
+              <p>
+              看看其他<br>
+              师兄师姐分享
+              </p>
+              <button>分享</button>
             </div>
-             <div id="link2">
-              {% if content.brother_is_ask %}
-                 <img class="link-img" src="{{theme_static('img/brother_help_1.png')}}">
-                 <a class=" link-button active-link-button" href="/brotherask/?name={{content.title}}&id={{content.id}}">我要问路</a>
-                 {% else %}
-                <img class="link-img" src="{{theme_static('img/brother_help.png')}}">
-                  <a class="link-button deactive-link-button" >我要问路</a>
-                {% endif %}
+            {% endif %}
+            {% if content.brother_is_ask %}
+            <div class="service-item service-active">
+               <p>
+                直接向师兄师姐<br>
+                问路
+                </p>
+                <button onclick="location='/brotherask/?name={{content.title}}&id={{content.id}}'">我要问路</button>
+             </div>
+             {% else %}
+             <div class="service-item service-negative">
+                <p>
+                  直接向师兄师姐<br>
+                  问问路
+                </p>
+                <button>我要问路</button>
+              </div>
+            {% endif %}
+        </div>
+        <div class="experience-container">
+            <div class="experience-item">
+                <h5>高校专业经历</h5>
+                {% for experience in content.brother_experience_study%}
+                <p><span>{{experience.time}}</span>&nbsp;<span>{{experience.title}}</span></p>
+                {% endfor %}  
+            </div>
+            <div class="experience-item">
+                <h5>实习工作经历</h5>
+                {% for experience in content.brother_experience_work%}
+                <p><span>2012年</span>&nbsp;<span>广东新闻奖二等奖、三等奖</span></p>
+                {% endfor %}  
+            </div>
+            <div class="experience-item">
+                <h5>社团组织与获奖经历</h5>
+                {% for experience in content.brither_experience_award%}
+                <p><span>2012年</span>&nbsp;<span>广东新闻奖二等奖、三等奖</span></p>
+                {% endfor %}  
             </div>
         </div>
-        {% include theme('footer.html') %}
-      </div> 
+      <div class="fix-btn">
+        <img src="{{theme_static('img/up_top.png')}}" alt="">
+        <img src="{{theme_static('img/section_menu.png')}}" alt="">
+      </div>
+  {% include theme('footer.html') %}
+</div> 
      
 {% endblock %}
