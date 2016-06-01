@@ -1,0 +1,56 @@
+#follow-wrap{
+    height:183px;
+    margin: 0 auto;
+    background: #148acc;
+}
+
+#follows{
+    width:320px;
+    margin: auto;
+}
+
+#follow-word{
+    padding-top:32px;
+    padding-bottom: 18px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 28px;
+    margin: 0;
+}
+
+.site{
+    float: left;
+    width: 90px;
+    margin: 0 35px;
+}
+
+.social-share:hover{
+    cursor: pointer;
+}
+
+.site-name{
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+}
+
+.site-logo{
+    display: block;
+    margin:auto;
+}
+
+.wechat-site{
+    position: relative;
+}
+
+#wechat-help{
+    display:none;
+    position:absolute;
+    top:-260px;
+    left:-50px;
+    background: #ffffff;
+}
+
+#wechat-help p{
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+{% extends theme("base.html") %}
+
+{%block title%}<title>师兄指路 传播者</title>{% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
+{%if channel.tags %}
+<meta name="keywords" content="{{channel.tags|join(',')}}">
+{%else%}
+<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+{%endif%}
+
+{% endblock %}
+
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/spread.css')}}">
+{% endblock %}
+
+{% block content %}
+    {% include theme('header.html') %}
+
+    <div class="spread-container">
+        <div class="spread-content">
+            <img src="{{theme_static('img/spread_content.png')}}" alt="传播者">
+        </div>
+    </div>
+    
+    {% include theme('footer.html') %}
+{% endblock %}
+
+
+

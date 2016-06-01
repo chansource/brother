@@ -4,7 +4,7 @@ from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
 from flask import request, url_for
 from quokka.utils.baseresp import _base_err_resp,_base_normal_resp
-from .models import BrotherVideos, BrotherAsk, JoinMessage, BrotherInfo
+from .models import BrotherVideos, BrotherArticles,BrotherAsk, JoinMessage, BrotherInfo
 from pprint import pprint
 import uuid
 import logging

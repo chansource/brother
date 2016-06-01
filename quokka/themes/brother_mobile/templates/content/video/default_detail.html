@@ -1,0 +1,26 @@
+{% from theme('_helpers.html') import load_video_detail  with context %}
+{% extends theme("base.html") %}
+
+{%block title%} {{content.title}} | {{channel.long_slug.split('/')|join(' | ')}} | {{Config.get('site', 'site_name', 'jiahuayouxue')}} {% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{content.summary}}">
+<meta name="keywords" content="{{content.tags|join(',')}}">
+{% endblock %}
+
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="video_detail.css">
+<link rel="stylesheet" type="text/css" href="share.css">
+{% endblock %}
+
+{% block content %}
+<!-- A wrapper for the header -->
+    {% include theme('header.html') %}
+    <div id="rest">
+
+         <!-- A wrapper for all the blog posts -->
+      {{load_video_detail(content)}}
+      {% include theme('share.html') %} 
+     {% include theme('footer.html') %} 
+ </div>
+{% endblock %}

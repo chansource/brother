@@ -1,0 +1,124 @@
+{% extends theme("base.html") %}
+{% block seo_meta %}
+{% endblock %}
+{% block head %}
+<title>我要问路</title>
+{% endblock head %}
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/brotherask_detail.css')}}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% include theme('header.html') %}
+    <div class="confirm-mask">
+        <div class="confirm">
+            <a id="confirm-btn">
+                <img src="{{theme_static('img/confirm_cross.png')}}">
+            </a>
+            <p id="confirm-message"></p>
+        </div>
+    </div>
+        <div class="content">
+            <form id="messageForm" class="message-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="brother" value="{{ request.args.get('id') }}" />
+                <input  type="hidden" name="channel" value="{{channel.id }}" />
+                <div class="segment">
+                    <span class="segment-name">收件人</span>
+                    <input class="segment-input" name="receiver" value="{{request.args.get('name','师兄师姐')}}"  placeholder="{{request.args.get('name','师兄师姐')}}" onblur="checkForm()">
+                </div>    
+                <div class="segment">
+                    <span class="segment-name">发件人</span>
+                    <input  class="segment-input" name="sender_email" placeholder="请输入你的邮箱" onblur="checkForm()">
+                </div>
+                <div class="segment">
+                    <span class="segment-name">主题</span>
+                    <input class="segment-input" name="title" value="向{{request.args.get('name','师兄师姐')}}问路" placeholder="向{{request.args.get('name','师兄师姐')}}问路" onblur="checkForm()">
+                </div>
+                <div class="segment">
+                        <textarea id="detail" class="text-area" name="message" placeholder="请输入你的提问内容" onblur="checkForm()"></textarea>
+                </div> 
+                <div class="sender-button-wrap">
+                    <input id="send-button"  class="send-btn novalid-button" type="submit" value="发送"/>
+                </div>    
+            </form>  
+        </div>  
+    {% include theme('footer.html') %}
+</div> 
+
+{% endblock %}
+{% block bottom_js %}
+<script  type="text/javascript" src="{{theme_static('js/validate/validate.min.js')}}"></script>
+<script type="text/javascript" src="{{theme_static('js/validate/validate.ext.js')}}"></script>
+<script>
+ $.extend($.ajaxSettings, {
+    headers: {
+      'X-CSRFToken': $("meta[name=csrf_token]").attr("content")
+    }
+  });
+function showMessage (message) {
+    $("#confirm-message").text(message);
+    $("body").css("overflow","hidden");
+    $(".confirm-mask").toggle();
+}
+var validator = new FormValidator('messageForm', [{
+    name: 'receiver',
+    display: '收件人',
+    rules: 'required'
+},{
+    name: 'title',
+    display: '主题',
+    rules: 'required'
+},{
+    name: 'sender_email',
+    display: '你的邮箱',
+    rules: 'required|valid_email'
+},{
+    name: 'message',
+    display: '消息内容',
+    rules: 'required'
+} ], function(errors) {
+    if (errors.length > 0) {
+        showMessage(errors[0].message);
+    }
+    else{
+            event.preventDefault();
+            console.log("post");
+            $.post(
+                '/brotherask/sendmessage',
+                {
+                    "title":$("input[name='title']").val(),
+                    "message":$("textarea[name='message']").val(),
+                    "sender_email":$("input[name='sender_email']").val(),
+                    "receiver":$("input[name='receiver']").val(),
+                    "status":"未读",
+                    "channel":$("input[name='channel']").val(),
+                    "brother":$("input[name='brother']").val(),
+                },
+                function (data) {
+                    if(!data["rtn"]){
+                        showMessage("提交成功！");
+                    }
+                    else{
+                        showMessage(data["msg"]);
+                    }
+                }
+            );
+    }
+});
+$("#confirm-btn").click(function  () {
+    $("body").css("overflow","auto");
+    $(".confirm-mask").toggle();
+});
+validator.setMessage('required', '填上%s，才能收到回答哦！');
+validator.setMessage('valid_email', '要填上正确的邮箱地址，才能收到回答哦！');
+function checkForm()  {
+    if( validator.valid() ){
+        $("#send-button").removeClass("novalid-button").addClass("valid-button");
+    }
+    else{
+        $("#send-button").removeClass("valid-button").addClass("novalid-button");
+    }
+}
+</script>
+{% endblock %}

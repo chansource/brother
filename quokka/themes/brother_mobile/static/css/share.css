@@ -1,0 +1,74 @@
+.sharing{
+    height:168px;
+    padding-top: 76px;
+    border-bottom: 1px solid #148acc;
+}
+
+#cut-line1 {
+    width:100px;
+    height:1px;
+    margin:11px 0 0 0;
+    background-color:#148acc;
+    overflow:hidden;
+    float: left;
+    }
+#cut-line2 {
+    width:100px;
+    height:1px;
+    margin:11px  0 0 0  ;
+    background-color:#148acc;
+    overflow:hidden;
+    float: right;
+
+    }
+#shares{
+    width:320px;
+    margin:auto;
+}
+.shareword{
+    text-align: center;
+
+}
+ #shares span{
+    color: #148acc;
+    font-size: 22px;
+}
+.sites{
+margin-top: 39px;
+padding-left: 16px;
+}
+.site{
+display: inline-block;
+width: 30%;
+}
+.social-share:hover{
+   cursor: pointer;
+}
+.site-name{
+    color: #148acc;
+    text-align: center;
+    font-size: 18px;
+}
+.site-logo{
+    display: block;
+    margin:auto;
+}
+
+.wechat-site{
+    position: relative;
+}
+.wechat-help{
+    width: 216px;
+    display:none;
+    position: absolute;
+    top:-265px;
+    left:-62px;
+    background: #ffffff;
+}
+.wechat-help p{
+    text-align: center;
+}
+.wechat-help div{
+    width:200px;
+    margin: 4px auto 0 auto;
+}

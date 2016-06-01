@@ -1,0 +1,95 @@
+{% from theme('_helpers.html') import load_comment_area, load_tags_area, load_share_area, load_recommendation_area, load_page_header, load_page_time, load_page_content  with context %}
+{% extends theme("base.html") %}
+
+{% block title %}<title>师兄名片 {{content.title}}</title>{% endblock %}
+
+{% block seo_meta %}
+<meta name="description" content="{{content.summary}}">
+<meta name="keywords" content="{{content.tags|join(',')}}">
+{% endblock %}
+
+{% block head_css %}
+<link rel="stylesheet" type="text/css" href="{{theme_static('css/brother_detail.css')}}">
+{% endblock %}
+{% block content %}
+  <div class="container">
+    {% include theme('header.html') %}
+        <div class="cover">
+            <img src="{{content.get_main_image_url(default="")}}" alt="">
+        </div>
+        <div class="info">
+            <p class="info-name">{{content.title}}</p>
+            <p class="info-education"><span>{{content.brother_college_major}}</span>&nbsp;&nbsp;<span>{{content.brother_college_name}}</span></p>
+            <p class="info-tag">
+              {% for tag in content.brother_tags%}<span>{{tag}}</span>{% endfor %}
+              </p>
+        </div>
+        <div class="motto">
+            <p>“</p>
+            <p>{{content.brother_motto}}</p>
+            <p>”</p>
+        </div>
+        <div class="service">
+              {% if content.brother_is_share %}
+              <div class="service-item service-active">
+                <p>
+                看看<br>
+                师兄师姐分享
+                </p>
+                <button  {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}'" {% endif %}>分享</button>
+              </div>
+            {% else %}
+            <div class="service-item service-negative">
+              <p>
+              看看其他<br>
+              师兄师姐分享
+              </p>
+              <button>分享</button>
+            </div>
+            {% endif %}
+            {% if content.brother_is_ask %}
+            <div class="service-item service-active">
+               <p>
+                直接向师兄师姐<br>
+                问路
+                </p>
+                <button onclick="location='/brotherask/?name={{content.title}}&id={{content.id}}'">我要问路</button>
+             </div>
+             {% else %}
+             <div class="service-item service-negative">
+                <p>
+                  直接向师兄师姐<br>
+                  问问路
+                </p>
+                <button>我要问路</button>
+              </div>
+            {% endif %}
+        </div>
+        <div class="experience-container">
+            <div class="experience-item">
+                <h5>高校专业经历</h5>
+                {% for experience in content.brother_experience_study%}
+                <p><span>{{experience.time}}</span>&nbsp;<span>{{experience.title}}</span></p>
+                {% endfor %}  
+            </div>
+            <div class="experience-item">
+                <h5>实习工作经历</h5>
+                {% for experience in content.brother_experience_work%}
+                <p><span>2012年</span>&nbsp;<span>广东新闻奖二等奖、三等奖</span></p>
+                {% endfor %}  
+            </div>
+            <div class="experience-item">
+                <h5>社团组织与获奖经历</h5>
+                {% for experience in content.brither_experience_award%}
+                <p><span>2012年</span>&nbsp;<span>广东新闻奖二等奖、三等奖</span></p>
+                {% endfor %}  
+            </div>
+        </div>
+      <div class="fix-btn">
+        <img src="{{theme_static('img/up_top.png')}}" alt="">
+        <img src="{{theme_static('img/section_menu.png')}}" alt="">
+      </div>
+  {% include theme('footer.html') %}
+</div> 
+     
+{% endblock %}

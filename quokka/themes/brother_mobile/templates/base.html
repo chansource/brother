@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <meta charset="utf-8" />
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+    {%block title%}{% endblock %}
+    {% block seo_meta %}
+    <meta name="description" content="{{Config.get('site', 'site_description')}}" />
+    <meta name="keywords" content="{{Config.get('site', 'site_keywords')}}" />
+    {% endblock %}
+    {% block meta %}{% endblock %}
+    {% block head %}
+    {% endblock head %}
+
+    <link rel="stylesheet" href="{{theme_static('css/base.css')}}">
+    {% block head_css %}{% endblock %}
+
+
+    {% block head_js %}{% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    {% endblock %}
+    {% block commom_js %}
+    <script src="//cdn.bootcss.com/zepto/1.1.6/zepto.min.js"></script>
+    <script type="text/javascript" src="{{theme_static('js/zepto/1.1.6/event.js')}}"></script>
+    <script type="text/javascript" src="{{theme_static('js/zepto/1.1.6/touch.js')}}"></script>
+    <script type="text/javascript" src="{{theme_static('js/header.js')}}"></script>
+    {% endblock %}
+    {% block bottom_js %}
+    {% endblock %}
+    {% block js_footer %}
+
+    {% endblock %}
+</body>
+</html>

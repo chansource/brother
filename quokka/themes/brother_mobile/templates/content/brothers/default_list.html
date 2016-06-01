@@ -1,0 +1,60 @@
+{% from theme('_helpers.html') import  render_pagination with context %}
+{% extends theme("base.html") %}
+{%block title%} <title>师兄指路 师兄</title>{% endblock %}
+{% block seo_meta %}
+<meta name="description" content="{{channel.description or Config.get('site', 'site_description')}}">
+{% if channel.tags %}
+<meta name="keywords" content="{{channel.tags|join(',')}}">
+{% else %}
+<meta name="keywords" content="{{Config.get('site', 'site_keywords')}}">
+{% endif %}
+
+{% endblock %}
+{% block head_css %}
+<link rel="stylesheet" href="{{theme_static('css/brother_list.css')}}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% include theme('header.html') %}
+    <div class="sort-wrap">
+            <button class="sort-btn">最热排序</button>
+            <button class="sort-btn">最新上传</button>
+    </div>
+    <div class="contents">
+        {% for content in contents.items %}
+        <a class="content-item" href="{{content.get_absolute_url()}}">
+            <div class="item-cover">
+                <img  src="{{content.get_main_image_url(default="")}}" alt="师兄封面">
+            </div>
+            <div class="item-infos">
+                    {% if content.brother_is_share or content.brother_is_ask %}
+                    <div class="server-tags">
+                        {% if content.brother_is_share %}
+                        <span class="ask-tag" href="/brotherask">答问
+                        </span>{% endif %}{% if content.brother_is_ask %}<span class="share-tag" href="/brotherask">分享</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    <div class="basic-info">
+                        <p>{{content.title}}</p>
+                        <span class="other-info">{{content.brother_college_major}}</span>
+                        <span class="other-info">{{content.brother_college_name}}</span>
+                    </div>
+                    <div class="tags">
+                        {% for brother_tag in content.brother_tags %}
+                        <span class="personal-tag">{{brother_tag}}
+                        </span>{% endfor %}
+                    </div>
+            </div>
+        </a> 
+    {% endfor %}  
+    </div>
+    <button id="more-btn" class="more-btn">加载更多</button>
+    {% include theme('footer.html') %}
+</div>
+{% endblock %}
+{% block bottom_js %}
+<script type="text/javascript" src="{{theme_static('js/zepto/1.1.6/ajax.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script type="text/javascript" src="{{theme_static('js/brothers.js')}}"></script>
+{% endblock %}

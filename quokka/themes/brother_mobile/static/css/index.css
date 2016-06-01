@@ -1,0 +1,195 @@
+a {
+    text-decoration: none;
+    /*TODO: 私有属性，考虑兼容性问题;*/
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+}
+
+.sub-nav {
+    width: 100%;
+    padding: 13px 0 14px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #f4f4f4;
+}
+
+.sub-nav-item {
+    width: 45px;
+    height: auto;
+}
+
+.sub-nav-img {
+    width: 100%;
+    height: auto;
+}
+
+.sub-nav-text {
+    font-size: 14px;
+    color: #7c7c7c;
+    text-align: center;
+/*TODO: 移动端以及PC端的字体到底如何选择？*/
+/*http://www.admin10000.com/document/2971.html*/
+/*TODO: 移动端如何使用em以达到自适应的效果;*/
+/*TODO: 2倍率的设计图，需要将标注尺寸/2，这个比较麻烦，如何与设计师达成标准？;*/
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+    padding: 0;
+    margin: 14px 0 0 0;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+}
+
+.item {
+    width: 100%;
+    height: auto;
+}
+
+.item-header {
+    padding: 9px 0 10px 0;
+}
+
+.item-header-text {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.item-header-text span {
+    font-size: 16px;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+    color: #148acc;
+}
+
+.item-header-name {
+    font-weight: 500;
+}
+
+.item-header-tag {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.item-header-tag span {
+    font-size: 14px;
+    color: #7c7c7c;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+    display: inline-block;
+/*TODO: CSS自动化工具能否将属性进行合并，比如border属性;*/
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 4px;
+    margin: 4px 6px 0 6px;
+}
+
+.item-content-photo {
+    width: 100%;
+    height: auto;
+}
+
+.item-content {
+    position: relative;
+    background-color: #f4f4f4;
+}
+
+.item-content-tag {
+    width: 60px;
+    height: 25px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    left: 0;
+}
+
+.item-content-tag:nth-child(2) {
+    top: 0;
+}
+
+.item-content-tag:last-child {
+    top: 34px;
+}
+
+.item-content-tag[name="share"] {
+    background-color: #148acb;
+}
+
+.item-content-tag[name="qa"] {
+    background-color: #e65442;
+}
+
+.follow {
+    padding: 10px 0 8px 0;
+}
+
+.follow-text {
+    color: #148acc;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+    text-align: center;
+}
+
+.follow-container {
+    margin-top: 11px;
+    text-align: center;
+}
+
+.follow-item {
+    width: 60px;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.follow-icon {
+    width: 30px;
+    height: auto;
+}
+
+.follow-item-text {
+    font-size: 14px;
+    color: #148acc;
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+    margin-top: 9px;
+}
+
+
+
+
+
+
+
+
+
+
+
