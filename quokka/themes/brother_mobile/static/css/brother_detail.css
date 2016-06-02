@@ -1,3 +1,9 @@
+/*c1 蓝色 148acc
+c2 白色 ffffff
+c3 灰色 7c7c7c
+c4 红色 e75342
+c_bg 浅灰色 f4f4f4*/
+
 * {
     font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
 }
@@ -12,14 +18,23 @@ p, h1, h2, h3, h4, h5, ul, li
     padding: 0;
     margin: 0;
 }
+
+body {
+    padding: 0;
+    margin: 0;
+    height:100%
+}
+
 button {
     border-style: none;
 }
+
 .container {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
 }
+
 .cover img{
     width: 100%;
     height: auto;
@@ -144,6 +159,82 @@ button {
     color: #7c7c7c;
     margin-top: 9px;
 }
+
+/*sideout布局开始*/
+
+.slideout-menu {
+    position: fixed;
+    left: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+    width: 256px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+    background-color: #f4f4f4;
+}
+
+.slideout-panel {
+    position:relative;
+    z-index: 1;
+    will-change: transform;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+    overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+    display: block;
+}
+
+.slideout-menu ul {
+    list-style-type: disc;
+    padding-left: 30px;
+}
+
+.menu-item {
+    font-size: 18px;
+    line-height: 48px;
+    vertical-align: middle;
+}
+
+.menu-item::after {
+    content: "";
+    display: block;
+    margin-left: -30px;
+    width: 256px;
+    height: 0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #7c7c7c;   
+}
+
+.menu-active {
+    color: #148acc;
+}
+
+.menu-negative {
+    color: #7c7c7c;
+}
+
+.slideout-menu header{
+    background-color: #148acc;
+    padding-top: 13px;
+    height: 37px;
+}
+
+.slideout-menu header h2 {
+    color: #ffffff;
+    font-size: 18px;
+    padding-left: 19px;
+    font-weight: lighter;
+}
+
 .fix-btn {
     position: fixed;
     top: 38%;
@@ -156,4 +247,21 @@ button {
     margin-top: 3px;
     width: 40px;
     height: auto;
+}
+
+/*sideout布局结束*/
+
+.position {
+    display: none;
+}
+
+.shade {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(61, 61, 61, 0.7);
 }

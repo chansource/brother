@@ -4,103 +4,101 @@
 <meta name="description" content="{{content.summary}}">
 <meta name="keywords" content="{{content.tags|join(',')}}">
 {% endblock %}
+
 {% block head %}
 {% endblock head %}
+
 {% block head_css %}
 <link rel="stylesheet" type="text/css" href="{{theme_static('css/videos.css')}}">
-<link rel="stylesheet" type="text/css" href="{{theme_static('css/share.css')}}">
 {% endblock %}
-{% block content %}
-        {% include theme('header.html') %}
-    <div class="content-wrap">
-        <div  class="content">
-              <div class="content-header">
-                  <h1>{{content.title}}</h1>
-                  <span>分享人 {{content.shared_by}}</span>
-              </div>
-             <div class="video-wrap" >
-                <div id="like-button" class="like-wrap">
-                    <img class="good_ico" src="{{theme_static('img/zan.png')}}">
-                    <p id="like_numbers">{{content.videos[0].like_numbers}}</p>
-                </div>
-                <div id="video-detail" class="iframe-wrap">
-                </div>
-            </div>
-            {% if content.videos|length >1 %}
-            <div class="buttons-wrap">
-            {% for video in content.videos %}
-              {% if loop.index==1 %}
-              <button class="section-button selected-section-button">{{video.video_title}}
-              {% else %}
-              <button class="section-button non-selected-section-button">{{video.video_title}}
-              {% endif %}
-            {% endfor %}
-            </button>
-            </div>
-            {% endif %}
-     </div> 
-     {% include theme('share.html') %}
 
-     {% include theme('footer.html') %}
-</div>
+{% block content %}
+    {% include theme('header.html') %}
+    <div class="container">
+        <div class="video-container" id="video-detail"></div>
+        <div class="video-details">
+            <h2>{{ content.videos[0]["video_title"] }}</h2>
+            <p>分享者：{{content.shared_by}}</p>
+            <div class="video-btn-container">
+                <div class="video-like-btn video-btn">{{content.videos[0].like_numbers}}</div>
+                <div class="video-share-btn video-btn">分享</div>
+            </div>
+        </div>
+        <nav class="video-nav">
+            {% if content.videos|length >1 %}
+            {% for i in range(0, content.videos|length, 2) %}
+                {% if (i==(content.videos|length - 1)) %}
+                    <div class="video-nav-row">
+                        <p class="video-nav-item seq="{{ i }}">{{ i + 1}}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                    </div>
+                {% elif i==0 %}
+                    <div class="video-nav-row">
+                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <div class="video-nav-divide"></div>
+                        <p class="video-nav-item" seq="{{ i + 1}}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
+                    </div>
+                {% else %}
+                    <div class="video-nav-row">
+                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1}}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <div class="video-nav-divide"></div>
+                        <p class="video-nav-item" seq="{{ i + 1}}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        </nav>   
+    </div>
+
+    {% include theme('footer.html') %}
 {% endblock %}
+
 {% block bottom_js %}
 <script type="text/javascript">
-$(document).ready(function(){
     var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
-     var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
-     var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
-     var index=0;
-     var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
-     //加载视频
-    $("#video-detail").append(videos_urls[0]);
-    $(".like-wrap").css("display","block");
-    //视频按钮布局
-   {% if content.videos|length >1 %}
-     var button_number={{ content.videos|length }};
-     var margin_left=21;
-     var width=($(".video-wrap").width()-margin_left*(button_number-1))/button_number;
-      $(".non-selected-section-button").css("margin-left",margin_left);
-     $(".section-button").css("width",width);
-     $(".section-button").css("display","inline-block");
-   {% endif %}
+    var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
+    var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
+    var index=0;
+    var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
+    // 增加激活视频样式
+    $(".video-nav-item").eq(0).addClass("video-nav-active");
+    // 加载第一个视频
+    $(".video-container").html(videos_urls[0]);
     //视频按钮事件
-    $(".section-button").click(function(){
-        index=$(this).index();
-        $("#video-detail iframe").remove();
-        $("#video-detail").append(videos_urls[index]);
-        $("#like_numbers").text(likes[index]);
-        $("title").text("{{content.shared_by}} "+videos_titles[index])
-        $(".section-button").removeClass("selected-section-button").addClass("non-selected-section-button");
-        $(this).removeClass("non-selected-section-button").addClass("selected-section-button");
-      });
+    $(".video-nav-item").on("tap", function(event){
+        index=$(event.target).attr("seq");
+        console.debug("index is " + index);
+        $(".video-container").html(videos_urls[index]);
+        $(".video-nav-item").removeClass("video-nav-active")
+        $(".video-nav-item").eq(index).addClass("video-nav-active");
+        $(".video-details h2").html(videos_titles[index]);
+        $(".video-like-btn").html(likes[index]);
+    });
 
-    //增加csrf_token
-    $(function () {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
-            }
-        });
-        });
+    // 增加csrf_token
+    $(function() {
+        $.ajaxSettings.headers = {"X-CSRFToken": $("meta[name=csrf_token]").attr("content")};
+    });
 
-    //点赞事件
-    $("#like-button").click(function  () {
-        if(likeStatus[index]){
-            $.post(
-                '/brothervideos/addvideolike', 
-                {"id":"{{content.id}}","index":index}, 
-                function(){
-                    likes[index]+=1;
-                    $("#like_numbers").text(likes[index]);
+    // 点赞事件
+    // TODO: 为什么tap事件对于button不友好，难道不能用button嘛？
+    $(".video-like-btn").on("tap", function(event) {
+        event.preventDefault();
+        console.debug("taped");
+        if (likeStatus[index]) {
+            $.post('/brothervideos/addvideolike', 
+                {
+                    "id": "{{content.id}}",
+                    "index": index
+                }, 
+                function(data, status, xhr) {
+                    console.debug("/brothervideos/addvideolike status is " + status);
                 }
             );
-            likeStatus[index]=false;
+            // 为增强体验，先在UI上显示点赞数+1
+            likes[index] += 1;
+            $(".video-like-btn").html(likes[index]);
+            likeStatus[index] = false;
         }
     });
-});
 </script>
- <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
- <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
- <script type="text/javascript" src="{{theme_static('js/share.js')}}"></script>
 {% endblock %}
