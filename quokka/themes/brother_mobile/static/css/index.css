@@ -9,6 +9,10 @@ body {
     margin: 0;
 }
 
+* {
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+
 .container {
     width: 100%;
     max-width: 600px;
@@ -134,7 +138,7 @@ body {
     top: 0;
 }
 
-.item-content-tag:last-child {
+.item-content-tag:nth-child(3) {
     top: 34px;
 }
 
@@ -181,6 +185,33 @@ body {
     color: #148acc;
     font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
     margin-top: 9px;
+}
+
+.more-brother {
+    text-align: center;
+    background: #f4f4f4;
+    height: 35px;
+    padding-top: 5px;
+}
+
+.more-brother a {
+    color: #7c7c7c;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.fix-btn {
+    position: fixed;
+    bottom: 50%;
+    right: 5px;
+    z-index: 5;
+}
+
+.fix-btn img {
+    display: block;
+    margin-top: 3px;
+    width: 40px;
+    height: auto;
 }
 
 

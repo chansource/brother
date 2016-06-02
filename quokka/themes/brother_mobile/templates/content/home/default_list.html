@@ -10,80 +10,86 @@
 {% block content %}
     {% include theme('header.html') %}
 <div class="container">
-        <!-- TODO: banner下有白色的一条横线，老问题，如何根本解决？ -->
-        <div class="banner">
-            <div class="swiper-wrapper">
-                {% for content in contents.items %}
-                    {% if content.model == "brothers.banner" %}
-                <div class="swiper-slide"><img src="{{content.get_main_image_url()}}" alt="轮播图片"></div>
-                    {% endif %}
-                {% endfor %} 
-            </div>
+    <!-- TODO: banner下有白色的一条横线，老问题，如何根本解决？ -->
+    <div class="banner">
+        <div class="swiper-wrapper">
+            {% for content in contents.items %}
+                {% if content.model == "brothers.banner" %}
+            <div class="swiper-slide"><img src="{{content.get_main_image_url()}}" alt="轮播图片"></div>
+                {% endif %}
+            {% endfor %} 
         </div>
-        <div class="sub-nav">
-            <div class="sub-nav-item">
-                <a href="/brothers/">
-                    <img src="{{theme_static('img/index_sub_nav_brother.png')}}" alt="" class="sub-nav-img">
-                    <p class="sub-nav-text">师兄</p>
-                </a>
-            </div>
-            <div class="sub-nav-item">
-                <a href="/join/">
-                    <img src="{{theme_static('img/index_sub_nav_join.png')}}" alt="" class="sub-nav-img">
-                    <p class="sub-nav-text">加入</p>
-                </a>
-            </div>
-            <div class="sub-nav-item">
-                <a href="/spread/">
-                    <img src="{{theme_static('img/index_sub_nav_spread.png')}}" alt="" class="sub-nav-img">
-                    <p class="sub-nav-text">传播者</p>
-                </a>
-            </div>
+    </div>
+    <div class="sub-nav">
+        <div class="sub-nav-item">
+            <a href="/brothers/">
+                <img src="{{theme_static('img/index_sub_nav_brother.png')}}" alt="" class="sub-nav-img">
+                <p class="sub-nav-text">师兄</p>
+            </a>
         </div>
-        <div class="content">
-            {% for content in contents.items|selectattr("model", "equalto", "brothers.brotherinfo")|sort(attribute='home_order') %}
-            {% if content.model == "brothers.brotherinfo" %}
-            <div class="item">
-                <a href="{{content.get_absolute_url()}}">
-                    <div class="item-header">
-                        <p class="item-header-text">
-                            <span class="item-header-name">{{content.title}}</span>
-                            <span>{{content.brother_college_major}}</span>
-                            <span>{{content.brother_college_name}}</span>
-                        </p>
-                        <p class="item-header-tag">
-                            {% for brother_tag in content.brother_tags %}
-                            <span>{{brother_tag}}</span>
-                            {% endfor %}
-                        </p>
-                    </div>
-                    <div class="item-content">
-                        <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="item-content-photo">
-                        {% if content.brother_is_share %}
-                        <div class="item-content-tag" name="share">分享</div>
-                        {% endif %}
-                        {% if content.brother_is_ask %}
-                        <div class="item-content-tag" name="qa">答问</div>
-                        {% endif %}
-                    </div>
-                </a>
-            </div>
-            {% endif %}{% endfor %}
-        </div>  
-        <div class="follow">
-            <p class="follow-text">关注我们</p>
-            <div class="follow-container">
-                <!-- TODO: 未实现跳转到微博/微信诱导关注 -->
-                <div class="follow-item">
-                    <img src="{{theme_static('img/index_follow_weibo.png')}}" alt="" class="follow-icon">
-                    <p class="follow-item-text">新浪微博</p>
+        <div class="sub-nav-item">
+            <a href="/join/">
+                <img src="{{theme_static('img/index_sub_nav_join.png')}}" alt="" class="sub-nav-img">
+                <p class="sub-nav-text">加入</p>
+            </a>
+        </div>
+        <div class="sub-nav-item">
+            <a href="/spread/">
+                <img src="{{theme_static('img/index_sub_nav_spread.png')}}" alt="" class="sub-nav-img">
+                <p class="sub-nav-text">传播者</p>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        {% for content in contents.items|selectattr("model", "equalto", "brothers.brotherinfo")|sort(attribute='home_order') %}
+        {% if content.model == "brothers.brotherinfo" %}
+        <div class="item">
+            <a href="{{content.get_absolute_url()}}">
+                <div class="item-header">
+                    <p class="item-header-text">
+                        <span class="item-header-name">{{content.title}}</span>
+                        <span>{{content.brother_college_major}}</span>
+                        <span>{{content.brother_college_name}}</span>
+                    </p>
+                    <p class="item-header-tag">
+                        {% for brother_tag in content.brother_tags %}
+                        <span>{{brother_tag}}</span>
+                        {% endfor %}
+                    </p>
                 </div>
-                <div class="follow-item">
-                    <img src="{{theme_static('img/index_follow_wechat.png')}}" alt="" class="follow-icon">
-                    <p class="follow-item-text">微信</p>
-                </div>                
-            </div>
+                <div class="item-content">
+                    <img src="{{content.get_main_image_url(default="")}}" alt="师兄封面" class="item-content-photo">
+                    {% if content.brother_is_share %}
+                    <div class="item-content-tag" name="share">分享</div>
+                    {% endif %}
+                    {% if content.brother_is_ask %}
+                    <div class="item-content-tag" name="qa">答问</div>
+                    {% endif %}
+                </div>
+            </a>
         </div>
+        {% endif %}{% endfor %}
+    </div>  
+    <div class="more-brother">
+        <a href="/brothers">更多师兄</a>
+    </div>
+    <div class="follow">
+        <p class="follow-text">关注我们</p>
+        <div class="follow-container">
+            <!-- TODO: 未实现跳转到微博/微信诱导关注 -->
+            <div class="follow-item">
+                <img src="{{theme_static('img/index_follow_weibo.png')}}" alt="" class="follow-icon">
+                <p class="follow-item-text">新浪微博</p>
+            </div>
+            <div class="follow-item">
+                <img src="{{theme_static('img/index_follow_wechat.png')}}" alt="" class="follow-icon">
+                <p class="follow-item-text">微信</p>
+            </div>                
+        </div>
+    </div>
+    <div class="fix-btn">
+        <img src="{{theme_static('img/up_top.png')}}" alt="">
+    </div>
     {% include theme('footer.html') %}  
 </div>
     
@@ -93,9 +99,20 @@
 <script src="{{theme_static('js/swiper.min.js')}}"></script>
 <script>
 var banner = new Swiper ('.banner', {
-        direction: 'horizontal',
-        loop: true,
-    });
+    direction: 'horizontal',
+    loop: true,
+});
+
+function setBannerHeight(){
+    $(".banner").height($(window).width()*740/1500).show();
+}
+
+setBannerHeight();
+$(window).resize(setBannerHeight);
+
+$(".fix-btn img").eq(0).on("tap", function() {
+    scroll(0,0);
+});
 </script>
 {% endblock %}
 
