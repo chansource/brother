@@ -21,7 +21,7 @@
              <div class="video-wrap" >
                 <div id="like-button" class="like-wrap">
                     <img class="good_ico" src="{{theme_static('img/zan.png')}}">
-                    <p id="like_numbers">{{content.videos[0].like_numbers}}</p>
+                    <p id="like_numbers">{{ request.args.get('likes') }}</p>
                 </div>
                 <div id="video-detail" class="iframe-wrap">
                 </div>
@@ -49,9 +49,9 @@
 $(document).ready(function(){
     var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
      var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
-     var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
+     var likeNum={{ request.args.get('likes') }};
      var index=0;
-     var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
+     var likeStatus=true;
      //加载视频
     $("#video-detail").append(videos_urls[0]);
     $(".like-wrap").css("display","block");
@@ -69,7 +69,6 @@ $(document).ready(function(){
         index=$(this).index();
         $("#video-detail iframe").remove();
         $("#video-detail").append(videos_urls[index]);
-        $("#like_numbers").text(likes[index]);
         $("title").text("{{content.shared_by}} "+videos_titles[index])
         $(".section-button").removeClass("selected-section-button").addClass("non-selected-section-button");
         $(this).removeClass("non-selected-section-button").addClass("selected-section-button");
@@ -86,16 +85,16 @@ $(document).ready(function(){
 
     //点赞事件
     $("#like-button").click(function  () {
-        if(likeStatus[index]){
+        if(likeStatus){
             $.post(
-                '/brothervideos/addvideolike', 
-                {"id":"{{content.id}}","index":index}, 
+                '/brothers/addlike', 
+                {"id":"{{ request.args.get('id') }}"}, 
                 function(){
-                    likes[index]+=1;
-                    $("#like_numbers").text(likes[index]);
+                    likeNum+=1;
+                    $("#like_numbers").text(likeNum);
                 }
             );
-            likeStatus[index]=false;
+            likeStatus=false;
         }
     });
 });

@@ -7,6 +7,7 @@ $("#nav-btn").click(function (){
     $("nav").toggle();
     $("#nav-btn img").toggle();
     $(".help-btn").toggle();
+    $(".fix-btn").toggle();
     navStatus=!navStatus;
     shareStatus=!shareStatus;
 });

@@ -77,7 +77,7 @@
             <div id="link1">
               {% if content.brother_is_share %}
                 <img class="link-img" src="{{theme_static('img/brother_say_1.png')}}">
-                  <a class="link-button active-link-button" {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}'" {% endif %}>分享</a>
+                  <a class="link-button active-link-button" {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}?id={{content.id}}&likes={{content.like_numbers}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}?id={{content.id}}&likes={{content.like_numbers}}'" {% endif %}>分享</a>
                 {% else %}
                 <img class="link-img" src="{{theme_static('img/brother_say.png')}}">
                   <a class="link-button deactive-link-button">分享</a>

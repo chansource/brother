@@ -1,3 +1,6 @@
+*{
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
 .container{
     width:100%;
     background: #f4f4f4;
@@ -6,16 +9,20 @@
     width:100%;
     display: flex;
 }
-.sort-btn{
+.sort-wrap button{
     width: 50%;
     height: 43px;
     background: #f4f4f4;
     border: 0;
     outline: none;
     padding: 0;
-    color: #148acc;
     font-size: 13px;
-    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+.active-sort-btn{
+    color: #148acc;
+}
+.deactive-sort-btn{
+    color: #7c7c7c;
 }
 .content-link{
     display: block;
@@ -52,7 +59,6 @@
     text-align: center;
     color: #ffffff;
     font-size: 15px;
-    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
 }
 .ask-tag{
     background: #e65442;
@@ -68,12 +74,10 @@
     color: #148acc;
     font-size: 16px;
     font-weight: bold;
-    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
 }
 .basic-info span{
     color: #148acc;
     font-size: 10px;
-    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
 }
 .tags{
     margin:6px 0 0 0;
@@ -87,10 +91,10 @@
     border-radius: 6px;
     text-align: center;
     color: #7c7c7c;
-    font: 12px "Lantinghei TC","Microsoft YaHei",sans-serif;
+    font-size: 12px;
 }
 .more-btn{
-    width:90px;
+    width:200px;
     height:22px;
     margin:6px auto 9px auto;
     display: block;
@@ -100,6 +104,19 @@
     color:#7c7c7c;
     font-size: 15px;
     font-weight: bold;
-    font: 14px "Lantinghei TC","Microsoft YaHei",sans-serif;
+    font-size: 14px ;
     
+}
+.fix-btn {
+    position: fixed;
+    top: 38%;
+    right: 5px;
+    z-index: 5;
+}
+
+.fix-btn img {
+    display: block;
+    margin-top: 3px;
+    width: 40px;
+    height: auto;
 }

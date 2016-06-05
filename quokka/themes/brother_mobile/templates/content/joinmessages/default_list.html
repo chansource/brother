@@ -8,49 +8,199 @@
 <link rel="stylesheet" type="text/css" href="{{theme_static('css/want_to_join.css')}}">
 {% endblock %}
 {% block content %}
-        {% include theme('header.html') %}
-        <div class="content-wrap">
-        <div class="content">
-            <form id="messageForm" class="message-form" action="/join/sendmessage" method="post">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                <input  type="hidden" name="channel" value="{{ channel.id }}" />
-                <div class="segment">
-                    <span class="segment-name">收件人</span>
-                    <p id="receiver" class="segment-default">师兄指路</p>
-                </div>    
-                <div class="segment">
-                    <span class="segment-name">发件人</span>
-                    <input id="sender_email" class="segment-input" name="sender_email" type="email" placeholder="请输入你的邮箱" autocomplete="on" required onblur="checkForm()">
+<div class="container">
+    {% include theme('header.html') %}
+    <div class="confirm-mask">
+        <div class="confirm">
+            <a id="confirm-btn">
+                <img src="{{theme_static('img/confirm_cross.png')}}">
+            </a>
+            <p id="confirm-message"></p>
+        </div>
+    </div>
+    <div class="content">
+        <form id="messageForm" class="message-form" action="/join/sendmessage" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <input  type="hidden" name="channel" value="{{ channel.id }}" />
+            <div class="segment">
+                <span class="segment-name">收件人</span>
+                <p  class="segment-default">师兄指路</p>
+            </div>    
+            <div class="segment">
+                <span class="segment-name">发件人</span>
+                <input  class="segment-input" style="background: #eaeaea" name="sender_email" type="email" placeholder="请输入你的邮箱" autocomplete="on" onblur="checkForm()">
+            </div>
+            <div class="segment">
+                <span class="segment-name">主题</span>
+                <p class="segment-default" >我要加入</p>
+            </div>
+            <div class="segment">
+                <div class="message-wrap">
+                    <textarea  class="text-area" name="message" placeholder="请输入内容" onblur="checkForm()"></textarea>
+                    <!--用来存放文件信息-->
+                    <div id="filelist" class="uploader-list"></div>
                 </div>
-                <div class="segment">
-                    <span class="segment-name">主题</span>
-                    <p id="title" class="segment-default" >我要加入</p>
-                </div>
-                <div class="segment">
-                    <span class="segment-name ask-segment">简介</span>
-                    <div class="message-wrap">
-                        <textarea id="detail"  class="text-area" name="message" placeholder="请输入你的简介" required onblur="checkForm()"></textarea>
-                        <!--用来存放文件信息-->
-                        <div id="filelist" class="uploader-list"></div>
-                    </div>
-                </div> 
-                <div class="buttons-wrap">
-                        <div class="buttons">
-                            <div id="chooseBtn" class="btn valid-button">上传简历</div>
-                            <button id="send-button" class="btn novalid-button ">发送</button>
-                        </div>
-                </div>     
+            </div> 
+            <div class="buttons-wrap">
+                <div id="chooseBtn" class="btn valid-button">上传简历</div>
+                <button id="send-button" class="btn novalid-button ">发送</button>
+            </div>     
             </form>  
         </div> 
-    
-
      {% include theme('footer.html') %}
      </div> 
 {% endblock %}
 {% block bottom_js %}
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script  type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script> 
-<script type="text/javascript" src="{{theme_static('js/joinmessage.js')}}"></script>
+<script  type="text/javascript" src="{{theme_static('js/validate/validate.min.js')}}"></script>
+<script type="text/javascript" src="{{theme_static('js/validate/validate.ext.js')}}"></script>
+<script src="http://cdn.staticfile.org/Plupload/2.1.1/plupload.full.min.js"></script> 
+<script type="text/javascript">
+var file_id=null;
+if (!window.location.origin) {
+  window.location.origin = window.location.protocol + "//" 
+    + window.location.hostname 
+    + (window.location.port ? ':' + window.location.port : '');
+}
+//实例化一个plupload上传对象
+var uploader = new plupload.Uploader({
+    browse_button : 'chooseBtn', //触发文件选择对话框的按钮，为那个元素id
+    url : window.location["origin"]+'/media/uploadfile', //服务器端的上传页面地址
+    multi_selection:false,
+    filters: {
+        mime_types : [
+            { title : "Doc files", extensions : "doc,docx,pdf" },
+            { title : "Zip files", extensions : "zip" }
+        ],
+        max_file_size: "1mb",
+        prevent_duplicates: true
+    },
+    headers: {
+            "X-CSRFToken": $("meta[name=csrf_token]").attr("content")
+    },
+});    
+//在实例对象上调用init()方法进行初始化
+uploader.init();
+//绑定各种事件，并在事件监听函数中做你想做的事
+uploader.bind('FilesAdded',function(uploader,files){
+    //限制数量，删除新的文件
+    if(uploader.files.length>1){
+        showMessage("只能添加一个附件哦!");
+         uploader.splice(1,999);
+    }
+    else{
+        //单个文件时，显示ui，开始上传
+        $("#filelist").append( '<div id="' + files[0].id + '" class="item">' +
+        '<input type="button" class="ico_att">'+
+        '<span class="filename">' + files[0].name + '</span>' +
+        '</div>' );
+        uploader.start();
+    }
+});
+uploader.bind('UploadProgress',function(uploader,file){
+    var $li = $( '#'+file.id );
+    $percent = $li.find('.progress .progress-bar');
+    // 避免重复创建
+    if ( !$percent.length ) {
+        $percent = $('<div class="progress">' +
+          '<div class="progress-bar" style="width: 0%">' +
+          '</div>' +
+        '</div>').appendTo( $li ).find('.progress-bar');
+    }
+    $percent.css( 'width', file.percent  + '%' );
+});    
+uploader.bind('FileUploaded',function(uploader,file,result){
+    //上传完成
+    $( '#'+file.id ).find('.progress').hide();
+    $( '#'+file.id ).append('<a onclick="delAttach('+"'"+file.id+"'"+')" class="att_del">删除</a>');
+    var response=$.parseJSON(result.response);
+    if(!response["rtn"]){
+           console.log(response["data"]["file_id"]);
+            file_id=response["data"]["file_id"];
+        }
+    else{
+        showMessage(response["rtn"]+":附件上传失败!");
+        delAttach(file.id);
+    }
+});
+function delAttach (id) {
+    file_id=null;
+    $( '#'+id ).remove();
+    uploader.removeFile(id);
+}
+//上传出错
+uploader.bind( 'Error', function( file,error ) {
+    if(error.code==-602){
+        showMessage("这个文件已经上传了哦！");
+    }
+    else{
+        showMessage(error.code+error.message);
+    }
+});
+$.extend($.ajaxSettings, {
+headers: {
+  'X-CSRFToken': $("meta[name=csrf_token]").attr("content")
+}
+});
+function showMessage (message) {
+    $("#confirm-message").text(message);
+    $("body").css("overflow","hidden");
+    $(".confirm-mask").toggle();
+}
+var validator = new FormValidator('messageForm', [{
+    name: 'sender_email',
+    display: '你的邮箱',
+    rules: 'required|valid_email'
+},{
+    name: 'message',
+    display: '消息内容',
+    rules: 'required'
+} ], function(errors) {
+    if (errors.length > 0) {
+        showMessage(errors[0].message);
+    }
+    else{
+            event.preventDefault();
+            var data={
+                        "title":"我要加入",
+                        "message":$("textarea[name='message']").val(),
+                        "sender_email":$("input[name='sender_email']").val(),
+                        "status":"未读",
+                        "channel":$("input[name='channel']").val()
+                    };
+              if(file_id!==null){
+                data['document']=file_id;
+              }
+            $.post(
+                    '/joinmessages/sendmessage',
+                    data,
+                    function(data){
+                        if(!data["rtn"]){
+                            showMessage("提交成功!");
+                            $("#send-button").attr("disabled", "true");
+                            $("#send-button").removeClass("valid-button").addClass("novalid-button");
+
+                        }
+                        else{
+                            showMessage(data["rtn"]+":系统又捣乱出错了\n");
+                        }
+                    }
+            );
+    }
+});
+$("#confirm-btn").click(function  () {
+    $("body").css("overflow","auto");
+    $(".confirm-mask").toggle();
+});
+validator.setMessage('required', '填上%s，才能收到回答哦！');
+validator.setMessage('valid_email', '要填上正确的邮箱地址，才能收到回答哦！');
+function checkForm()  {
+    if( validator.valid() ){
+        $("#send-button").removeClass("novalid-button").addClass("valid-button");
+    }
+    else{
+        $("#send-button").removeClass("valid-button").addClass("novalid-button");
+    }
+}
+
+</script>
 {% endblock %}

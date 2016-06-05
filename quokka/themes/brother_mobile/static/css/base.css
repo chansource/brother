@@ -9,6 +9,7 @@ body{
     justify-content: space-between;
     align-items: center;
     border: 0;
+    z-index: 100;
 }
 .header a{
   display: block;
@@ -76,4 +77,9 @@ body{
     font-size: 13px;
     color: #7c7c7c;
     width: 300px;
+}
+.footer a{
+    color: #7c7c7c;
+    text-decoration: none;
+    font-size: 13px;
 }

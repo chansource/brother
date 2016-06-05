@@ -28,42 +28,41 @@
         <p>{{ content.brother_motto }}</p>
         <p>”</p>
     </div>
-    <div class="service">
-        {% if content.brother_is_share %}
-        <div class="service-item service-active">
-            <p>
-            看看其他<br>
-            师兄师姐分享
-            </p>
-            <button {% if content.brother_is_video %} onclick="location='{{ content.brother_videos.get_absolute_url() }}'" {% else %}onclick="location='{{ content.brother_articles.get_absolute_url() }}'" {% endif %}>分享</button>
-        </div>
-        {% else %}
-        <div class="service-item service-negative">
-            <p>
-            看看其他<br>
-            师兄师姐分享
-            </p>
-            <button>分享</button>
-        </div>
-        {% endif %}
-
-        {% if content.brother_is_ask %}
-        <div class="service-item service-active">
-            <p>
-            直接向师兄师姐<br>
-            问问路
-            </p>
-            <button onclick="location='/brotherask/?name={{ content.title }}&id={{ content.id }}'">我要问路</button>
-        </div>
-        {% else %}
-        <div class="service-item service-negative">
-            <p>
-            直接向师兄师姐<br>
-            问问路
-            </p>
-            <button>我要问路</button>
-        </div>
-        {% endif %}
+            <div class="service">
+              {% if content.brother_is_share %}
+              <div class="service-item service-active">
+                <p>
+                看看<br>
+                师兄师姐分享
+                </p>
+                <button  {% if content.brother_is_video %} onclick="location='{{content.brother_videos.get_absolute_url()}}?id={{content.id}}&likes={{content.like_numbers}}'" {% else %}onclick="location='{{content.brother_articles.get_absolute_url()}}?id={{content.id}}&likes={{content.like_numbers}}'" {% endif %}>分享</button>
+              </div>
+            {% else %}
+            <div class="service-item service-negative">
+              <p>
+              看看其他<br>
+              师兄师姐分享
+              </p>
+              <button>分享</button>
+            </div>
+            {% endif %}
+            {% if content.brother_is_ask %}
+            <div class="service-item service-active">
+               <p>
+                直接向师兄师姐<br>
+                问路
+                </p>
+                <button onclick="location='/brotherask/?name={{content.title}}&id={{content.id}}'">我要问路</button>
+             </div>
+             {% else %}
+             <div class="service-item service-negative">
+                <p>
+                  向其他师兄师姐<br>
+                  问路
+                </p>
+                <button>我要问路</button>
+              </div>
+            {% endif %}
     </div>
     <div class="experience-container">
         <div class="experience-item">

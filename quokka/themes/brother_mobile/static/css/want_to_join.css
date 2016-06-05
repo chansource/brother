@@ -1,96 +1,86 @@
-.content-wrap{
+*{
+  font-family:"Lantinghei TC","Microsoft YaHei",sans-serif;
+}
+.container{
+    width:100%;
     background: #f4f4f4;
 }
 .content{
-    width:970px;
+    width:100%;
     background:#f4f4f4;
-    margin:auto;
-    padding-top: 76px;
+    padding-top: 18px;
 }
 .message-form{
-  margin: 0;
+  margin:0px;
 }
 .segment{
-    margin-bottom: 30px;
-    font:22px "Lantinghei TC","Microsoft YaHei",sans-serif;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: #7c7c7c;
+    font-size:14px ;
+    padding:15px 0 15px 0;
+}
+.segment:nth-of-type(even){
+background:#eaeaea;
 }
 .segment-name{
-    display: inline-block;
-     width:92px;
+    width:17%;
+    opacity: 0.5;
+    padding-left: 7px;
 }
-.segment-content{
-    padding-left: 23px;
-    font-weight: bold;
-}
-.ask-segment{
-    vertical-align: top;
-}
-.segment-default{
-    border:0;
-    line-height: 42px;
-    width:470px;
-    padding-left: 23px;
-    border-radius: 6px;
-    display: inline-block;
-    margin: 0;
-    background: #f4f4f4;
-    _zoom:1;
-    *display:inline;
+.segment p{
+  line-height: 25px;
+  width:86%;
+  margin:0;
 }
 .segment-input{
-    background: #eaeaea;
     border:0;
-    line-height: 42px;
-    width:470px;
-    height: 44px;
-    font-size: 22px;
-    padding-left: 23px;
-    border-radius: 6px;
+    line-height: 25px;
+    width:86%;
+    border-radius: 4px;
     outline: none;
-    display: inline-block;
 }
-.message-wrap{
-  width:867px;
-  display: inline-block;
-  background: #eaeaea;
+.segment-input:nth-of-type(1){
+  background: #f4f4f4;
 }
-
 .text-area{
     background: #eaeaea;
-    line-height: 42px;
-    width:821px;
-    height:240px;
-    font-size: 22px;
-    padding: 0 23px 0 23px;
-    outline: none;
-    border: none;
+    border:0;
+    line-height: 25px;
+    width:100%;
+    height:176px;
+    padding: 0 7px 0 7px;
+    border-radius: 6px;
     resize:none;
-    overflow:auto;
-    _zoom:1;
-    *display:inline; /*兼容ie67*/
+    outline:none;
 }
 .buttons-wrap{
-    width: 100%;
-    height: 56px;
-   position: relative;
-   margin-top: 7px;
-}
-.buttons{
-  position: absolute;
-  right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   width: 100%;
+   height: 40px;
+   margin: 16px 0 100px 0;
 }
 .btn{
-  width: 200px;
+  -webkit-appearance:none; /*去除默认样式*/
+  width: 130px;
   height:100%;
-  font-size: 22px;
+  font-weight: bold;
+  font-size:16px ;
   border-radius: 6px;
   outline: none;
-  display: inline-block;
-  line-height: 56px;
+  line-height: 40px;
   text-align: center;
   padding: 0;
-
+}
+.btn:nth-child(1){
+  margin-right: 12px;
+}
+.btn:nth-child(2){
+  height:42px;
 }
 .novalid-button{
   border: 1px solid #7c7c7c;
@@ -103,30 +93,67 @@
   color:#ffffff;
 }
 
+.confirm-mask{
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+  z-index:1;
+  display: none;
+}
+.confirm{
+  position: relative;
+  top:30%;
+  width:100%;
+  height:30%;
+  background: #ffffff;
+  overflow:hidden; 
+}
+.confirm a{
+  position: absolute;
+  top:17px;
+  right:17px;
+}
+.confirm a img{
+  width:16px;
+  height:16px;
+}
+.confirm p{
+  position: relative;
+  top:40%;
+  color: #148acc;
+  font-size:14px;
+  text-align: center;
+  line-height: 25px;
+  padding: 0 20px 0 20px;
+}
 .ico_att {
-    background: url('https://rescdn.qqmail.com/zh_CN/htmledition/images/webp/newicon/compose207c92.png') no-repeat 0 0;
-    width: 16px;
-    height: 15px;
+    width: 8px;
+    height: 14px;
+    background: url("../img/attch_icon.png") no-repeat 0 0;
+    background-size:auto 100%;
     padding: 0;
     border: none;
     margin-right: 5px;
     display: inline-block;
 }
 .uploader-list{
-  padding-left: 23px;
+  padding-left: 17px;
+}
+.uploader-list .item{
+    height: 17px;
+    font-size: 14px;
 }
 .filename{
+
   color: #148acc;
 }
 .att_del{
-  font-size: 20px;
-  margin-left: 10px;
-}
-.att_del:hover{
-  text-decoration: underline;
+  margin-left: 4px;
 }
 .progress {
-    height: 15px;
+    height: 12px;
     width:158px;
     overflow: hidden;
     background-color: #f5f5f5;
@@ -138,7 +165,4 @@
 .progress-bar{
   height: 100%;
   background: #148acc;
-}
-.error{
-  color: #148acc;
 }
