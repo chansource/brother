@@ -1,9 +1,89 @@
-.spread-container {
-    width: 100%;
+/*c1 蓝色 148acc
+c2 白色 ffffff
+c3 灰色 7c7c7c
+c4 红色 e75342
+c_bg 浅灰色 f4f4f4*/
+
+* {
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+
+p, h1, h2, h3, h4, h5, ul, li
+{
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
     background-color: #f4f4f4;
 }
 
-.spread-content {
-    width: 1196px;
+.banner {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 600px;
     margin: 0 auto;
 }
+
+.contents {
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 15px;
+}
+
+.contents-row {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: row;
+}
+
+.item {
+    /*flex: 1;*/
+    width: 33%;
+    background-color: #ffffff;
+}
+
+.item:nth-child(2),
+.item:nth-child(3)
+{
+    margin-left: 5px;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+}
+
+.item p {
+    font-size: 14px;
+    color: #7c7c7c;
+    text-align: center;
+}
+
+
+
+
+
