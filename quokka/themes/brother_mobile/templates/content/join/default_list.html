@@ -17,36 +17,41 @@
 
 {% block content %}
     {% include theme('header.html') %}
-    <div class="join-container">
-        <img class="join-content" src="{{theme_static('img/join_text.png')}}" alt="我们需要伙伴">
 
-        <div class="join-qrcode">
-            <img src="{{theme_static('img/join_qrcode.png')}}" alt="扫描二维码加入">
-            <div class="clearfloat"></div>
+    <div class="container">
+        <h1>谁不需要伙伴</h1>
+        <p>
+            你在阅读此文，足证我们有共同的价值观。<br>
+            <br>
+            志同则道合，即便没有路，走的人多了，也便成了路。<br>
+            <br>
+            伙伴们已经迈出了第一步，有你接力，必能成就星辰大海的征途。<br>
+            <br>
+            我们需要<br>
+        </p>
+        <ul>
+            <li>分享者——以视频或文稿，分享经验、教训和思考。</li>
+            <li>答疑者——用各种方式解答后来人的疑问。</li>
+            <li>传播者——把分享带到每个角落，让更多人受益。</li>
+        </ul> 
+        <br>
+        <p>
+            年轻人是推动进步的力量，多做一点点，一切皆不同。
+        </p>
+        <div class="join-step">
+            <img src="{{theme_static('img/join_step.png')}}" alt="">
+            <button>发送简历</button>
         </div>
-        
-        {% include theme('footer.html') %}
     </div>
-    
+
+    {% include theme('footer.html') %}
 {% endblock %}
 
 {% block bottom_js %}
 <script>
-    // TODO: 如何优雅地实现定高+剩余占据全部的布局？并且窗口大小变化后自动变化。
-    function setSize(){
-        // 占据除header外剩余高度，但不能小于最小高度
-        minHeight = 810;
-        height = $(window).height() - 106;
-        if(height < minHeight){
-            height = minHeight; 
-        }
-        $(".join-container").height(height);
-    }
-
-    // initial
-    setSize();
-
-    $(window).resize(setSize);
+    $(".join-step button").on("tap", function(){
+        window.location.href = "/joinmessages";
+    });
 </script>
 {% endblock %}
 
