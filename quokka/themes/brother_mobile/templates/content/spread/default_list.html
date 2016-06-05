@@ -13,20 +13,95 @@
 {% endblock %}
 
 {% block head_css %}
-<link rel="stylesheet" href="{{theme_static('css/spread.css')}}">
+<link rel="stylesheet" href="{{ theme_static('css/swiper.min.css') }}">
+<link rel="stylesheet" href="{{ theme_static('css/spread.css') }}">
 {% endblock %}
 
 {% block content %}
     {% include theme('header.html') %}
 
-    <div class="spread-container">
-        <div class="spread-content">
-            <img src="{{theme_static('img/spread_content.png')}}" alt="传播者">
+    <div class="container">
+        <div class="banner">
+            <div class="swiper-wrapper">
+            {%- for content in contents.items  if content.model == "brothers.banner" -%}
+                <div class="swiper-slide">
+                    <a href="{{content.url}}">
+                        <img src="{{ content.get_main_image_url() }}" alt="轮播图片">
+                    </a>
+                </div>
+            {%- endfor -%} 
+            </div>
+        </div>
+
+        <!-- 横向排列的布局，到底是否适合用flex？如何处理item不能沾满一行的情况 -->
+        <div class="contents">
+            <div class="contents-row">
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_1.png') }}" alt="">
+                    <p>真功夫</p>
+                </div>
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_2.png') }}" alt="">
+                    <p>优酷</p>
+                </div>
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_3.png') }}" alt="">
+                    <p>腾讯视频</p>
+                </div>
+            </div>
+            <div class="contents-row">
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_4.png') }}" alt="">
+                    <p>搜狐视频</p>
+                </div>
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_5.png') }}" alt="">
+                    <p>哔哩哔哩</p>
+                </div>
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_6.png') }}" alt="">
+                    <p>爱奇艺</p>
+                </div>
+            </div>
+            <div class="contents-row">
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_7.png') }}" alt="">
+                    <p>乐视网</p>
+                </div>
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_8.png') }}" alt="">
+                    <p>爱氧星</p>
+                </div>
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_9.png') }}" alt="">
+                    <p>酷六</p>
+                </div>
+            </div>
+            <div class="contents-row">
+                <div class="item">
+                    <img src="{{ theme_static('img/spread_logo_10.png') }}" alt="">
+                    <p>爆米花网</p>
+                </div>
+                <div class="item">
+                    <a href="/join">
+                        <img src="{{ theme_static('img/spread_logo_n.png') }}" alt="">
+                        <p></p>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     {% include theme('footer.html') %}
 {% endblock %}
 
-
-
+{% block bottom_js %}
+<script src="{{ theme_static('js/swiper.min.js') }}"></script>
+<script>
+    // TODO: banner添加自动调整大小的功能
+    var banner = new Swiper ('.banner', {
+        direction: 'horizontal',
+        loop: true,
+    });
+</script>
+{% endblock %}

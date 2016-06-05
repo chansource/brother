@@ -19,14 +19,15 @@ p, h1, h2, h3, h4, h5, ul, li
     margin: 0;
 }
 
-html {
-    height: 100%;
-}
-
 body {
     padding: 0;
     margin: 0;
-    height: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     background-color: #f4f4f4;
 }
 
@@ -41,47 +42,54 @@ body {
     height: auto;
 }
 
-
-.container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 .contents {
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-bottom: 15px;
-}
-
-.contents-row {
-    margin-top: 6px;
-    display: flex;
-    flex-direction: row;
+    width: 100%;
 }
 
 .item {
-    /*flex: 1;*/
-    width: 33%;
+    margin-top: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    display: flex;
     background-color: #ffffff;
 }
 
-.item:nth-child(2),
-.item:nth-child(3)
-{
-    margin-left: 5px;
+.item-cover {
+    width: 150px;
 }
 
-.item img {
+.item-cover img {
     width: 100%;
     height: auto;
 }
 
-.item p {
-    font-size: 14px;
-    color: #7c7c7c;
-    text-align: center;
+.item-text {
+    padding-right: 6px;
+    padding-left: 3px;
+    flex: 1;
 }
+
+.item-text h1 {
+    font-size: 16px;
+    color: #148acc;
+    font-weight: 500;
+}
+
+.item-text p {
+    font-size: 10px;
+    color: #7c7c7c;
+    margin-top: 6px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
