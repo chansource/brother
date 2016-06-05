@@ -1,29 +1,118 @@
+/*c1 蓝色 148acc
+c2 白色 ffffff
+c3 灰色 7c7c7c
+c4 红色 e75342
+c_bg 浅灰色 f4f4f4*/
 
-.join-content {
-    display: block;
-    margin: 0 auto;
-    padding-top: 70px;
+* {
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
 }
 
-.join-qrcode {
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+
+p, h1, h2, h3, h4, h5, ul, li
+{
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+button {
+    border-style: none;
+}
+
+.container {
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ffffff;
+    background-image: url("../img/join_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    min-height: 100%;
+    padding-top: 16px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    padding-bottom: 70px;
+}
+
+.container h1 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.container p:nth-child(2) {
+    padding-top: 15px;
+}
+
+.container p,
+.container li
+{
+    font-size: 14px;
+}
+
+.container ul {
+    padding-left: 1em;
+}
+
+.join-step {
+    width: 150px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 30px;
 }
 
-.join-qrcode img {
-    float: right;
-    margin: 0 166px 10px 0; 
+.join-step img {
+    display: block;
+    width: 127px;
+    height: auto;
+    margin: 0 auto;
 }
 
-.join-container {
-    background-image: url("../img/join_bg.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: bottom;
+.join-step button {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 300;
+    border-radius: 4px;
+    background-color: #148acc;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 15px;
+    padding-top: 3px;
 }
 
-footer {
-    background-color: transparent !important;
-    margin-top: 20px;
-    padding-bottom: 0 !important;
+.footer {
+    margin-top: -50px;
+    padding: 0;
+    background-color: transparent;
 }
+
+.footer p {
+    color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
