@@ -19,10 +19,10 @@
     font-size: 13px;
 }
 .active-sort-btn{
-    color: #148acc;
+    color: #7c7c7c;
 }
 .deactive-sort-btn{
-    color: #7c7c7c;
+    color: #148acc;
 }
 .content-link{
     display: block;

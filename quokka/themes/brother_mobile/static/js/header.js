@@ -2,7 +2,7 @@
 var navStatus=true;
 var shareStatus=true;
 
-$("#nav-btn").click(function (){
+$("#nav-btn").on('tap',function (){
     $("#share-btn img").toggle();
     $(".page-nav").toggle();
     $("#nav-btn img").toggle();

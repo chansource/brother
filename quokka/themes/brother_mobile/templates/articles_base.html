@@ -64,6 +64,7 @@
     var n=0;
     //菜单出现和消失的动画
     function show_menu () {
+      $("body").css("overflow","none");
       $(".fix-btn").toggle();
       $(".menu-mask").animate({
             "margin-left":"0"
@@ -74,6 +75,7 @@
             "margin-left":"100%"
         }, 300, 'linear',function  () {
           $(".fix-btn").toggle();
+          $("body").css("overflow","auto");
         });
     }
     //点击的时候显示菜单
