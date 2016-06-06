@@ -3,52 +3,24 @@
 from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
 from flask import request, url_for
-from quokka.utils.baseresp import _base_err_resp,_base_normal_resp
-from .models import BrotherVideos, BrotherArticles,BrotherAsk, JoinMessage, BrotherInfo
+from quokka.utils.baseresp import _base_err_resp, _base_normal_resp
+from .models import BrotherVideos, BrotherArticles, BrotherAsk, JoinMessage, BrotherInfo
 from pprint import pprint
 import uuid
 import logging
+import datetime
 
 logger = logging.getLogger('quokka')
 
-class AddVideoLikeView(MethodView):
+
+class AddBrotherLikeView(MethodView):
     """
     Add like number.
 
     `HTTP` is form-style request,json-style respond using post submit.
 
     POST param:
-        id: BrotherVideos id
-        index: video index,eg 0,1,2,3,4
-
-    HTTP return:
-        Try it your self.
-    """
-
-    def post(self):
-        logger.debug("add video like view")
-        try:
-            content_id = request.form["id"]
-            index = int(request.form["index"])
-            logger.debug("content_id:{}  index:{}".format(content_id,index))
-            result = BrotherVideos.objects(id=content_id).first()
-            result.videos[index].like_numbers += 1
-            result.save()
-            return _base_normal_resp()
-
-        except Exception, e:
-            logger.error(str(e))
-            return _base_err_resp("error")
-
-class AddArticleLikeView(MethodView):
-    """
-    Add like number.
-
-    `HTTP` is form-style request,json-style respond using post submit.
-
-    POST param:
-        id: BrotherVideos id
-        index: video index,eg 0,1,2,3,4
+        id: BrotherInfo id
 
     HTTP return:
         Try it your self.
@@ -58,16 +30,72 @@ class AddArticleLikeView(MethodView):
         logger.debug("add article like view")
         try:
             content_id = request.form["id"]
-            index = int(request.form["index"])
-            logger.debug("content_id:{}  index:{}".format(content_id,index))
-            result = BrotherArticles.objects(id=content_id).first()
-            result.articles[index].like_numbers += 1
+            logger.debug("content_id:{}".format(content_id))
+            result = BrotherInfo.objects(id=content_id).first()
+            result.like_numbers += 1
             result.save()
             return _base_normal_resp()
 
         except Exception, e:
             logger.error(str(e))
             return _base_err_resp("error")
+
+
+class AddVideoLikeView(MethodView):
+    """
+    Add like number.
+
+    `HTTP` is form-style request,json-style respond using post submit.
+
+    POST param:
+        id: BrotherVideos id
+
+    HTTP return:
+        Try it your self.
+    """
+
+    def post(self):
+        logger.debug("add video like view")
+        try:
+            content_id = request.form["id"]
+            logger.debug("content_id:{}".format(content_id))
+            result = BrotherVideos.objects(id=content_id).first()
+            result.like_numbers += 1
+            result.save()
+            return _base_normal_resp()
+
+        except Exception, e:
+            logger.error(str(e))
+            return _base_err_resp("error")
+
+
+class AddArticleLikeView(MethodView):
+    """
+    Add like number.
+
+    `HTTP` is form-style request,json-style respond using post submit.
+
+    POST param:
+        id: BrotherArticles id
+
+    HTTP return:
+        Try it your self.
+    """
+
+    def post(self):
+        logger.debug("add article like view")
+        try:
+            content_id = request.form["id"]
+            logger.debug("content_id:{}".format(content_id))
+            result = BrotherArticles.objects(id=content_id).first()
+            result.like_numbers += 1
+            result.save()
+            return _base_normal_resp()
+
+        except Exception, e:
+            logger.error(str(e))
+            return _base_err_resp("error")
+
 
 class SendMessageView(MethodView):
     """
@@ -92,13 +120,13 @@ class SendMessageView(MethodView):
         try:
             form = BrotherAskForm(request.form)
             if form.validate():
-               logger.debug("form validate.form data: {}".format(form.data))
-               brother_ask=BrotherAsk()
-               form.populate_obj(brother_ask)
-               brother_ask.slug=str(uuid.uuid1())
-               brother_ask.save()
-               logger.debug("brother ask message saved.")
-               return _base_normal_resp()
+                logger.debug("form validate.form data: {}".format(form.data))
+                brother_ask = BrotherAsk()
+                form.populate_obj(brother_ask)
+                brother_ask.slug = str(uuid.uuid1())
+                brother_ask.save()
+                logger.debug("brother ask message saved.")
+                return _base_normal_resp()
             else:
                 logger.error("form.errors-{}".format(form.errors))
                 logger.error("form.data-{}".format(request.form))
@@ -106,6 +134,7 @@ class SendMessageView(MethodView):
         except Exception, e:
             logger.error(str(e))
             return _base_err_resp("something went wrong")
+
 
 class JoinMessageView(MethodView):
     """
@@ -127,19 +156,20 @@ class JoinMessageView(MethodView):
         try:
             form = JoinMessageForm(request.form)
             if form.validate():
-               logger.debug("form validate.form data: {}".format(form.data))
-               join_message=JoinMessage()
-               form.populate_obj(join_message)
-               join_message.slug=str(uuid.uuid1())
-               join_message.save()
-               logger.debug("join_message saved.")
-               return _base_normal_resp()
+                logger.debug("form validate.form data: {}".format(form.data))
+                join_message = JoinMessage()
+                form.populate_obj(join_message)
+                join_message.slug = str(uuid.uuid1())
+                join_message.save()
+                logger.debug("join_message saved.")
+                return _base_normal_resp()
             else:
                 logger.error("form.errors-{}".format(form.errors))
                 return _base_err_resp("error in the form")
         except Exception, e:
             logger.error(str(e))
             return _base_err_resp("something went wrong")
+
 
 class BrotherInfoView(MethodView):
     """
@@ -158,8 +188,21 @@ class BrotherInfoView(MethodView):
     def get(self):
         offset = int(request.args.get("offset", 0))
         count = int(request.args.get("count", 10))
-        results = BrotherInfo.objects.skip(offset).limit(count)
-        
+        order_type = request.args.get("order", "")
+        order_map = {"time": "-created_at", "hot": "-like_numbers"}
+        ordering = order_map[order_type]
+        logger.debug("offset-{} count-{} ordering-{}".format(offset,count,ordering))
+        if ordering:
+            now = datetime.datetime.now()
+            filters = {
+                'published': True,
+                'available_at__lte': now,
+            }
+            logger.debug("order")
+            results = BrotherInfo.objects(
+                **filters).order_by(ordering).skip(offset).limit(count)
+        else:
+            results = BrotherInfo.objects.skip(offset).limit(count)
         brother_list = []
         for i in results:
             tmp = {
@@ -177,4 +220,3 @@ class BrotherInfoView(MethodView):
             brother_list.append(tmp)
 
         return _base_normal_resp(data=brother_list)
-

@@ -16,7 +16,7 @@
           {% if channel.slug =="brotherarticles"%}
           <div id="like-btn" class="like-btn">
             <img class="good_ico" src="{{theme_static('img/like.png')}}">
-            <p id="like_numbers">{{content.articles[0].like_numbers}}</p>
+            <p id="like_numbers">{{ request.args.get('likes') }}</p>
         </div>
          {% endif %}
         <div class="content-header">
@@ -60,9 +60,8 @@
 <script>
     var articleTitles=[{% for article in content.articles %} "{{article.title}}",{% endfor %}];
     var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
-    var likes=[{% for article in content.articles %}{{ article.like_numbers }},{% endfor %}];
+
     var n=0;
-    var likeStatus=[{% for i in range(content.articles|length) %}true,{% endfor %}];
     //菜单出现和消失的动画
     function show_menu () {
       $(".fix-btn").toggle();
@@ -103,28 +102,31 @@
         });
         $(".section-body").text(articles[n]);
         $(".section-title").text(articleTitles[n]);
-        $("#like_numbers").text(likes[n]);
         hide_menu();
     });
+    {% if channel.slug =="brotherarticles"%}
      $.extend($.ajaxSettings, {
-    headers: {
-      'X-CSRFToken': $("meta[name=csrf_token]").attr("content")
-    }
-  });
-    //点赞事件
+      headers: {
+        'X-CSRFToken': $("meta[name=csrf_token]").attr("content")
+      }
+    });
+    var likeNum={{ request.args.get('likes') }};
+    var likeStatus=true;
+        //点赞事件
     $("#like-btn").on("tap", function  () {
-        if(likeStatus[n]){
+        if(likeStatus){
             $.post(
-                '/brotherarticles/addarticlelike', 
-                {"id":"{{content.id}}","index":n}, 
+                '/brothers/addlike', 
+                {"id":"{{ request.args.get('id') }}"}, 
                 function(){
-                  likes[n]+=1;
-                  $("#like_numbers").text(likes[n]);
+                  likeNum+=1;
+                  $("#like_numbers").text(likeNum);
                 }
             );
-            likeStatus[n]=false;
+            likeStatus=false;
         }
     });
+    {% endif %}
 
 </script>
 {% endblock %}

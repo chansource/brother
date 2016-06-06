@@ -15,7 +15,6 @@ class Video(db.EmbeddedDocument):
     video_url = db.StringField(max_length=500, required=True)  # 视频url
     like_numbers = db.IntField(default=0)  # 点赞数
 
-
 class BrotherVideos(Content):
     """
     师兄视频集
@@ -23,7 +22,7 @@ class BrotherVideos(Content):
     shared_by = db.StringField(max_length=255, required=True)  # 分享人
     videos = db.ListField(
         db.EmbeddedDocumentField(Video, required=True), required=False)  # 师兄视频列表
-    
+    like_numbers = db.IntField(default=0)  # 点赞数
 
 class Article(db.EmbeddedDocument):
     """
@@ -32,7 +31,6 @@ class Article(db.EmbeddedDocument):
     title = db.StringField(max_length=255, required=True)  # 文章标题
     body = db.StringField(required=True)  # 文章正文
     like_numbers = db.IntField(default=0)  # 点赞数
-
 class BrotherArticles(Content):
     """
     师兄文章集
@@ -40,6 +38,8 @@ class BrotherArticles(Content):
     author = db.StringField(max_length=255, required=True)  # 分享人
     articles = db.ListField(
         db.EmbeddedDocumentField(Article, required=True), required=False)  # 师兄文章列表
+    like_numbers = db.IntField(default=0)  # 点赞数
+
 
 
 class Experience(db.EmbeddedDocument):
@@ -106,7 +106,7 @@ class BrotherInfo(Content, Ordered):
         max_length=255, required=False)  # 工作行业
     science_liberal = db.StringField(
         max_length=255, required=False)  # 文理科
-
+    like_numbers = db.IntField(default=0)  # 点赞数
 
 class Banner(Content):
     """

@@ -65,6 +65,7 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'work_abroad',
         'work_industry',
         'science_liberal',
+        'like_numbers',
     ]
 
     form_args = {
@@ -100,6 +101,7 @@ class BrotherInfoAdmin(BaseContentAdmin):
         'work_abroad': {'label': u'是否海外工作'},
         'work_industry': {'label': u'工作行业'},
         'science_liberal': {'label': u'文理科'},
+        "like_numbers": {'label': u'点赞数'},
     }
 
     form_subdocuments = {
@@ -123,13 +125,13 @@ class VideoField(EmbeddedForm):
     form_args = {
         "video_title": {'label': u'视频标题'},
         "video_url": {'label': u'视频flash地址'},
-        "like_numbers": {'label': u'点赞数'},
+        
     }
 
     form_columns = [
         "video_title",
         "video_url",
-        "like_numbers",
+        
     ]
 
 

@@ -43,7 +43,7 @@
                         <div class="article-wrap">
                           <div id="like-button" class="like-wrap">
                                 <img class="good_ico" src="{{theme_static('img/zan.png')}}">
-                                <p id="like_numbers">{{content.articles[0].like_numbers}}</p>
+                                <p id="like_numbers">{{ request.args.get('likes') }}</p>
                           </div>
                           {% endif %}
                           <div id="article" class="article-detail">{{content.articles[0].body}}</div>
@@ -57,9 +57,9 @@
 {% block bottom_js %}
  <script type="text/javascript">
     var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
-    var likes=[{% for article in content.articles %}{{ article.like_numbers }},{% endfor %}];
+    var likeNum={{ request.args.get('likes') }};
      var index=0;
-     var likeStatus=[{% for i in range(content.articles|length) %}true,{% endfor %}];
+     var likeStatus=true;
     //将第二个按钮放到下面
     var margin=($(".articles-container").height()-$("#section-links").height())/2;
     $(".section-link:eq(0)").css("margin-top",margin);
@@ -67,7 +67,6 @@
     $(".section-link").click(function() {
         index=$(this).index();
         $("#article").text(articles[index]);
-        $("#like_numbers").text(likes[index]);
         //更换样式
         $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
         $(this).removeClass("noselect-section-link").addClass("selected-section-link");
@@ -88,17 +87,17 @@
 
     //点赞事件
     $("#like-button").click(function  () {
-        if(likeStatus[index]){
+        if(likeStatus){
             $.post(
-                '/brotherarticles/addarticlelike', 
-                {"id":"{{content.id}}","index":index}, 
+                '/brothers/addlike', 
+                {"id":"{{ request.args.get('id') }}"}, 
                 function(){
-                  likes[index]+=1;
-                  $("#like_numbers").text(likes[index]);
+                  likeNum+=1;
+                  $("#like_numbers").text(likeNum);
 
                 }
             );
-            likeStatus[index]=false;
+            likeStatus=false;
 
         }
     });

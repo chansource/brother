@@ -1,35 +1,47 @@
+*{
+  font-family:"Lantinghei TC","Microsoft YaHei",sans-serif;
+}
 .container{
     width:100%;
     background: #f4f4f4;
 }
 .content{
-    width:290px;
-    margin:auto;
+    width:100%;
     background:#f4f4f4;
-    padding-top: 33px;
+    padding-top: 18px;
 }
 .message-form{
   margin:0px;
 }
+
+
 .segment{
-    margin-bottom: 30px;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: #7c7c7c;
-    font:14px "Lantinghei TC","Microsoft YaHei",sans-serif;
+    font-size:14px ;
+    padding:15px 0 15px 0;
+}
+.segment:nth-of-type(even){
+background:#eaeaea;
 }
 .segment-name{
-    display: inline-block;
-    width:42px;
+    width:17%;
     opacity: 0.5;
-    margin-right: 12px;
+    padding-left: 7px;
 }
+
 .segment-input{
-    background: #eaeaea;
     border:0;
     line-height: 25px;
-    width:218px;
-    padding-left: 7px;
+    width:86%;
     border-radius: 4px;
     outline: none;
+}
+.segment-input:nth-of-type(1){
+  background: #f4f4f4;
 }
 .text-area{
     background: #eaeaea;
@@ -46,16 +58,17 @@
    width: 100%;
    height: 40px;
    position: relative;
-   margin: 7px 0 100px 0;
+   margin: 16px 0 100px 0;
 }
 .send-btn{
+  -webkit-appearance:none; /*去除input默认样式*/
   position: absolute;
-  right: 0;
+  right: 10px;
   width: 150px;
   height:100%;
   font-weight: bold;
-  font:16px  "Lantinghei SC","Microsoft YaHei",sans-serif;
-  border-radius: 4px;
+  font-size:16px ;
+  border-radius: 6px;
   outline: none;
 }
 .novalid-button{
@@ -100,7 +113,7 @@
   position: relative;
   top:40%;
   color: #148acc;
-  font:14px  "Lantinghei SC","Microsoft YaHei",sans-serif;
+  font-size:14px;
   text-align: center;
   line-height: 25px;
   padding: 0 20px 0 20px;

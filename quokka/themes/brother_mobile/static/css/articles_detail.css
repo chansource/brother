@@ -1,3 +1,11 @@
+* {
+    font-family: "Lantinghei SC","Microsoft YaHei",sans-serif;
+}
+p, h1, h2, h3, h4, h5, ul, li
+{
+    padding: 0;
+    margin: 0;
+}
 .container{
     width:100%;
     background: #f4f4f4;

@@ -23,20 +23,20 @@
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                 <input type="hidden" name="brother" value="{{ request.args.get('id') }}" />
                 <input  type="hidden" name="channel" value="{{channel.id }}" />
-                <div class="segment">
+                <div class="segment" >
                     <span class="segment-name">收件人</span>
-                    <input class="segment-input" name="receiver" value="{{request.args.get('name','师兄师姐')}}"  placeholder="{{request.args.get('name','师兄师姐')}}" onblur="checkForm()">
-                </div>    
-                <div class="segment">
-                    <span class="segment-name">发件人</span>
-                    <input  class="segment-input" name="sender_email" placeholder="请输入你的邮箱" onblur="checkForm()">
+                    <input class="segment-input"  name="receiver" value="{{request.args.get('name','师兄师姐')}}"  placeholder="{{request.args.get('name','师兄师姐')}}" onblur="checkForm()">
+                </div>  
+                <div class="segment"  >
+                    <span class="segment-name" >发件人</span>
+                    <input  class="segment-input"  style="background: #eaeaea" name="sender_email" placeholder="请输入你的邮箱" onblur="checkForm()">
                 </div>
                 <div class="segment">
                     <span class="segment-name">主题</span>
                     <input class="segment-input" name="title" value="向{{request.args.get('name','师兄师姐')}}问路" placeholder="向{{request.args.get('name','师兄师姐')}}问路" onblur="checkForm()">
                 </div>
                 <div class="segment">
-                        <textarea id="detail" class="text-area" name="message" placeholder="请输入你的提问内容" onblur="checkForm()"></textarea>
+                        <textarea  class="text-area" name="message" placeholder="请输入你的提问内容" onblur="checkForm()"></textarea>
                 </div> 
                 <div class="sender-button-wrap">
                     <input id="send-button"  class="send-btn novalid-button" type="submit" value="发送"/>
