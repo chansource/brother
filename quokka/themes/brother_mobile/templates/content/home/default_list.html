@@ -15,7 +15,9 @@
         <div class="swiper-wrapper">
             {% for content in contents.items %}
                 {% if content.model == "brothers.banner" %}
-            <div class="swiper-slide"><img src="{{content.get_main_image_url()}}" alt="轮播图片"></div>
+                <div class="swiper-slide">
+                    <a href="{{content.url}}"><img src="{{content.get_main_image_url()}}" alt="轮播图片"></a>
+                </div>
                 {% endif %}
             {% endfor %} 
         </div>

@@ -25,23 +25,26 @@
             </div>
         </div>
         <nav class="video-nav">
+            <!-- 坑爹的老问题，flex到底是否合适这种场景？ -->
             {% if content.videos|length >1 %}
             {% for i in range(0, content.videos|length, 2) %}
                 {% if (i==(content.videos|length - 1)) %}
                     <div class="video-nav-row">
-                        <p class="video-nav-item seq="{{ i }}">{{ i + 1}}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <div class="video-nav-divide"></div>
+                        <p style="background-color: #f4f4f4;" class="video-nav-item"></p>
                     </div>
                 {% elif i==0 %}
                     <div class="video-nav-row">
                         <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
                         <div class="video-nav-divide"></div>
-                        <p class="video-nav-item" seq="{{ i + 1}}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i + 1 }}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
                     </div>
                 {% else %}
                     <div class="video-nav-row">
-                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1}}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
                         <div class="video-nav-divide"></div>
-                        <p class="video-nav-item" seq="{{ i + 1}}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i + 1 }}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
                     </div>
                 {% endif %}
             {% endfor %}
