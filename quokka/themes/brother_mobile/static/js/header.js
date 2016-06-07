@@ -4,7 +4,7 @@ var shareStatus=true;
 
 $("#nav-btn").click(function (){
     $("#share-btn img").toggle();
-    $("nav").toggle();
+    $(".page-nav").toggle();
     $("#nav-btn img").toggle();
     $(".help-btn").toggle();
     $(".fix-btn").toggle();
