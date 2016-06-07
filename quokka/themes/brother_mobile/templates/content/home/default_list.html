@@ -1,6 +1,6 @@
 {% extends theme("base.html") %}
 
-{%block title%} <title>师兄指路—年轻人帮助年轻人</title>{% endblock %}
+{%block title%} <title>师兄指路-年轻人帮助年轻人</title>{% endblock %}
 
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
@@ -15,7 +15,9 @@
         <div class="swiper-wrapper">
             {% for content in contents.items %}
                 {% if content.model == "brothers.banner" %}
-            <div class="swiper-slide"><img src="{{content.get_main_image_url()}}" alt="轮播图片"></div>
+                <div class="swiper-slide">
+                    <a href="{{content.url}}"><img src="{{content.get_main_image_url()}}" alt="轮播图片"></a>
+                </div>
                 {% endif %}
             {% endfor %} 
         </div>
@@ -101,6 +103,8 @@
 var banner = new Swiper ('.banner', {
     direction: 'horizontal',
     loop: true,
+    autoplay: 1000,
+    speed: 1000,
 });
 
 function setBannerHeight(){

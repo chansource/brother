@@ -25,23 +25,26 @@
             </div>
         </div>
         <nav class="video-nav">
+            <!-- 坑爹的老问题，flex到底是否合适这种场景？ -->
             {% if content.videos|length >1 %}
             {% for i in range(0, content.videos|length, 2) %}
                 {% if (i==(content.videos|length - 1)) %}
                     <div class="video-nav-row">
-                        <p class="video-nav-item seq="{{ i }}">{{ i + 1}}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <div class="video-nav-divide"></div>
+                        <p style="background-color: #f4f4f4;" class="video-nav-item"></p>
                     </div>
                 {% elif i==0 %}
                     <div class="video-nav-row">
                         <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
                         <div class="video-nav-divide"></div>
-                        <p class="video-nav-item" seq="{{ i + 1}}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i + 1 }}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
                     </div>
                 {% else %}
                     <div class="video-nav-row">
-                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1}}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i }}">{{ i + 1 }}&nbsp;&nbsp;{{ content.videos[i]["video_title"] }}</p>
                         <div class="video-nav-divide"></div>
-                        <p class="video-nav-item" seq="{{ i + 1}}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
+                        <p class="video-nav-item" seq="{{ i + 1 }}">{{ i + 2 }}&nbsp;&nbsp;{{ content.videos[i+1]["video_title"] }}</p>
                     </div>
                 {% endif %}
             {% endfor %}
@@ -50,55 +53,4 @@
     </div>
 
     {% include theme('footer.html') %}
-{% endblock %}
-
-{% block bottom_js %}
-<script type="text/javascript">
-    var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
-    var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
-    var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
-    var index=0;
-    var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
-    // 增加激活视频样式
-    $(".video-nav-item").eq(0).addClass("video-nav-active");
-    // 加载第一个视频
-    $(".video-container").html(videos_urls[0]);
-    //视频按钮事件
-    $(".video-nav-item").on("tap", function(event){
-        index=$(event.target).attr("seq");
-        console.debug("index is " + index);
-        $(".video-container").html(videos_urls[index]);
-        $(".video-nav-item").removeClass("video-nav-active")
-        $(".video-nav-item").eq(index).addClass("video-nav-active");
-        $(".video-details h2").html(videos_titles[index]);
-        $(".video-like-btn").html(likes[index]);
-    });
-
-    // 增加csrf_token
-    $(function() {
-        $.ajaxSettings.headers = {"X-CSRFToken": $("meta[name=csrf_token]").attr("content")};
-    });
-
-    // 点赞事件
-    // TODO: 为什么tap事件对于button不友好，难道不能用button嘛？
-    $(".video-like-btn").on("tap", function(event) {
-        event.preventDefault();
-        console.debug("taped");
-        if (likeStatus[index]) {
-            $.post('/brothervideos/addvideolike', 
-                {
-                    "id": "{{content.id}}",
-                    "index": index
-                }, 
-                function(data, status, xhr) {
-                    console.debug("/brothervideos/addvideolike status is " + status);
-                }
-            );
-            // 为增强体验，先在UI上显示点赞数+1
-            likes[index] += 1;
-            $(".video-like-btn").html(likes[index]);
-            likeStatus[index] = false;
-        }
-    });
-</script>
 {% endblock %}

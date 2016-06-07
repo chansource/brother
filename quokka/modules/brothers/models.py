@@ -41,7 +41,6 @@ class BrotherArticles(Content):
     like_numbers = db.IntField(default=0)  # 点赞数
 
 
-
 class Experience(db.EmbeddedDocument):
     """
     个人经历信息
