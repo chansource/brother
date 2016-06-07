@@ -1,2 +1,38 @@
 {% extends theme("videos_base.html") %}
+
 {%block title%}<title>话题 {{content.title}}</title>{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+    var videoUrl = '{{ content.videos[0].video_url|safe }}';
+    var videoTitle = '{{ content.videos[0].video_title }}';
+    var videoLikeNumbers = {{ content.videos[0].like_numbers }};
+    var likeStatus = true;
+    // 增加激活视频样式
+    $(".video-nav-item").eq(0).addClass("video-nav-active");
+    // 加载第一个视频
+    $(".video-container").html(videoUrl);
+
+    // 点赞事件
+    // TODO: 为什么tap事件对于button不友好，难道不能用button嘛？
+    // $(".video-like-btn").on("tap", function(event) {
+    //     event.preventDefault();
+    //     console.debug("taped");
+    //     if (likeStatus) {
+    //         $.post('/brothervideos/addvideolike', 
+    //             {
+    //                 "id": "{{content.id}}",
+    //                 "index": 0
+    //             }, 
+    //             function(data, status, xhr) {
+    //                 console.debug("/brothervideos/addvideolike status is " + status);
+    //             }
+    //         );
+    //         // 为增强体验，先在UI上显示点赞数+1
+    //         videoLikeNumbers += 1;
+    //         $(".video-like-btn").html(videoLikeNumbers);
+    //         likeStatus = false;
+    //     }
+    // });
+</script>
+{% endblock %}
