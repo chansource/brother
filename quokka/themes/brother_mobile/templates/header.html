@@ -6,7 +6,7 @@
     <div class="logo-wrap">
         <img src="{{ theme_static('img/logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
         {% if not channel.is_homepage %}
-        <span>|  {% if channel.slug=='brothers' and contents %}师兄{% else %}{{channel.description}}{% endif %}</span>
+        <span>|  {% if channel.slug=='brothers' and contents %}师兄师姐{% else %}{{channel.description}}{% endif %}</span>
         {% endif %}
     </div>
     <a id="share-btn" class="share-btn">
@@ -15,7 +15,7 @@
 </div>
 <nav class="page-nav">
     <a  class="pre-nav-item" href="/">首页</a>
-    <a  class="pre-nav-item" href="/brothers">师兄</a>
+    <a  class="pre-nav-item" href="/brothers">师兄师姐</a>
     <a class="pre-nav-item" href="/about/detail.html">关于</a>
     <a class="pre-nav-item" href="/join">加入</a>
     <a href="/spread">传播者</a>

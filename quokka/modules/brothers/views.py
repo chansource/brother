@@ -12,28 +12,52 @@ import datetime
 
 logger = logging.getLogger('quokka')
 
+class BrotherLikeView(MethodView):
+    def get(self):
+        """
+            Get like number.
 
-class AddBrotherLikeView(MethodView):
-    """
-    Add like number.
+            `HTTP` is form-style request,json-style respond using post submit.
 
-    `HTTP` is form-style request,json-style respond using post submit.
+            POST param:
+                id: BrotherInfo id
 
-    POST param:
-        id: BrotherInfo id
+            HTTP return:
+                Try it your self.
+        """
+        logger.debug("get brother like view")
+        try:
+            content_id = request.args.get("id")
+            logger.debug("content_id:{}".format(content_id))
+            result = BrotherInfo.objects(id=content_id).first()
+            data={"like_numbers":result.like_numbers}
+            return _base_normal_resp(data=data)
 
-    HTTP return:
-        Try it your self.
-    """
-
+        except Exception, e:
+            logger.error(str(e))
+            return _base_err_resp("error")
+               
     def post(self):
-        logger.debug("add article like view")
+        """
+            Add like number.
+
+            `HTTP` is form-style request,json-style respond using post submit.
+
+            POST param:
+                id: BrotherInfo id
+
+            HTTP return:
+                Try it your self.
+        """
+        logger.debug("add brother like view")
         try:
             content_id = request.form["id"]
             logger.debug("content_id:{}".format(content_id))
             result = BrotherInfo.objects(id=content_id).first()
+            logger.debug("pre like numbers:{}".format(result.like_numbers))
             result.like_numbers += 1
             result.save()
+            logger.debug("after like numbers:{}".format(result.like_numbers))
             return _base_normal_resp()
 
         except Exception, e:

@@ -4,6 +4,7 @@ if (!window.location.origin) {
     + (window.location.port ? ':' + window.location.port : '');
 }
 var file_id=null;
+var sendStatus=false;
 var uploader = WebUploader.create({
     headers: { "X-CSRFToken": $("meta[name=csrf_token]").attr("content")},
     auto:true,
@@ -79,44 +80,66 @@ $(function () {
         }
     });
 });
-$.validator.setDefaults({
-    //只验证不提交
-   debug: true
-});
-$("#messageForm").validate({
-    ignore: "input:file",
-    focusCleanup: true,
-    onfocusout: function(element) { },
-    submitHandler: function() {
-      var data={
-                        "title":$("#title").text(),
+function showMessage (message) {
+    $("#confirm-message").text(message);
+    $("body").css("overflow","hidden");
+    $(".confirm-mask").toggle();
+}
+var validator = new FormValidator('messageForm', [{
+    name: 'sender_email',
+    display: '你的邮箱',
+    rules: 'required|valid_email'
+},{
+    name: 'message',
+    display: '消息内容',
+    rules: 'required'
+} ], function(errors) {
+    if (errors.length > 0) {
+        showMessage(errors[0].message);
+    }
+    else{
+            event.preventDefault();
+            var data={
+                        "title":"我要加入",
                         "message":$("textarea[name='message']").val(),
                         "sender_email":$("input[name='sender_email']").val(),
                         "status":"未读",
                         "channel":$("input[name='channel']").val()
                     };
-      if(file_id!==null){
-        data['document']=file_id;
-      }
-      $.post(
+              if(file_id!==null){
+                data['document']=file_id;
+              }
+            $.post(
                     '/joinmessages/sendmessage',
                     data,
                     function(data){
                         if(!data["rtn"]){
-                            alert("提交成功!");
+                            showMessage("提交成功!");
+                            sendStatus=true;
                             $("#send-button").attr("disabled", "true");
                             $("#send-button").removeClass("valid-button").addClass("novalid-button");
 
                         }
                         else{
-                            alert(data["rtn"]+":系统又捣乱出错了\n");
+                            showMessage(data["rtn"]+":系统又捣乱出错了\n");
                         }
                     }
-                );
+            );
     }
 });
-function checkForm () {
-    if($("#messageForm").valid()){
+$("#confirm-btn").click(function  () {
+    if(sendStatus){
+        history.back();
+    }
+    else{
+        $("body").css("overflow","auto");
+        $(".confirm-mask").toggle();
+    }
+});
+validator.setMessage('required', '填上%s，才能收到回答哦！');
+validator.setMessage('valid_email', '要填上正确的邮箱地址，才能收到回答哦！');
+function checkForm()  {
+    if( validator.valid() ){
         $("#send-button").removeClass("novalid-button").addClass("valid-button");
     }
     else{

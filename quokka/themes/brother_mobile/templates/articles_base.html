@@ -114,11 +114,25 @@
     });
     var likeNum={{ request.args.get('likes') }};
     var likeStatus=true;
+    $.get(
+        '/brothers/like', 
+        {"id":"{{ request.args.get('id') }}"}, 
+        function(response){
+          data=response["data"];
+          if(!data["rtn"]){
+            likeNum=data["like_numbers"];
+          }
+          else{
+            likeNum+=1;
+          }
+          $("#like_numbers").text(likeNum);
+        }
+      );
         //点赞事件
     $("#like-btn").on("tap", function  () {
         if(likeStatus){
             $.post(
-                '/brothers/addlike', 
+                '/brothers/like', 
                 {"id":"{{ request.args.get('id') }}"}, 
                 function(){
                   likeNum+=1;

@@ -19,10 +19,12 @@
                   <span>分享人 {{content.shared_by}}</span>
               </div>
              <div class="video-wrap" >
+                {% if channel.slug =="brothervideos"%}
                 <div id="like-button" class="like-wrap">
                     <img class="good_ico" src="{{theme_static('img/zan.png')}}">
                     <p id="like_numbers">{{ request.args.get('likes') }}</p>
                 </div>
+                {% endif %}
                 <div id="video-detail" class="iframe-wrap">
                 </div>
             </div>
@@ -49,9 +51,7 @@
 $(document).ready(function(){
     var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
      var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
-     var likeNum={{ request.args.get('likes') }};
-     var index=0;
-     var likeStatus=true;
+
      //加载视频
     $("#video-detail").append(videos_urls[0]);
     $(".like-wrap").css("display","block");
@@ -59,7 +59,7 @@ $(document).ready(function(){
    {% if content.videos|length >1 %}
      var button_number={{ content.videos|length }};
      var margin_left=21;
-     var width=($(".video-wrap").width()-margin_left*(button_number-1))/button_number;
+     var width=($(".video-wrap").width()-margin_left*(button_number-1))/button_number-1;
       $(".non-selected-section-button").css("margin-left",margin_left);
      $(".section-button").css("width",width);
      $(".section-button").css("display","inline-block");
@@ -73,7 +73,10 @@ $(document).ready(function(){
         $(".section-button").removeClass("selected-section-button").addClass("non-selected-section-button");
         $(this).removeClass("non-selected-section-button").addClass("selected-section-button");
       });
-
+    {% if channel.slug =="brothervideos" %}
+     var likeNum={{ request.args.get('likes') }};
+     var index=0;
+     var likeStatus=true;
     //增加csrf_token
     $(function () {
             $.ajaxSetup({
@@ -82,12 +85,25 @@ $(document).ready(function(){
             }
         });
         });
-
+    $.get(
+        '/brothers/like', 
+        {"id":"{{ request.args.get('id') }}"}, 
+        function(response){
+          data=response["data"];
+          if(!data["rtn"]){
+            likeNum=data["like_numbers"];
+          }
+          else{
+            likeNum+=1;
+          }
+          $("#like_numbers").text(likeNum);
+        }
+      );
     //点赞事件
     $("#like-button").click(function  () {
         if(likeStatus){
             $.post(
-                '/brothers/addlike', 
+                '/brothers/like', 
                 {"id":"{{ request.args.get('id') }}"}, 
                 function(){
                     likeNum+=1;
@@ -95,9 +111,10 @@ $(document).ready(function(){
                 }
             );
             likeStatus=false;
-        }
+            }
+        });
     });
-});
+    {% endif %}
 </script>
  <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
  <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>
