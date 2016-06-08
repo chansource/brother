@@ -17,19 +17,15 @@
 <div class="container">
     {% include theme('header.html') %}
     <div class="sort-wrap">
-            <button class="active-sort-btn">最热排序</button>
-            <button class="deactive-sort-btn" disabled="disabled">最新上传</button>
+            <button class="deactive-sort-btn" disabled="disabled">最热排序</button>
+            <button class="active-sort-btn">最新上传</button>
     </div>
     <div class="contents">
     </div>
     <div class="fix-btn">
       <img src="{{theme_static('img/up_top.png')}}" alt="">
     </div>
-    {% if contents.pages==1 %}
-    <button id="more-btn" class="more-btn" disabled="disabled" >无更多内容</button>
-    {% else %}
     <button id="more-btn" class="more-btn">加载更多</button>
-    {% endif %}
     {% include theme('footer.html') %}
 </div>
 {% endblock %}

@@ -31,7 +31,7 @@
                         <span>{{article.title}}</span>
                     </a>
                     {% endif %}
-                    {% endfor %}
+                    {% endfor %}<base></base>
                 </div>
                 <div class="right-wrap">
                     <a href="#nav">
@@ -57,9 +57,8 @@
 {% block bottom_js %}
  <script type="text/javascript">
     var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
-    var likeNum={{ request.args.get('likes') }};
+
      var index=0;
-     var likeStatus=true;
     //将第二个按钮放到下面
     var margin=($(".articles-container").height()-$("#section-links").height())/2;
     $(".section-link:eq(0)").css("margin-top",margin);
@@ -75,7 +74,9 @@
         margin=($(".articles-container").height()-$("#section-links").height())/2;
         $(this).css("margin-top",margin);
     });
-
+    {% if channel.slug =="brotherarticles"%}
+    var likeNum={{ request.args.get('likes') }};
+    var likeStatus=true;
     //增加csrf_token
     $(function () {
             $.ajaxSetup({
@@ -84,12 +85,25 @@
             }
         });
         });
-
+    $.get(
+        '/brothers/like', 
+        {"id":"{{ request.args.get('id') }}"}, 
+        function(response){
+          data=response["data"];
+          if(!data["rtn"]){
+            likeNum=data["like_numbers"];
+          }
+          else{
+            likeNum+=1;
+          }
+          $("#like_numbers").text(likeNum);
+        }
+      );
     //点赞事件
     $("#like-button").click(function  () {
         if(likeStatus){
             $.post(
-                '/brothers/addlike', 
+                '/brothers/like', 
                 {"id":"{{ request.args.get('id') }}"}, 
                 function(){
                   likeNum+=1;
@@ -98,9 +112,9 @@
                 }
             );
             likeStatus=false;
-
         }
     });
+    {% endif %}
  </script>
  <script type="text/javascript" src="{{theme_static('js/jquery.qrcode.min.js')}}"></script>
  <script type="text/javascript" src="{{theme_static('js/qrcode.js')}}"></script>

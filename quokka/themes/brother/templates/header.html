@@ -4,7 +4,7 @@
         <img src="{{ theme_static('img/logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
         {% else %}
         <img src="{{  theme_static('img/page_logo.png') }}" alt="{{Config.get('site', 'site_name')}}">
-        <span>{% if channel.slug=='brothers' and contents %}师兄{% else %}{{channel.description}}{% endif %}</span>
+        <span>{% if channel.slug=='brothers' and contents %}师兄师姐{% else %}{{channel.description}}{% endif %}</span>
         {% endif %}
     </div>
 <!--     {% set navigation_bar = [
@@ -17,7 +17,7 @@
      ] -%} -->
     {% set navigation_bar = [
             ('/', ['home'], '首页'),
-            ('/brothers', ['brothers','brothervideos','brotherarticles','brotherask'], '师兄'),
+            ('/brothers', ['brothers','brothervideos','brotherarticles','brotherask'], '师兄师姐'),
             ('/about/detail.html', ['about'], '关于'),
             ('/join', ['join','joinmessages'], '加入'),
             ('/spread', ['spread'], '传播者'),
