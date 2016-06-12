@@ -10,9 +10,12 @@ from flask.ext.admin.form.upload import ImageUploadInput
 from quokka.core.models.subcontent import SubContent, SubContentPurpose
 from quokka.modules.media.models import Image
 
+import logging
+
 if sys.version_info.major == 3:
     unicode = lambda x: u'{}'.format(x)  # noqa  # flake8: noqa
 
+logger = logging.getLogger()
 
 class ThumbWidget(ImageUploadInput):
     empty_template = ""
@@ -49,6 +52,38 @@ class ImageUploadField(form.ImageUploadField):
             ] + [item.upper() for item in items]
             self.allowed_extensions = merged_items
         return super(ImageUploadField, self).is_file_allowed(filename)
+
+    def _save_file(self, data, filename):
+        '''
+        将原版ImageUploadField._save_file函数内容拷贝过来，加日志DEBUG
+        '''
+        import os.path as op
+
+        path = self._get_path(filename)
+        logger.debug("path %s" % path)
+
+        if not op.exists(op.dirname(path)):
+            os.makedirs(os.path.dirname(path), self.permission | 0o111)
+
+        # Figure out format
+        filename, format = self._get_save_format(filename, self.image)
+        logger.debug("filename %s format %s" % (filename, format))
+
+        if self.image and (self.image.format != format or self.max_size):
+            if self.max_size:
+                image = self._resize(self.image, self.max_size)
+            else:
+                image = self.image
+
+            self._save_image(image, self._get_path(filename), format)
+        else:
+            data.seek(0)
+            data.save(self._get_path(filename))
+
+        self._save_thumbnail(data, filename, format)
+
+        logger.debug("path %s" % filename)
+        return filename
 
 
 class ContentImageField(ImageUploadField):

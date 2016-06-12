@@ -232,7 +232,7 @@ CSRF_SESSION_KEY = "somethingimpossibletoguess"
 # configure logger in your local_settings
 LOGGER_ENABLED = True
 LOGGER_LEVEL = 'DEBUG'
-LOGGER_FORMAT = '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+LOGGER_FORMAT = '%(asctime)s %(name)-12s %(levelname)-8s %(message)s %(pathname)s:%(lineno)d'
 LOGGER_DATE_FORMAT = '%d.%m %H:%M:%S'
 
 # media module
