@@ -13,7 +13,6 @@ from .controller import MediaController
 
 logger = logging.getLogger()
 
-
 class Media(MediaController, Content):
 
     DEFAULT_CHANNEL = "media"
@@ -44,6 +43,14 @@ class Media(MediaController, Content):
             logger.warning(str(e))
             return Channel.get_homepage()
 
+    def save(self, *args, **kwargs):
+        """
+        验证path字段，保证不为None
+        """
+        logger.debug("(horsley) path %s" % self.path)
+        
+        if self.path != None:
+            super(Image, self).save(*args, **kwargs)
 
 class Image(Media):
     DEFAULT_CHANNEL = 'media/images'
@@ -51,7 +58,6 @@ class Image(Media):
     @property
     def thumb(self):
         return form.thumbgen_filename(self.path)
-
 
 class File(Media):
     DEFAULT_CHANNEL = 'media/files'
