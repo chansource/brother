@@ -50,7 +50,8 @@ class Media(MediaController, Content):
         logger.debug("(horsley) path %s" % self.path)
         
         if self.path != None:
-            super(Image, self).save(*args, **kwargs)
+            # super(Image, self).save(*args, **kwargs)
+            Content.save(self, *args, **kwargs)
 
 class Image(Media):
     DEFAULT_CHANNEL = 'media/images'
