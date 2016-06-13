@@ -51,6 +51,7 @@ class Media(MediaController, Content):
         
         if self.path != None:
             # super(Image, self).save(*args, **kwargs)
+            # TODO: python多继承的super搜索顺序
             Content.save(self, *args, **kwargs)
 
 class Image(Media):
