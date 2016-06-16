@@ -29,7 +29,7 @@
 
     <div class="sub-nav">
         <div class="sub-nav-content">
-            <a href="/brothers/" class="sub-nav-text">师兄</a>
+            <a href="/brothers/" class="sub-nav-text">师兄师姐</a>
             <a href="/join/" class="sub-nav-text">加入</a>
             <a href="/spread/" class="sub-nav-text">传播者</a>
         </div>
@@ -96,7 +96,11 @@
     });
 
     setBannerHeight();
-    $(window).resize(setBannerHeight);
+    $(window).resize(function  () {
+        setBannerHeight();
+        mySwiper.stopAutoplay();
+        mySwiper.startAutoplay();
+    });
 </script>
 {% endblock %}
 

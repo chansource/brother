@@ -19,7 +19,13 @@
     {% block head_css %}{% endblock %}
 
 
-    {% block head_js %}{% endblock %}
+    {% block head_js %}
+    <script type="text/javascript">
+        if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){
+            location="http://m.brotalk.cn"+window.location.pathname;
+        }
+    </script>
+    {% endblock %}
 </head>
 
 <body>

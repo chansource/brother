@@ -26,7 +26,10 @@ from quokka.utils.settings import get_setting_value
 
 from quokka.core.admin.fields import ThumbField
 from quokka.core.admin.utils import _, _l, _n
-
+import StringIO,codecs
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 class ThemeMixin(object):
     def render(self, template, **kwargs):
@@ -141,7 +144,7 @@ class ModelAdmin(ThemeMixin, Roled, ModelView):
         'link': format_link
     }
     column_formatters_args = {}
-
+    column_exclude_list=['_cls','mpath','model','slug','long_slug','show_on_channel','shortened_url','template_type','content_format','channel_roles','related_mpath','license','values','related_channels','available_until','channel','available_at','document']
     def get_datetime_format(self):
         return current_app.config.get('DATETIME_FORMAT', self.datetime_format)
 
@@ -164,17 +167,54 @@ class ModelAdmin(ThemeMixin, Roled, ModelView):
             }
         )
 
+    # @action('export_to_csv', _l('Export as csv'))
+    # def export_to_csv(self, ids):
+    #     if self.column_expose_list:
+    #         qs = json.loads(self.model.objects(id__in=ids).only(*self.column_expose_list).to_json())
+    #     else:
+    #         qs = json.loads(self.model.objects(id__in=ids).to_json())
+    #     def generate():
+    #         yield ','.join(list(qs[0].keys())) + '\n'
+    #         for item in qs:
+    #             try:
+    #                 yield ','.join([str(i) for i in list(item.values())]) + '\n'
+    #             except Exception as e:
+    #                 print e
+
+    #     return Response(
+    #         generate(),
+    #         mimetype="text/csv",
+    #         headers={
+    #             "Content-Disposition":
+    #             "attachment;filename=%s.csv" % self.model.__name__.lower()
+    #         }
+    #     )
+
     @action('export_to_csv', _l('Export as csv'))
     def export_to_csv(self, ids):
-        qs = json.loads(self.model.objects(id__in=ids).to_json())
-
-        def generate():
-            yield ','.join(list(qs[0].keys())) + '\n'
+        dest = StringIO.StringIO()
+        dest.write(codecs.BOM_UTF8)
+        if hasattr(self.model,'column_expose_list'):
+            qs=self.model.objects(id__in=ids).only(*self.column_expose_list)
+            if hasattr(self.model,'column_expose_names'):
+                dest.write(','.join(self.column_expose_names.values())+'\n')
+            else:
+                dest.write(','.join(self.column_expose_list)+'\n')
             for item in qs:
-                yield ','.join([str(i) for i in list(item.values())]) + '\n'
+                dest.write(','.join([str(item[field]) for field in self.column_expose_list])+'\n')
 
+        else:
+            qs=self.model.objects(id__in=ids).exclude(*self.column_exclude_list)
+            expose_list=list(set(self.model._fields.keys()).difference(set(self.column_exclude_list)))
+            dest.write(','.join(expose_list)+'\n')
+            try:
+                for item in qs:
+                    dest.write(','.join([str(item[field]) for field in expose_list])+'\n')
+            except Exception as e:
+                print e
+            
         return Response(
-            generate(),
+            dest.getvalue(),
             mimetype="text/csv",
             headers={
                 "Content-Disposition":

@@ -332,7 +332,8 @@ class BannerAdmin(BaseContentAdmin):
 
 class BrotherAskAdmin(BaseContentAdmin):
     column_list = ['title','receiver','sender_email','created_at','status']
-    column_searchable_list = ('title', 'message', 'receiver')
+    column_searchable_list = ['title', 'message', 'receiver']
+    column_expose_list = ['title', 'sender_email','receiver','created_at','message','status']
     column_filters = ['receiver','sender_email','created_at','status']
     form_columns = [
         'title',
@@ -353,6 +354,16 @@ class BrotherAskAdmin(BaseContentAdmin):
         'message': {'label': u'提问内容'},
         'tags': {'label': u'标签'},
         'status': {'label': u'状态'},
+    }
+    column_expose_names={
+        'title': u'主题',
+        'created_at': u'提交时间',
+        'receiver':u'收件人',
+        'brother': u'对应的师兄',
+        'sender_email': u'发件人',
+        'message': u'提问内容',
+        'tags': u'标签',
+        'status': u'状态',
     }
 class JoinMessageAdmin(BaseContentAdmin):
     column_list = ['sender_email','created_at','status']

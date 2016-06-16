@@ -68,10 +68,10 @@ var uploader = new plupload.Uploader({
     url : window.location["origin"]+'/media/uploadfile', //服务器端的上传页面地址
     multi_selection:false,
     filters: {
-        mime_types : [
-            { title : "Doc files", extensions : "doc,docx,pdf" },
-            { title : "Zip files", extensions : "zip" }
-        ],
+        // mime_types : [
+        //     { title : "Doc files", extensions : "doc,docx,pdf,jpg,jpeg,png" },
+        //     { title : "Zip files", extensions : "zip" }
+        // ],
         max_file_size: "1mb",
         prevent_duplicates: true
     },

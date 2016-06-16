@@ -16,7 +16,11 @@
 
     <link rel="stylesheet" href="{{theme_static('css/base.css')}}">
     {% block head_css %}{% endblock %}
-
+    <script type="text/javascript">
+        if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){
+            location="http://www.brotalk.cn"+window.location.pathname;
+        }
+    </script>
 
     {% block head_js %}{% endblock %}
 </head>
