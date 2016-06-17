@@ -125,13 +125,11 @@ class VideoField(EmbeddedForm):
     form_args = {
         "video_title": {'label': u'视频标题'},
         "video_url": {'label': u'视频flash地址'},
-        
     }
 
     form_columns = [
         "video_title",
         "video_url",
-        
     ]
 
 
@@ -168,7 +166,7 @@ class ArticleField(EmbeddedForm):
 
     form_args = {
         "title": {'label': u'标题'},
-        "body": {'label': u'内容'},
+        "body": {'label': u'内容', 'widget': TextEditor()},
     }
 
     form_columns = [
@@ -207,6 +205,7 @@ class BrotherArticlesAdmin(BaseContentAdmin):
 
 
 class TopicAdmin(BaseContentAdmin):
+    
     form_columns = [
         'channel',
         'title',
@@ -331,10 +330,15 @@ class BannerAdmin(BaseContentAdmin):
 
 
 class BrotherAskAdmin(BaseContentAdmin):
+
     column_list = ['title','receiver','sender_email','created_at','status']
+
     column_searchable_list = ['title', 'message', 'receiver']
+
     column_expose_list = ['title', 'sender_email','receiver','created_at','message','status']
+
     column_filters = ['receiver','sender_email','created_at','status']
+
     form_columns = [
         'title',
         'created_at',
@@ -345,6 +349,7 @@ class BrotherAskAdmin(BaseContentAdmin):
         'tags',
         'status',
     ]
+
     form_args = {
         'title': {'label': u'主题'},
         'created_at': {'label': u'提交时间'},
@@ -355,6 +360,7 @@ class BrotherAskAdmin(BaseContentAdmin):
         'tags': {'label': u'标签'},
         'status': {'label': u'状态'},
     }
+
     column_expose_names={
         'title': u'主题',
         'created_at': u'提交时间',
@@ -365,9 +371,13 @@ class BrotherAskAdmin(BaseContentAdmin):
         'tags': u'标签',
         'status': u'状态',
     }
+
 class JoinMessageAdmin(BaseContentAdmin):
+
     column_list = ['sender_email','created_at','status']
+
     column_filters = ['sender_email','created_at','status']
+
     form_columns = [
         'title',
         'channel',
@@ -378,6 +388,7 @@ class JoinMessageAdmin(BaseContentAdmin):
         'document',
         'status',
     ]
+
     form_args = {
         'title': {'label': u'主题'},
         'created_at': {'label': u'提交时间'},
