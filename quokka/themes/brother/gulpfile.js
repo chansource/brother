@@ -1,4 +1,4 @@
-
+// TODO: 目前有缺陷，不能一次性执行gulp，需要先gulp rev，再gulp rev_template
 var gulp = require('gulp');
 var rev = require('gulp-rev'); // 对文件名加MD5后缀
 var revCollector = require('gulp-rev-collector'); // 模板路径替换
