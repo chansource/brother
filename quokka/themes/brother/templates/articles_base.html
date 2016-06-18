@@ -11,54 +11,65 @@
 <link rel="stylesheet" type="text/css" href="{{theme_static('css/share.css')}}">
 {% endblock %}
 {% block content %}
-        {% include theme('header.html') %}
-        <div class="rest">
-        <div  class="content">
-              <div class="content-header">
-                    <div class="header-wrap">
-                      <p>{{content.title}}</p>
-                      <span>作者&nbsp;|&nbsp;{{content.author}}&nbsp;&nbsp;发表日期&nbsp;|&nbsp;{{content.created_at.strftime('%Y.%m.%d')}}</span>
+      {% include theme('header.html') %}
+      <div class="rest">
+      <div  class="content">
+          <div class="content-header">
+                <div class="header-wrap">
+                  <p>{{content.title}}</p>
+                  <span>作者&nbsp;|&nbsp;{{content.author}}&nbsp;&nbsp;发表日期&nbsp;|&nbsp;{{content.created_at.strftime('%Y.%m.%d')}}</span>
+                </div>
+          </div>
+            <div id="section-links" class="section-links">
+                {% for article in content.articles%}
+                  {% if loop.index==1 %}
+                <a class="selected-section-link section-link">
+                    <span>{{article.title}}</span>
+                </a>
+                {% else %}
+                <a class="noselect-section-link section-link">
+                    <span>{{article.title}}</span>
+                </a>
+                {% endif %}
+                {% endfor %}<base></base>
+            </div>
+            <div class="right-wrap">
+                <a href="#nav">
+                    <img src="{{theme_static('img/back_top.png')}}">
+                </a>
+            </div>
+            <div class="articles-container">
+                    {% if channel.slug =="brotherarticles"%}
+                    <div class="article-wrap">
+                      <div id="like-button" class="like-wrap">
+                            <img class="good_ico" src="{{theme_static('img/zan.png')}}">
+                            <p id="like_numbers">{{ request.args.get('likes') }}</p>
+                      </div>
+                      {% endif %}
+                      <div id="article" class="article-detail">{{content.articles[0].body}}</div>
                     </div>
-              </div>
-                <div id="section-links" class="section-links">
-                    {% for article in content.articles%}
-                      {% if loop.index==1 %}
-                    <a class="selected-section-link section-link">
-                        <span>{{article.title}}</span>
-                    </a>
-                    {% else %}
-                    <a class="noselect-section-link section-link">
-                        <span>{{article.title}}</span>
-                    </a>
-                    {% endif %}
-                    {% endfor %}<base></base>
-                </div>
-                <div class="right-wrap">
-                    <a href="#nav">
-                        <img src="{{theme_static('img/back_top.png')}}">
-                    </a>
-                </div>
-                <div class="articles-container">
-                        {% if channel.slug =="brotherarticles"%}
-                        <div class="article-wrap">
-                          <div id="like-button" class="like-wrap">
-                                <img class="good_ico" src="{{theme_static('img/zan.png')}}">
-                                <p id="like_numbers">{{ request.args.get('likes') }}</p>
-                          </div>
-                          {% endif %}
-                          <div id="article" class="article-detail">{{content.articles[0].body}}</div>
-                        </div>
-                     {% include theme('share.html') %}
-                </div>
+                 {% include theme('share.html') %}
+            </div>
      </div>
      {% include theme('footer.html') %}
      </div>
+  <!-- 直接将文章内容填充到JS中，会出现换行，JS语法错误 -->
+  <!-- 将文章内容填充到该标签中，再读入JS变量中 -->
+  <div id="articles" style="display:none;">
+    {% for article in content.articles %} 
+    <p>{{article.body}}</p>
+    {% endfor %}
+  </div>
+
 {% endblock %}
 {% block bottom_js %}
  <script type="text/javascript">
-    var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
-
-     var index=0;
+    var articles = []
+    $("#articles p").each(function(){
+      articles.push($(this).html());
+    });
+    
+    var index=0;
     //将第二个按钮放到下面
     var margin=($(".articles-container").height()-$("#section-links").height())/2;
     $(".section-link:eq(0)").css("margin-top",margin);

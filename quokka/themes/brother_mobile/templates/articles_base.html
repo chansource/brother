@@ -54,12 +54,24 @@
     </nav>
   </div>
 
+<!-- 直接将文章内容填充到JS中，会出现换行，JS语法错误 -->
+<!-- 将文章内容填充到该标签中，再读入JS变量中 -->
+<div id="articles" style="display:none;">
+  {% for article in content.articles %} 
+  <p>{{article.body}}</p>
+  {% endfor %}
+</div>
+
 {% endblock %}
 {% block bottom_js %}
 <script src="{{theme_static('js/zepto/1.1.6/fx.js')}}"></script>
 <script>
     var articleTitles=[{% for article in content.articles %} "{{article.title}}",{% endfor %}];
-    var articles=[{% for article in content.articles %} "{{article.body}}",{% endfor %}];
+
+    var articles = []
+    $("#articles p").each(function(){
+      articles.push($(this).html());
+    });
 
     var n=0;
     //菜单出现和消失的动画
