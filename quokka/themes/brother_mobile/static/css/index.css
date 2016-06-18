@@ -40,13 +40,19 @@ body {
 }
 
 .sub-nav-item {
-    width: 45px;
+    width: 60px;
     height: auto;
 }
 
 .sub-nav-img {
-    width: 100%;
+    width: 45px;
     height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.sub-nav-img a {
+    width: 100%;
 }
 
 .sub-nav-text {
