@@ -121,6 +121,7 @@ body {
 .item-content {
     position: relative;
     background-color: #f4f4f4;
+    padding-bottom: 10px;
 }
 
 .item-content-tag {
