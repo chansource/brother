@@ -19,19 +19,19 @@
 
 .preview-content{
     width:272px;
-    height:315px;
     margin-left: 28px;
     display: inline-block;
     text-decoration: none;
     float: left;
 }
+
 .first-preview-content{
     width:573px;
-   height:630px;
 }
+
 .preview-content img{
     width:100%;
-
+    height: auto;
 }
 
 .preview-content h2{
