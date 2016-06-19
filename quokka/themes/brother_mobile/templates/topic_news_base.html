@@ -31,16 +31,21 @@
             </div>
         </div>
         <div class="contents">
-            <div class="item">
-                <div class="item-cover">
-                    <img src="{{theme_static('img/news_cover_demo.png')}}" alt="">
+            {% for content in contents.items if content.model == "brothers.topic" or content.model == "brothers.news"%}
+            <a href="{{content.get_absolute_url()}}">
+                <div class="item">
+                    <div class="item-cover">
+                        <img src="{{ content.get_main_image_url(default="") }}" alt="">
+                    </div>
+                    <div class="item-text">
+                        <h1>{{ content.title }}</h1>
+                        <p>{{ content.summary }}</p>
+                    </div>                
+                    <!-- loop.index -->
                 </div>
-                <div class="item-text">
-                    <h1>动态的标题</h1>
-                    <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
-                </div>
-            </div>
-            <div class="item">
+            </a>
+            {% endfor %} 
+<!--             <div class="item">
                 <div class="item-cover">
                     <img src="{{theme_static('img/news_cover_demo.png')}}" alt="">
                 </div>
@@ -48,7 +53,7 @@
                     <h1>动态的标题</h1>
                     <p>简介简介简介简介简简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     

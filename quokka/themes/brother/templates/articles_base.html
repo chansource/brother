@@ -46,26 +46,28 @@
                             <p id="like_numbers">{{ request.args.get('likes') }}</p>
                       </div>
                       {% endif %}
-                      <div id="article" class="article-detail">{{content.articles[0].body}}</div>
+                      <div id="article" class="article-detail">{{content.articles[0].body|safe()}}</div>
                     </div>
                  {% include theme('share.html') %}
             </div>
      </div>
      {% include theme('footer.html') %}
      </div>
-  <!-- 直接将文章内容填充到JS中，会出现换行，JS语法错误 -->
-  <!-- 将文章内容填充到该标签中，再读入JS变量中 -->
-  <div id="articles" style="display:none;">
-    {% for article in content.articles %} 
-    <p>{{article.body}}</p>
-    {% endfor %}
+<!-- 直接将文章内容填充到JS中，会出现换行，JS语法错误 -->
+<!-- 将文章内容填充到该标签中，再读入JS变量中 -->
+<div id="articles" style="display:none;">
+  {% for article in content.articles %}
+  <div>
+    {{ article.body|safe() }}
   </div>
+  {% endfor %}
+</div>
 
 {% endblock %}
 {% block bottom_js %}
  <script type="text/javascript">
     var articles = []
-    $("#articles p").each(function(){
+    $("#articles div").each(function(){
       articles.push($(this).html());
     });
     
@@ -76,7 +78,7 @@
       /*按钮点击事件*/
     $(".section-link").click(function() {
         index=$(this).index();
-        $("#article").text(articles[index]);
+        $("#article").html(articles[index]);
         //更换样式
         $(".section-link").removeClass("selected-section-link").addClass("noselect-section-link");
         $(this).removeClass("noselect-section-link").addClass("selected-section-link");
