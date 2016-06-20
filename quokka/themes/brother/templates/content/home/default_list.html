@@ -1,6 +1,6 @@
 {% extends theme("base.html") %}
 
-{%block title%} <title>师兄指路-年轻人帮助年轻人</title>{% endblock %}
+{%block title%} <title>{{Config.get('site', 'homepage_title')}}</title>{% endblock %}
 
 {% block head_css %}
 <link rel="stylesheet" href="{{theme_static('css/swiper.min.css')}}">
