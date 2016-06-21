@@ -2,7 +2,19 @@
 var gulp = require('gulp');
 var rev = require('gulp-rev'); // 对文件名加MD5后缀
 var revCollector = require('gulp-rev-collector'); // 模板路径替换
+var autoprefixer = require('gulp-autoprefixer'); // 添加css浏览器私有属性前缀
 var debug = require('gulp-debug'); // DBEUG
+
+gulp.task('autoprefixer', function() {
+    return gulp.src(['static/css/*.css'])
+        // 将CSS属性增加前缀
+        .pipe(autoprefixer({
+            browsers: ['>1%'],
+            cascade: false
+        }))
+        // 输出文件本地                                   
+        .pipe(gulp.dest('static/css'))
+});
 
 gulp.task('rev', function() {                         
     return gulp.src(['static/css/*.css']) 
@@ -11,9 +23,9 @@ gulp.task('rev', function() {
         // 输出文件本地                                   
         .pipe(gulp.dest('static/css'))    
         // 生成一个rev-manifest.json
-        .pipe(rev.manifest())                                  
+        .pipe(rev.manifest())                                
         // 将 rev-manifest.json 保存到 rev 目录内
-        .pipe(gulp.dest('rev'));                              
+        .pipe(gulp.dest('rev'));                           
 });
 
 gulp.task('rev_template', function() {
