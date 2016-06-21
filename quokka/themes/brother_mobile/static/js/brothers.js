@@ -14,7 +14,7 @@ var template = Handlebars.compile(source);
 var perCount=5;
 var pages=0;
 var offset=perCount*pages;
-var order="time";
+var order="hot";
 var baseUrl="/brotherinfo?";
 var url=baseUrl+'offset='+offset+'&count='+perCount+"&order="+order;
 getData ();
