@@ -97,3 +97,16 @@
       </div> 
      
 {% endblock %}
+
+{% block bottom_js %}
+  <script>
+    // 内容最多的经历栏目高度最高，另外两个高度和最高的保持一致。
+    var experienceMaxHeight = 0;
+    $(".experience").each(function() {
+      if ($(this).height() > experienceMaxHeight) {
+        experienceMaxHeight = $(this).height();
+      }
+    });
+    $(".experience").height(experienceMaxHeight);
+  </script>
+{% endblock %}
