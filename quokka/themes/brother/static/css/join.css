@@ -5,14 +5,37 @@
     padding-top: 70px;
 }
 
-.join-qrcode {
+.join-nav-container {
     width: 100%;
     margin-top: 30px;
 }
 
-.join-qrcode img {
+.join-nav {
     float: right;
-    margin: 0 166px 10px 0; 
+    margin-right: 166px;
+    margin-bottom: 10px;
+    width: 165px;
+}
+
+.join-nav img {
+    display: block;
+}
+
+.join-nav a {
+    height: 27px;
+    width: 100%;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    background-color: rgba(255,255,255,0.6);
+    color: #148acb;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #79bccc;
+    border-width: 1px;
+    display: block;
+    text-decoration: none;
+    padding-top: 11px;
+    font-size: 18px;
 }
 
 .join-container {
