@@ -235,17 +235,15 @@ class JoinMessageView(MethodView):
 
 
 class BrotherInfoView(MethodView):
-    """
-    Get brother list.
+    """获取师兄列表
 
-    `HTTP` is form-style request,json-style respond using post submit.
+        采用GET请求方式。
 
-    POST param:
-        offset: start position
-        count: result count
+    GET参数:
+        order: 排序规则，time按时间排序，hot按点赞数排序
+        offset: 起始偏移量
+        count: 返回结果数量
 
-    HTTP return:
-        Try it your self.
     """
 
     def get(self):
@@ -283,3 +281,59 @@ class BrotherInfoView(MethodView):
             brother_list.append(tmp)
 
         return _base_normal_resp(data=brother_list)
+
+class TopicsView(MethodView):
+    """获取话题列表
+
+        采用GET请求方式。
+
+    GET参数:
+        offset: 起始偏移量
+        count: 返回结果数量
+    """
+    def get(self):
+        offset = int(request.args.get("offset", 0))
+        count = int(request.args.get("count", 10))
+        results = Topic.objects.skip(offset).limit(count)
+        rtn_list = []
+        for i in results:
+            tmp = {
+                "cover_img": url_for('quokka.core.media', filename=i["contents"][0]["content"].path),
+                "title": i["title"],
+                "summary": i["summary"],
+                # TODO: 如何使用url_for优雅地拼接详情页的url
+                # "details_link": url_for('quokka.core.detail', long_slug=i.slug)
+                "link": "/topics/" + i.slug + ".html"
+            }
+            rtn_list.append(tmp)
+
+        return _base_normal_resp(data=rtn_list)
+
+
+class NewsView(MethodView):
+    """获取动态列表
+
+        采用GET请求方式。
+
+    GET参数:
+    
+        offset: 起始偏移量
+        count: 返回结果数量
+    """
+    def get(self):
+        offset = int(request.args.get("offset", 0))
+        count = int(request.args.get("count", 10))
+        results = News.objects.skip(offset).limit(count)
+        rtn_list = []
+        for i in results:
+            tmp = {
+                "cover_img": url_for('quokka.core.media', filename=i["contents"][0]["content"].path),
+                "title": i["title"],
+                "summary": i["summary"],
+                # TODO: 如何使用url_for优雅地拼接详情页的url
+                # "details_link": url_for('quokka.core.detail', long_slug=i.slug)
+                "link": "/news/" + i.slug + ".html"
+            }
+            rtn_list.append(tmp)
+
+        return _base_normal_resp(data=rtn_list)
