@@ -81,6 +81,21 @@ body {
     margin-top: 6px;
 }
 
+.more-btn{
+    width:200px;
+    height:22px;
+    margin:6px auto 9px auto;
+    display: block;
+    border: 0;
+    outline:none;
+    background: #f4f4f4;
+    color:#7c7c7c;
+    font-size: 15px;
+    font-weight: bold;
+    font-size: 14px ;
+    
+}
+
 
 
 
