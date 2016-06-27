@@ -4,7 +4,7 @@ from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
 from flask import request, url_for
 from quokka.utils.baseresp import _base_err_resp, _base_normal_resp
-from .models import BrotherVideos, BrotherArticles, BrotherAsk, JoinMessage, BrotherInfo
+from .models import BrotherVideos, BrotherArticles, BrotherAsk, JoinMessage, BrotherInfo, Topic, News
 from pprint import pprint
 import uuid
 import logging
@@ -64,62 +64,101 @@ class BrotherLikeView(MethodView):
             logger.error(str(e))
             return _base_err_resp("error")
 
+class AddTopicVideoLikeView(MethodView):
+    def get(self):
+        """
+            Get like number.
 
-class AddVideoLikeView(MethodView):
-    """
-    Add like number.
+            `HTTP` is form-style request,json-style respond using post submit.
 
-    `HTTP` is form-style request,json-style respond using post submit.
+            GET param:
+                id: Topic id
+                index: 一个话题可含多个视频，第一个index为0，依次类推
 
-    POST param:
-        id: BrotherVideos id
-
-    HTTP return:
-        Try it your self.
-    """
-
-    def post(self):
-        logger.debug("add video like view")
+            HTTP return:
+                Try it your self.
+        """
         try:
-            content_id = request.form["id"]
-            logger.debug("content_id:{}".format(content_id))
-            result = BrotherVideos.objects(id=content_id).first()
-            result.like_numbers += 1
-            result.save()
-            return _base_normal_resp()
-
+            content_id = request.args.get("id")
+            index = int(request.args.get("index"))
+            result = Topic.objects(id=content_id).first()            
+            data={"like_numbers": result.videos[index].like_numbers}
+            return _base_normal_resp(data=data)
         except Exception, e:
             logger.error(str(e))
             return _base_err_resp("error")
 
-
-class AddArticleLikeView(MethodView):
-    """
-    Add like number.
-
-    `HTTP` is form-style request,json-style respond using post submit.
-
-    POST param:
-        id: BrotherArticles id
-
-    HTTP return:
-        Try it your self.
-    """
-
     def post(self):
-        logger.debug("add article like view")
+        """
+            Add like number.
+
+            `HTTP` is form-style request,json-style respond using post submit.
+
+            POST param:
+                id: Topic id
+                index: 一个话题可含多个视频，第一个index为0，依次类推
+
+            HTTP return:
+                Try it your self.
+        """
         try:
             content_id = request.form["id"]
-            logger.debug("content_id:{}".format(content_id))
-            result = BrotherArticles.objects(id=content_id).first()
-            result.like_numbers += 1
+            index = int(request.form["index"])
+            result = Topic.objects(id=content_id).first()
+            result.videos[index].like_numbers += 1
             result.save()
             return _base_normal_resp()
-
         except Exception, e:
             logger.error(str(e))
             return _base_err_resp("error")
 
+class AddNewsArticleLikeView(MethodView):
+    def get(self):
+        """
+            Get like number.
+
+            `HTTP` is form-style request,json-style respond using post submit.
+
+            GET param:
+                id: News id
+                index: 一个动态可含多个文章，第一个index为0，依次类推
+
+            HTTP return:
+                Try it your self.
+        """
+        try:
+            content_id = request.args.get("id")
+            index = int(request.args.get("index"))
+            result = News.objects(id=content_id).first()
+            data={"like_numbers": result.articles[index].like_numbers}
+            return _base_normal_resp(data=data)
+        except Exception, e:
+            logger.error(str(e))
+            return _base_err_resp("error")
+
+    def post(self):
+        """
+            Add like number.
+
+            `HTTP` is form-style request,json-style respond using post submit.
+
+            POST param:
+                id: News id
+                index: 一个动态可含多个文章，第一个index为0，依次类推
+
+            HTTP return:
+                Try it your self.
+        """
+        try:
+            content_id = request.form["id"]
+            index = int(request.form["index"])
+            result = News.objects(id=content_id).first()
+            result.articles[index].like_numbers += 1
+            result.save()
+            return _base_normal_resp()
+        except Exception, e:
+            logger.error(str(e))
+            return _base_err_resp("error")
 
 class SendMessageView(MethodView):
     """
