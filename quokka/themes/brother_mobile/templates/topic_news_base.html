@@ -30,31 +30,8 @@
             {%- endfor -%}
             </div>
         </div>
-        <div class="contents">
-            {% for content in contents.items if content.model == "brothers.topic" or content.model == "brothers.news"%}
-            <a href="{{content.get_absolute_url()}}">
-                <div class="item">
-                    <div class="item-cover">
-                        <img src="{{ content.get_main_image_url(default="") }}" alt="">
-                    </div>
-                    <div class="item-text">
-                        <h1>{{ content.title }}</h1>
-                        <p>{{ content.summary }}</p>
-                    </div>                
-                    <!-- loop.index -->
-                </div>
-            </a>
-            {% endfor %} 
-<!--             <div class="item">
-                <div class="item-cover">
-                    <img src="{{theme_static('img/news_cover_demo.png')}}" alt="">
-                </div>
-                <div class="item-text">
-                    <h1>动态的标题</h1>
-                    <p>简介简介简介简介简简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
-                </div>
-            </div> -->
-        </div>
+        <div class="contents"></div>
+        <button id="more-btn" class="more-btn">加载更多</button>
     </div>
     
     {% include theme('footer.html') %}
@@ -62,10 +39,14 @@
 
 {% block bottom_js %}
 <script src="{{theme_static('js/swiper.min.js')}}"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script>
-var banner = new Swiper ('.banner', {
-    direction: 'horizontal',
-    loop: true,
-});
+    // 根据channel确定url前缀
+    {%if channel.slug == "topics" %}
+    var baseUrl="/topicsinfo";
+    {%else%}
+    var baseUrl="/newsinfo";
+    {%endif%}
 </script>
+<script src="{{theme_static('js/topic_news.js')}}"></script>
 {% endblock %}

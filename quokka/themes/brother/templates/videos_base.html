@@ -48,7 +48,6 @@
 {% endblock %}
 {% block bottom_js %}
 <script type="text/javascript">
-$(document).ready(function(){
     var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
      var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
 
@@ -111,8 +110,7 @@ $(document).ready(function(){
                 }
             );
             likeStatus=false;
-            }
-        });
+        }
     });
     {% endif %}
 </script>

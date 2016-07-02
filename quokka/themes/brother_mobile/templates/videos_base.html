@@ -20,7 +20,11 @@
             <h2>{{ content.videos[0]["video_title"] }}</h2>
             <p>分享者：{{content.shared_by}}</p>
             <div class="video-btn-container">
+                {% if channel.slug =="brothervideos"%}
+                <div class="video-like-btn video-btn"></div>
+                {% else %}
                 <div class="video-like-btn video-btn">{{content.videos[0].like_numbers}}</div>
+                {% endif %}
                 <div class="video-share-btn video-btn">分享</div>
             </div>
         </div>
