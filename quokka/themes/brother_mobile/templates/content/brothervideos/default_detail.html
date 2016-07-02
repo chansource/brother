@@ -6,9 +6,15 @@
 <script type="text/javascript">
     var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
     var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
-    var likes=[{% for video in content.videos %}{{ video.like_numbers }},{% endfor %}];
+    $.get("/")
+    var brotherInfoId = "{{ request.args.get('id') }}";
+    var likeNum = 0
+    $.get("/brothers/like", {"id":brotherInfoId}, function(data){
+        likeNum = data.data.like_numbers;
+        $(".video-like-btn").text(likeNum);
+    });
     var index=0;
-    var likeStatus=[{% for i in range(content.videos|length) %}true,{% endfor %}];
+    var likeStatus=true;
     // 增加激活视频样式
     $(".video-nav-item").eq(0).addClass("video-nav-active");
     // 加载第一个视频
@@ -31,24 +37,20 @@
 
     // 点赞事件
     // TODO: 为什么tap事件对于button不友好，难道不能用button嘛？
-    // $(".video-like-btn").on("tap", function(event) {
-    //     event.preventDefault();
-    //     console.debug("taped");
-    //     if (likeStatus[index]) {
-    //         $.post('/brothervideos/addvideolike', 
-    //             {
-    //                 "id": "{{content.id}}",
-    //                 "index": index
-    //             }, 
-    //             function(data, status, xhr) {
-    //                 console.debug("/brothervideos/addvideolike status is " + status);
-    //             }
-    //         );
-    //         // 为增强体验，先在UI上显示点赞数+1
-    //         likes[index] += 1;
-    //         $(".video-like-btn").html(likes[index]);
-    //         likeStatus[index] = false;
-    //     }
-    // });
+    $(".video-like-btn").on("tap", function(event) {
+        event.preventDefault();
+        console.debug("taped");
+        if(likeStatus){
+            $.post(
+                '/brothers/like', 
+                {"id":"{{ request.args.get('id') }}"},
+                function(){
+                    likeNum+=1;
+                    $(".video-like-btn").text(likeNum);
+                }
+            );
+            likeStatus=false;
+        };
+    });
 </script>
 {% endblock %}
