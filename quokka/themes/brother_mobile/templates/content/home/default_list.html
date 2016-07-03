@@ -78,12 +78,11 @@
     <div class="follow">
         <p class="follow-text">关注我们</p>
         <div class="follow-container">
-            <!-- TODO: 未实现跳转到微博/微信诱导关注 -->
-            <div class="follow-item">
+            <div class="follow-item" id="follow-weibo">
                 <img src="{{theme_static('img/index_follow_weibo.png')}}" alt="" class="follow-icon">
                 <p class="follow-item-text">新浪微博</p>
             </div>
-            <div class="follow-item">
+            <div class="follow-item" style="display:none;">
                 <img src="{{theme_static('img/index_follow_wechat.png')}}" alt="" class="follow-icon">
                 <p class="follow-item-text">微信</p>
             </div>                
@@ -116,6 +115,10 @@ $(window).resize(setBannerHeight);
 
 $(".fix-btn img").eq(0).on("tap", function() {
     scroll(0,0);
+});
+
+$("#follow-weibo").on("tap", function(event){
+    window.location.href = "http://weibo.com/u/5872263244";
 });
 </script>
 {% endblock %}
