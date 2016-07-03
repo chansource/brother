@@ -84,7 +84,7 @@ body {
 .more-btn{
     width:200px;
     height:22px;
-    margin:6px auto 9px auto;
+    margin:6px auto 0 auto;
     display: block;
     border: 0;
     outline:none;
