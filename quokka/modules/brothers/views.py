@@ -254,14 +254,37 @@ class BrotherInfoView(MethodView):
         ordering = order_map[order_type]
         logger.debug("offset-{} count-{} ordering-{}".format(offset,count,ordering))
         if ordering:
+            # 先查询有order字段不为0的，按照order字段排序
             now = datetime.datetime.now()
             filters = {
                 'published': True,
                 'available_at__lte': now,
+                'order__ne': 0,
             }
-            logger.debug("order")
-            results = BrotherInfo.objects(
-                **filters).order_by(ordering).skip(offset).limit(count)
+            resultsa = BrotherInfo.objects(
+                **filters).order_by("order")
+            logger.debug("get %d ordered items", resultsa.count())
+            # TODO: 这种聚合queryset的方式太挫了，找到更好的方式。（学习mongoengine使用）
+            tmp = []
+            for i in resultsa:
+                tmp.append(i)
+            resultsa = tmp
+            # 再查询order字段为0的，按照time或hot排序
+            filters = {
+                'published': True,
+                'available_at__lte': now,
+                'order': 0,
+            }
+            resultsb = BrotherInfo.objects(
+                **filters).order_by(ordering)
+            logger.debug("get %d unordered items", resultsb.count())
+            # TODO: 这种聚合queryset的方式太挫了，找到更好的方式。（学习mongoengine使用）
+            tmp = []
+            for i in resultsb:
+                tmp.append(i)
+            resultsb = tmp
+            # 拼接两次查询的列表，并按照offset和count截取结果
+            results = (resultsa + resultsb)[offset : offset + count]
         else:
             results = BrotherInfo.objects.skip(offset).limit(count)
         brother_list = []
