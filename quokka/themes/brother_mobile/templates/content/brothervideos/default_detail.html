@@ -33,6 +33,7 @@
         $(".video-nav-item").removeClass("video-nav-active")
         $(".video-nav-item").eq(index).addClass("video-nav-active");
         $(".video-details h2").html(videos_titles[index]);
+        document.title = "{{content.shared_by}} "+videos_titles[index];
         resizeVideo();
         $(".video-like-btn").html(likes[index]);
     });
