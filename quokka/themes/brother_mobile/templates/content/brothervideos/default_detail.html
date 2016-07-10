@@ -4,6 +4,12 @@
 
 {% block bottom_js %}
 <script type="text/javascript">
+    function resizeVideo(undefined) {
+        "use strict";
+        var height = $("#video-detail").width()/16*9;
+        $("#video-detail iframe").height(height);
+    };
+
     var videos_titles=[{% for video in content.videos %}"{{ video.video_title}}",{% endfor %}];
     var videos_urls=[{% for video in content.videos %} '{{ video.video_url|safe}}',{% endfor %}];
     $.get("/")
@@ -27,6 +33,7 @@
         $(".video-nav-item").removeClass("video-nav-active")
         $(".video-nav-item").eq(index).addClass("video-nav-active");
         $(".video-details h2").html(videos_titles[index]);
+        resizeVideo();
         $(".video-like-btn").html(likes[index]);
     });
 
@@ -52,5 +59,7 @@
             likeStatus=false;
         };
     });
+
+    resizeVideo();
 </script>
 {% endblock %}

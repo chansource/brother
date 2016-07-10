@@ -4,6 +4,12 @@
 
 {% block bottom_js %}
 <script type="text/javascript">
+    function resizeVideo(undefined) {
+        "use strict";
+        var height = $("#video-detail").width()/16*9;
+        $("#video-detail iframe").height(height);
+    };
+
     var videoUrl = '{{ content.videos[0].video_url|safe }}';
     var videoTitle = '{{ content.videos[0].video_title }}';
     var videoLikeNumbers = {{ content.videos[0].like_numbers }};
@@ -34,5 +40,6 @@
     //         likeStatus = false;
     //     }
     // });
+    resizeVideo();
 </script>
 {% endblock %}
