@@ -5,11 +5,11 @@ var revCollector = require('gulp-rev-collector'); // 模板路径替换
 var debug = require('gulp-debug'); // DBEUG
 
 gulp.task('rev', function() {                         
-    return gulp.src(['static/css/*.css']) 
+    return gulp.src(['static/css/*.css', 'static/js/*.js'], {"base": "static"}) 
         // 文件名加MD5后缀  
         .pipe(rev())        
         // 输出文件本地                                   
-        .pipe(gulp.dest('static/css'))    
+        .pipe(gulp.dest('static'))    
         // 生成一个rev-manifest.json
         .pipe(rev.manifest())                                  
         // 将 rev-manifest.json 保存到 rev 目录内
