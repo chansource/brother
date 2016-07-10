@@ -17,15 +17,15 @@ gulp.task('autoprefixer', function() {
 });
 
 gulp.task('rev', function() {                         
-    return gulp.src(['static/css/*.css']) 
+    return gulp.src(['static/css/*.css', 'static/js/*.js'], {"base": "static"}) 
         // 文件名加MD5后缀  
         .pipe(rev())        
         // 输出文件本地                                   
-        .pipe(gulp.dest('static/css'))    
+        .pipe(gulp.dest('static'))    
         // 生成一个rev-manifest.json
-        .pipe(rev.manifest())                                
+        .pipe(rev.manifest())                                  
         // 将 rev-manifest.json 保存到 rev 目录内
-        .pipe(gulp.dest('rev'));                           
+        .pipe(gulp.dest('rev'));                              
 });
 
 gulp.task('rev_template', function() {
