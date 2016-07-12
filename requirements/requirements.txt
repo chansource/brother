@@ -35,3 +35,4 @@ Flask-Login==0.2.11  # rq.filter: <0.3
 
 # Mistune 0.7.1 broke base64; inline images
 mistune==0.6  # rq.filter: <0.7
+wechat-sdk==0.6.3

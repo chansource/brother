@@ -368,11 +368,11 @@ class NewsView(MethodView):
 class WechatBaseView(MethodView):
     def __init__(self, *args, **kargs):
         conf = WechatConf(
-            token=current_app.config("token"),
-            appid=current_app.config("appid"),
-            appsecret=current_app.config("appsecret"),
-            encrypt_mode=current_app.config("encrypt_mode"),  # 可选项：normal/compatible/safe，分别对应于 明文/兼容/安全 模式
-            encoding_aes_key=current_app.config("encoding_aes_key")  # 如果传入此值则必须保证同时传入 token, appid
+            token=current_app.config.get("WECHAT")["token"],
+            appid=current_app.config.get("WECHAT")["appid"],
+            appsecret=current_app.config.get("WECHAT")["appsecret"],
+            encrypt_mode=current_app.config.get("WECHAT")["encrypt_mode"],  # 可选项：normal/compatible/safe，分别对应于 明文/兼容/安全 模式
+            encoding_aes_key=current_app.config.get("WECHAT")["encoding_aes_key"],  # 如果传入此值则必须保证同时传入 token, appid
             access_token_getfunc=self._get_access_token_function,
             access_token_setfunc=self._set_access_token_function,
             jsapi_ticket_getfunc=self._get_jsapi_ticket_function,
@@ -380,10 +380,10 @@ class WechatBaseView(MethodView):
         )
         self.wechat = WechatBasic(conf=conf)
 
-    def _get_access_token_function():
+    def _get_access_token_function(self):
         """ 注意返回值为一个 Tuple，第一个元素为 access_token 的值，第二个元素为 access_token_expires_at 的值 """
         try:
-            content = open(current_app.config("WECHAT")["access_token"], "r").read()
+            content = open(current_app.config.get("WECHAT")["access_token"], "r").read()
             access_token = json.loads(content)["access_token"]
             access_token_expires_at = json.loads(content)["access_token_expires_at"]
             f.close()
@@ -393,8 +393,8 @@ class WechatBaseView(MethodView):
 
         return (access_token, access_token_expires_at)
 
-    def _set_access_token_function(access_token, access_token_expires_at):
-        f = open(current_app.config("WECHAT")["access_token"], "w")
+    def _set_access_token_function(self, access_token, access_token_expires_at):
+        f = open(current_app.config.get("WECHAT")["access_token"], "w")
         conent = json.dumps({
             "access_token": access_token,
             "access_token_expires_at": access_token_expires_at,
@@ -402,10 +402,10 @@ class WechatBaseView(MethodView):
         f.write(conent)
         f.close()
 
-    def _get_jsapi_ticket_function():
+    def _get_jsapi_ticket_function(self):
         """ 注意返回值为一个 Tuple，第一个元素为 jsapi_ticket 的值，第二个元素为 jsapi_ticket_expires_at 的值 """
         try:
-            content = open(current_app.config("WECHAT")["jsapi_ticket"], "r").read()
+            content = open(current_app.config.get("WECHAT")["jsapi_ticket"], "r").read()
             jsapi_ticket = json.loads(content)["jsapi_ticket"]
             jsapi_ticket_expires_at = json.loads(content)["jsapi_ticket_expires_at"]
             f.close()
@@ -415,8 +415,8 @@ class WechatBaseView(MethodView):
 
         return (jsapi_ticket, jsapi_ticket_expires_at)      
 
-    def _set_jsapi_ticket_function(jsapi_ticket, jsapi_ticket_expires_at):
-        f = open(current_app.config("WECHAT")["jsapi_ticket"], "w")
+    def _set_jsapi_ticket_function(self, jsapi_ticket, jsapi_ticket_expires_at):
+        f = open(current_app.config.get("WECHAT")["jsapi_ticket"], "w")
         conent = json.dumps({
             "jsapi_ticket": jsapi_ticket,
             "jsapi_ticket_expires_at": jsapi_ticket_expires_at,
@@ -425,8 +425,8 @@ class WechatBaseView(MethodView):
         f.close()
 
 class WechatCheckView(WechatBaseView):
+    """接入验证请求"""
     def get(self):
-        # 接入验证请求
         signature  = request.args.get("signature")
         timestamp  = request.args.get("timestamp")
         nonce  = request.args.get("nonce")
@@ -438,6 +438,7 @@ class WechatCheckView(WechatBaseView):
            logger.error("wechat.check_signature failed")
 
 class WechatJsView(WechatBaseView):
+    """JS-SDK签名"""
     def get(self):
         jsapi_ticket = self.wechat.get_jsapi_ticket()
         sign = Sign(jsapi_ticket["jsapi_ticket"], request.args.get("url")).sign()
