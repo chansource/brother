@@ -355,8 +355,8 @@ WECHAT = {
     "access_token": "/tmp/wechat_access_token.cache",
     "jsapi_ticket": "/tmp/jsapi_ticket.cache",
     "token": "123123",
-    "appid": "wx942566af1ff3a7fb",
-    "appsecret": "e9c8131ccd2b060e160ef29741b4429b",
+    "appid": "wx463eb1fd257a1735",
+    "appsecret": "6064fa06f84a4ff5663457a9019d7831",
     "encrypt_mode": "normal",
-    "encoding_aes_key": "wOmQvXsbXmIDdocsVwz4fZ0biPgtKBQ3PPUKmUfLdG7",
+    "encoding_aes_key": "MmDZV1QSDUcKFtvIrcqv4DzgW7GQfvqvQAc7t1cX0LF",
 }
