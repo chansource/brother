@@ -9,6 +9,10 @@ from pprint import pprint
 import uuid
 import logging
 import datetime
+from wechat_sdk import WechatConf, WechatBasic
+import json
+from Sign import Sign
+from flask import current_app
 
 logger = logging.getLogger('quokka')
 
@@ -360,3 +364,82 @@ class NewsView(MethodView):
             rtn_list.append(tmp)
 
         return _base_normal_resp(data=rtn_list)
+
+class WechatBaseView(MethodView):
+    def __init__(self, *args, **kargs):
+        conf = WechatConf(
+            token=current_app.config.get("WECHAT")["token"],
+            appid=current_app.config.get("WECHAT")["appid"],
+            appsecret=current_app.config.get("WECHAT")["appsecret"],
+            encrypt_mode=current_app.config.get("WECHAT")["encrypt_mode"],  # 可选项：normal/compatible/safe，分别对应于 明文/兼容/安全 模式
+            encoding_aes_key=current_app.config.get("WECHAT")["encoding_aes_key"],  # 如果传入此值则必须保证同时传入 token, appid
+            access_token_getfunc=self._get_access_token_function,
+            access_token_setfunc=self._set_access_token_function,
+            jsapi_ticket_getfunc=self._get_jsapi_ticket_function,
+            jsapi_ticket_setfunc=self._set_jsapi_ticket_function,
+        )
+        self.wechat = WechatBasic(conf=conf)
+
+    def _get_access_token_function(self):
+        """ 注意返回值为一个 Tuple，第一个元素为 access_token 的值，第二个元素为 access_token_expires_at 的值 """
+        try:
+            content = open(current_app.config.get("WECHAT")["access_token"], "r").read()
+            access_token = json.loads(content)["access_token"]
+            access_token_expires_at = json.loads(content)["access_token_expires_at"]
+            f.close()
+        except IOError, e:
+            access_token = None
+            access_token_expires_at = None
+
+        return (access_token, access_token_expires_at)
+
+    def _set_access_token_function(self, access_token, access_token_expires_at):
+        f = open(current_app.config.get("WECHAT")["access_token"], "w")
+        conent = json.dumps({
+            "access_token": access_token,
+            "access_token_expires_at": access_token_expires_at,
+        })
+        f.write(conent)
+        f.close()
+
+    def _get_jsapi_ticket_function(self):
+        """ 注意返回值为一个 Tuple，第一个元素为 jsapi_ticket 的值，第二个元素为 jsapi_ticket_expires_at 的值 """
+        try:
+            content = open(current_app.config.get("WECHAT")["jsapi_ticket"], "r").read()
+            jsapi_ticket = json.loads(content)["jsapi_ticket"]
+            jsapi_ticket_expires_at = json.loads(content)["jsapi_ticket_expires_at"]
+            f.close()
+        except IOError, e:
+            jsapi_ticket = None
+            jsapi_ticket_expires_at = None
+
+        return (jsapi_ticket, jsapi_ticket_expires_at)      
+
+    def _set_jsapi_ticket_function(self, jsapi_ticket, jsapi_ticket_expires_at):
+        f = open(current_app.config.get("WECHAT")["jsapi_ticket"], "w")
+        conent = json.dumps({
+            "jsapi_ticket": jsapi_ticket,
+            "jsapi_ticket_expires_at": jsapi_ticket_expires_at,
+        })
+        f.write(conent)
+        f.close()
+
+class WechatCheckView(WechatBaseView):
+    """接入验证请求"""
+    def get(self):
+        signature  = request.args.get("signature")
+        timestamp  = request.args.get("timestamp")
+        nonce  = request.args.get("nonce")
+
+        if self.wechat.check_signature(signature, timestamp, nonce):
+            logger.debug("wechat.check_signature success")
+            return request.args.get("echostr")
+        else:
+           logger.error("wechat.check_signature failed")
+
+class WechatJsView(WechatBaseView):
+    """JS-SDK签名"""
+    def get(self):
+        jsapi_ticket = self.wechat.get_jsapi_ticket()
+        sign = Sign(jsapi_ticket["jsapi_ticket"], request.args.get("url")).sign()
+        return json.dumps(sign)

@@ -350,3 +350,13 @@ $   curl https://intake.opbeat.com/api/v1/
     -d status=completed
 """
 # OPBEAT = None
+
+WECHAT = {
+    "access_token": "/tmp/wechat_access_token.cache",
+    "jsapi_ticket": "/tmp/jsapi_ticket.cache",
+    "token": "123123",
+    "appid": "wx463eb1fd257a1735",
+    "appsecret": "6064fa06f84a4ff5663457a9019d7831",
+    "encrypt_mode": "normal",
+    "encoding_aes_key": "MmDZV1QSDUcKFtvIrcqv4DzgW7GQfvqvQAc7t1cX0LF",
+}
