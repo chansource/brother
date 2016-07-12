@@ -383,7 +383,8 @@ class WechatBaseView(MethodView):
     def _get_access_token_function(self):
         """ 注意返回值为一个 Tuple，第一个元素为 access_token 的值，第二个元素为 access_token_expires_at 的值 """
         try:
-            content = open(current_app.config.get("WECHAT")["access_token"], "r").read()
+            f = open(current_app.config.get("WECHAT")["access_token"], "r")
+            content = f.read()
             access_token = json.loads(content)["access_token"]
             access_token_expires_at = json.loads(content)["access_token_expires_at"]
             f.close()
@@ -405,7 +406,8 @@ class WechatBaseView(MethodView):
     def _get_jsapi_ticket_function(self):
         """ 注意返回值为一个 Tuple，第一个元素为 jsapi_ticket 的值，第二个元素为 jsapi_ticket_expires_at 的值 """
         try:
-            content = open(current_app.config.get("WECHAT")["jsapi_ticket"], "r").read()
+            f = open(current_app.config.get("WECHAT")["jsapi_ticket"], "r")
+            content = f.read()
             jsapi_ticket = json.loads(content)["jsapi_ticket"]
             jsapi_ticket_expires_at = json.loads(content)["jsapi_ticket_expires_at"]
             f.close()
