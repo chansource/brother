@@ -269,7 +269,6 @@ ADMIN_ICONS = [
 ]
 
 DEFAULT_THEME = 'brother_mobile'
-DEFAULT_THEME = 'brother'
 
 # default content extension for url buildind
 CONTENT_EXTENSION = "html"
